@@ -10,12 +10,15 @@ public class GameController : MonoBehaviour {
 
     private NTUtils.Timer _spawnTimer;
 
+    private List<Enemy> _enemies = new List<Enemy>();
+
     private void Awake() {
         _spawnTimer = new NTUtils.Timer();
         _spawnTimer.SetOnComplete(SpawnEnemy);
         _spawnTimer.SetLooping(true);
-        _spawnTimer.Start(0.5f);
+        _spawnTimer.Start(1.25f);
         _spawnTimer.Complete();
+        _enemies = new List<Enemy>();
     }
 
     private void Update() {
@@ -28,5 +31,8 @@ public class GameController : MonoBehaviour {
         var go = Instantiate(cfg.Prefab, _enemyParent);
         go.transform.position = p;
         go.Setup(cfg);
+        _enemies.Add(go);
     }
+
+    public List<Enemy> GetEnemies() => _enemies;
 }

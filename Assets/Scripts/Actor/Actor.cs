@@ -15,7 +15,7 @@ public class Actor : MonoBehaviour {
     protected float _health = 10.0f;
     protected float _maxHealth = 10.0f;
 
-    private void Awake() {
+    protected virtual void Awake() {
         _body = GetComponent<Rigidbody2D>();
         _nav = new AgentNav2d();
     }
@@ -25,32 +25,38 @@ public class Actor : MonoBehaviour {
         _health = Mathf.Min(hp * prc, _maxHealth);
     }
 
-    protected void GoTo(Vector2 position, float speed, float minDist = 0.4f) {
+    protected bool GoTo(Vector2 position, float speed, float minDist = 0.4f) {
         
         var cp = _body.position;
 
         float sqrD = (cp - position).sqrMagnitude;
         if (sqrD < Mathf.Pow(minDist, 2.0f)) {
-            return;//no need to move anywhere
+            return false;//no need to move anywhere
         }
 
         var np = _nav.GetNextPoint(cp,position);
         Vector2 dirVec = (np - cp).normalized;
-        var moveTo = cp + (dirVec) * (Time.deltaTime * speed);
+        var moveTo = cp + (dirVec) * (Time.fixedDeltaTime * speed);
         
         _body.MovePosition(moveTo);
-        
+
+        return true;
+
     }
 
-    protected void GoToTarget(float speed, float minDist) {
+    protected bool GoToTarget(float speed, float minDist) {
         if (_target != null && _target._alive) {
-            GoTo(_target.transform.position, speed, minDist);
+            return GoTo(_target.transform.position, speed, minDist);
         }
+
+        return false;
     }
 
-    protected void LateUpdate() {
+    protected virtual void LateUpdate() {
         _visual.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100.0f);
     }
+
+    protected virtual void FixedUpdate() { }
 
     protected Actor GetTarget() => _target;
 
@@ -60,7 +66,9 @@ public class Actor : MonoBehaviour {
         }
 
         _target = t;
-        _target.OnDie += OnTargetDied;
+        if (_target != null) {
+            _target.OnDie += OnTargetDied;
+        }
     }
 
     protected virtual void OnTargetDied(Actor prvTarget) {
@@ -70,7 +78,15 @@ public class Actor : MonoBehaviour {
         if (_alive == false) return;
         _health -= hit.Damage;
         if (_health <= 0.0f) {
+            Die();
             OnDie?.Invoke(this);
         }
     }
+
+
+    protected virtual void Die() {
+        Destroy(gameObject);
+    }
+
+    public bool IsAlive() => _alive;
 }
