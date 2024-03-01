@@ -73,6 +73,20 @@ public class Player : Actor {
 
     public override void Hit(HitInfo hit) {
         base.Hit(hit);
+
+        if (GetTarget() != null) {
+            var pme = transform.position;
+            
+            var d = (pme - hit.Owner.transform.position).sqrMagnitude;
+            var dToTarget = (pme - GetTarget().transform.position).sqrMagnitude;
+            if (d < dToTarget * 0.95f) {
+                SetTarget(hit.Owner);
+            }
+        }
+        else if ( hit.Owner != null ) {
+            SetTarget(hit.Owner);
+        }
+
         Scene.WorldUiController.GetDamageNumbers().ShowNumbersDamageTaken(transform.position, hit);
     }
 
