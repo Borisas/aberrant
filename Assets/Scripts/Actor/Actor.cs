@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using PrimeTween;
 using UnityEngine;
 
 public class Actor : MonoBehaviour {
 
     public System.Action<Actor> OnDie;
+    public System.Action<Actor> OnHealthChanged;
 
     [SerializeField] private SpriteRenderer _visual = null;
     private Actor _target;
@@ -15,15 +17,21 @@ public class Actor : MonoBehaviour {
     protected float _health = 10.0f;
     protected float _maxHealth = 10.0f;
 
+    private HitAnimation _hitAnim;
+
     protected virtual void Awake() {
         _body = GetComponent<Rigidbody2D>();
         _nav = new AgentNav2d();
+        _hitAnim  = new HitAnimation("_BlinkRatio", 0.2f, _visual);
     }
 
     protected void SetupHealth(float hp, float prc = 1.0f) {
         _maxHealth = hp;
         _health = Mathf.Min(hp * prc, _maxHealth);
     }
+
+    public float GetHealth() => _health;
+    public float GetMaxHealth() => _maxHealth;
 
     protected bool GoTo(Vector2 position, float speed, float minDist = 0.4f) {
         
@@ -74,17 +82,27 @@ public class Actor : MonoBehaviour {
     protected virtual void OnTargetDied(Actor prvTarget) {
     }
 
-    public void Hit(HitInfo hit) {
+    public virtual void Hit(HitInfo hit) {
         if (_alive == false) return;
         _health -= hit.Damage;
+        OnHealthChanged?.Invoke(this);
         if (_health <= 0.0f) {
             Die();
             OnDie?.Invoke(this);
         }
+        else {
+            PlayHitAnimation();
+        }
+    }
+
+    protected void PlayHitAnimation() {
+
+        _hitAnim.Play();
     }
 
 
     protected virtual void Die() {
+        _hitAnim.Kill();
         Destroy(gameObject);
     }
 

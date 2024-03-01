@@ -1,11 +1,9 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 namespace SimpleUi {
     public class Director : MonoBehaviour {
-        private View[] _views = null;
+        [Sirenix.OdinInspector.ReadOnly] [SerializeField] private View[] _views = null;
 
         protected virtual void Awake() {
             _views = GetComponentsInChildren<View>();

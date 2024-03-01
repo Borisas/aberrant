@@ -7,6 +7,7 @@ using Object = UnityEngine.Object;
 public class Scene : MonoBehaviour {
     
     public static SimpleUi.Director UiDirector;
+    public static WorldUiController WorldUiController;
     public static GameController GameController;
     public static Player Player;
     
@@ -15,5 +16,6 @@ public class Scene : MonoBehaviour {
         Player = Object.FindObjectOfType<Player>();
         UiDirector = Object.FindObjectOfType<SimpleUi.Director>();
         GameController = Object.FindObjectOfType<GameController>();
+        WorldUiController = Object.FindObjectOfType<WorldUiController>();
     }
 }

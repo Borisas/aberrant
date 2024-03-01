@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae21ff37162303d439f9b37a424596c4, type: 3}
   m_Name: db_main
   m_EditorClassIdentifier: 
+  HealthBar: {fileID: 4849886340886639291, guid: 7a94c752ef9ba4149a3c144202ab985c, type: 3}
+  DamageNumberLabel: {fileID: 1910239837784235121, guid: a3752b955692659418b77997148b5b39, type: 3}
   Enemies:
   - {fileID: 11400000, guid: 7a6e54f0b9bb10d4fafb8136b93b773f, type: 2}

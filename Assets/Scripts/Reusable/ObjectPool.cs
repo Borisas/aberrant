@@ -40,5 +40,72 @@ public class ObjectPool : MonoBehaviour {
 
         return ni;
     }
+    
+
+    public static T Get<T>(T obj, Transform parent) where T : Object {
+        
+        var i = GetInstance();
+        if ( !i._pools.ContainsKey(obj) ) {
+            i._pools[obj] = new List<GameObject>();
+        }
+
+        var pool = i._pools[obj];
+
+        foreach(var go in pool) {
+            if ( go.activeSelf ) continue;
+            go.transform.SetParent(parent);
+            go.SetActive(true);
+            return go.GetComponent<T>();
+        }
+
+        var ni = GameObject.Instantiate(obj, parent);
+        pool.Add(ni.GameObject());
+
+        return ni;
+    }
+    
+    public static GameObject Get(GameObject obj) {
+        
+        var i = GetInstance();
+        if ( !i._pools.ContainsKey(obj) ) {
+            i._pools[obj] = new List<GameObject>();
+        }
+
+        var pool = i._pools[obj];
+
+        foreach(var go in pool) {
+            if ( go.activeSelf ) continue;
+            go.transform.SetParent(i.transform);
+            go.SetActive(true);
+            return go;
+        }
+
+        var ni = GameObject.Instantiate(obj, i.transform);
+        pool.Add(ni.GameObject());
+
+        return ni;
+    }
+    
+    public static GameObject Get(GameObject obj, Transform parent) {
+        
+        var i = GetInstance();
+        if ( !i._pools.ContainsKey(obj) ) {
+            i._pools[obj] = new List<GameObject>();
+        }
+
+        var pool = i._pools[obj];
+
+        foreach(var go in pool) {
+            if ( go.activeSelf ) continue;
+            go.transform.SetParent(parent);
+            go.SetActive(true);
+            return go;
+        }
+
+        var ni = GameObject.Instantiate(obj, parent);
+        pool.Add(ni.GameObject());
+
+        return ni;
+    }
 
 }

@@ -71,6 +71,11 @@ public class Player : Actor {
         SetTarget(e);
     }
 
+    public override void Hit(HitInfo hit) {
+        base.Hit(hit);
+        Scene.WorldUiController.GetDamageNumbers().ShowNumbersDamageTaken(transform.position, hit);
+    }
+
     protected override void OnTargetDied(Actor prvTarget) {
         base.OnTargetDied(prvTarget);
         SetTarget(null);

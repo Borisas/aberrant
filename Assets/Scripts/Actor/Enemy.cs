@@ -37,5 +37,9 @@ public class Enemy : Actor {
             }
         }
     }
-    
+
+    public override void Hit(HitInfo hit) {
+        base.Hit(hit);
+        Scene.WorldUiController.GetDamageNumbers().ShowNumbersHit(transform.position, hit);
+    }
 }

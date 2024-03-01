@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour {
         _spawnTimer = new NTUtils.Timer();
         _spawnTimer.SetOnComplete(SpawnEnemy);
         _spawnTimer.SetLooping(true);
-        _spawnTimer.Start(1.25f);
+        _spawnTimer.Start(1.0f);
         _spawnTimer.Complete();
         _enemies = new List<Enemy>();
     }

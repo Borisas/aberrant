@@ -2,10 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 
 public class DatabaseMain : ScriptableObject {
 
+    public GameObject HealthBar;
+    public TMP_Text DamageNumberLabel;
     public List<EnemyConfiguration> Enemies;
     
     public EnemyConfiguration GetEnemyById(EnemyId id) {
