@@ -5,37 +5,21 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour {
 
-    [SerializeField] private Area2D _enemySpawnArea = null;
-    [SerializeField] private Transform _enemyParent = null;
-    [SerializeField] private EnemySpawner _enemySpawner = null;
-
-    private NTUtils.Timer _spawnTimer;
-
-    private List<Enemy> _enemies = new List<Enemy>();
+    private RunInstance _instance = new RunInstance();
+    [SerializeField] private WaveController _waveController = null;
 
     private void Awake() {
+    
+        _waveController.BeginWave();
+        _waveController.OnWaveCompleted += WaveController_OnWaveCompleted;
+        _instance = new RunInstance();
+    }
+
+    private void WaveController_OnWaveCompleted() {
         
-        _spawnTimer = new NTUtils.Timer()
-            .SetOnComplete(SpawnEnemy)
-            .SetLooping(true)
-            .Start(1.0f)
-            .Complete();
-        
-        _enemies = new List<Enemy>();
     }
 
-    private void Update() {
-        _spawnTimer.Run();
+    public RunInstance GetRunInstance() {
+        return _instance;
     }
-
-    public void SpawnEnemy() {
-        var p = _enemySpawnArea.GetRandomPoint();
-        var cfg = Database.GetInstance().Main.GetEnemyById(EnemyId.Blob);
-        var go = Instantiate(cfg.Prefab, _enemyParent);
-        go.transform.position = p;
-        go.Setup(cfg);
-        _enemies.Add(go);
-    }
-
-    public List<Enemy> GetEnemies() => _enemies;
 }

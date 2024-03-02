@@ -11,12 +11,14 @@ public class Scene : MonoBehaviour {
     public static GameController GameController;
     public static Player Player;
     public static Effects Effects;
+    public static WaveController WaveController;
     
     private void Awake() {
 
         Player = Object.FindObjectOfType<Player>();
         UiDirector = Object.FindObjectOfType<SimpleUi.Director>();
         GameController = Object.FindObjectOfType<GameController>();
+        WaveController = Object.FindObjectOfType<WaveController>();
         WorldUiController = Object.FindObjectOfType<WorldUiController>();
         Effects = Object.FindObjectOfType<Effects>();
     }

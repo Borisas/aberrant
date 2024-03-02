@@ -8,4 +8,5 @@ using UnityEngine;
 public class DatabaseEffects : ScriptableObject {
 
     public GameObject HitAnim;
+    public GameObject Blood;
 }

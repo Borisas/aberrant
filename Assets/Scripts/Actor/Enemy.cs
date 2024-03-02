@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Enemy : Actor {
@@ -47,5 +44,10 @@ public class Enemy : Actor {
     public override void Hit(HitInfo hit) {
         base.Hit(hit);
         Scene.WorldUiController.GetDamageNumbers().ShowNumbersHit(transform.position, hit);
+    }
+
+    protected override void Die() {
+        base.Die();
+        Scene.Effects.SpawnBloodDrop(transform, Random.Range(1,4));
     }
 }

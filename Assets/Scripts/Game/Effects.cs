@@ -26,4 +26,17 @@ public class Effects : MonoBehaviour {
         var go = ObjectPool.Get(Database.GetInstance().Effects.HitAnim, transform);
         go.transform.position = p;
     }
+
+    public void SpawnBloodDrop(Transform t, int count = 1) {
+
+        var p = t.position;
+        
+        for (int i = 0; i < count; i++) {
+            var go = ObjectPool.Get(Database.GetInstance().Effects.Blood, transform);
+            p.x += UnityEngine.Random.Range(-0.15f, 0.15f);
+            p.y += UnityEngine.Random.Range(-0.15f, 0.15f);
+            go.transform.position = p;
+        }
+
+    }
 }
