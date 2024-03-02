@@ -10,7 +10,8 @@ public class Actor : MonoBehaviour {
     public System.Action<Actor> OnDie;
     public System.Action<Actor> OnHealthChanged;
 
-    [SerializeField] private SpriteRenderer _visual = null;
+    [SerializeField] private bool _turnToMovement = false;
+    [SerializeField] protected Transform _visualTransform = null;
     private SortingGroup _sorting = null;
     private Actor _target;
     protected Rigidbody2D _body = null;
@@ -18,13 +19,13 @@ public class Actor : MonoBehaviour {
     protected bool _alive = true;
     protected float _health = 10.0f;
     protected float _maxHealth = 10.0f;
+    protected bool _lastMoveRight = true;
 
-    private HitAnimation _hitAnim;
+    protected HitAnimation _hitAnim;
 
     protected virtual void Awake() {
         _body = GetComponent<Rigidbody2D>();
         _nav = new AgentNav2d();
-        _hitAnim  = new HitAnimation("_BlinkRatio", 0.2f, _visual);
         _sorting = GetComponent<SortingGroup>();
     }
 
@@ -36,7 +37,7 @@ public class Actor : MonoBehaviour {
     public float GetHealth() => _health;
     public float GetMaxHealth() => _maxHealth;
 
-    protected bool GoTo(Vector2 position, float speed, float minDist = 0.4f) {
+    protected bool GoTo(Vector2 position, float speed, ref bool movedRight, float minDist = 0.4f) {
         
         var cp = _body.position;
 
@@ -51,19 +52,24 @@ public class Actor : MonoBehaviour {
         
         _body.MovePosition(moveTo);
 
+        movedRight = dirVec.x > 0.0f;
+
         return true;
 
     }
 
-    protected bool GoToTarget(float speed, float minDist) {
+    protected bool GoToTarget(float speed, float minDist, ref bool movedRight) {
         if (_target != null && _target._alive) {
-            return GoTo(_target.transform.position, speed, minDist);
+            return GoTo(_target.transform.position, speed, ref movedRight, minDist);
         }
-
         return false;
     }
 
     protected virtual void LateUpdate() {
+        if (_turnToMovement) {
+            _visualTransform.localRotation = Quaternion.Euler(new Vector3(0.0f, _lastMoveRight ? 0.0f : 180.0f, 0.0f));
+        }
+
         _sorting.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100.0f);
     }
 

@@ -1,8 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Player : Actor {
+
+    public enum Limb {
+        Invalid = 0,
+        Head = 1,
+        Body = 2,
+        Leg_Left = 3,
+        Leg_Right = 4,
+        Arm_Left = 5,
+        Arm_Right = 6
+    }
+
+    [System.Serializable]
+    public class PlayerLimb {
+        public Limb Limb;
+        public SpriteRenderer Sprite;
+    }
+
+
+    [SerializeField] List<PlayerLimb> _limbs = new List<PlayerLimb>();
     private readonly Collider2D[] _possibleTargets = new Collider2D[32];
 
     private float _range = 0.525f;
@@ -12,6 +32,8 @@ public class Player : Actor {
     protected override void Awake() {
         base.Awake();
         SetupHealth(100.0f);
+        
+        _hitAnim  = new HitAnimation("_BlinkRatio", 0.2f, _limbs.Select(x=>x.Sprite).ToArray(), _visualTransform);
     }
 
     protected override void LateUpdate() {
@@ -29,7 +51,7 @@ public class Player : Actor {
             GetClosestTarget();
         }
         else {
-            if (!GoToTarget(1.0f, _range * 0.9f)) {
+            if (!GoToTarget(1.0f, _range * 0.9f, ref _lastMoveRight)) {
                 if (_attackTimer >= _attackInterval) {
                     t.Hit(new HitInfo{
                         Owner =  this,

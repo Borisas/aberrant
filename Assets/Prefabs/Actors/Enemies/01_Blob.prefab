@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb28adefce1e8142a7ffa72d6b50a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _visualTransform: {fileID: 2139051144767752903}
   _visual: {fileID: 1731247151863027005}
 --- !u!50 &593349594698483150
 Rigidbody2D:

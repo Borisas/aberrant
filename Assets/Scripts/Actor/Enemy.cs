@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class Enemy : Actor {
     
+    [SerializeField] private SpriteRenderer _visual = null;
+    
     private float _attackTimer = 0.0f;
     private float _attackInterval = 0.45f;
     private float _range = 0.525f;
-    
-    public void Setup(EnemyConfiguration cfg) {
 
+    protected override void Awake() {
+        base.Awake();
+        _hitAnim  = new HitAnimation("_BlinkRatio", 0.2f, _visual, _visualTransform);
+    }
+
+    public void Setup(EnemyConfiguration cfg) {
         SetTarget(Scene.Player);//force target player
         SetupHealth(cfg.Health);
     }
@@ -26,7 +32,7 @@ public class Enemy : Actor {
     protected override void FixedUpdate() {
         var t = GetTarget();
         if (t != null) {
-            if (!GoToTarget(1.0f, _range * 0.9f)) {
+            if (!GoToTarget(1.0f, _range * 0.9f, ref _lastMoveRight)) {
                 if (_attackTimer >= _attackInterval) {
                     t.Hit(new HitInfo{
                         Owner =  this,
