@@ -34,6 +34,8 @@ public class HitAnimation {
 
         _rendTransform.localScale = _originalScale * 0.85f;
         _scaleAnim = Tween.Scale(_rendTransform,_originalScale,0.25f);
+
+        Scene.Effects.SpawnHitParticles(_rend, _rendTransform);
     }
 
     public void Kill() {

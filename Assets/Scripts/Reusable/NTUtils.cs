@@ -21,31 +21,37 @@ public static class NTUtils {
         private DelVoidVoid _onComplete;
         private bool _looping = false;
 
-        public void Start(float duration) {
+        public Timer Start(float duration) {
             _duration = duration;
             Restart();
             _running = true;
+            return this;
         }
 
-        public void Restart() {
+        public Timer Restart() {
             _timer = 0.0f;
             _running = true;
+            return this;
         }
 
-        public void Stop() {
+        public Timer Stop() {
             _running = false;
+            return this;
         }
 
-        public void SetOnComplete(DelVoidVoid c) {
+        public Timer SetOnComplete(DelVoidVoid c) {
             _onComplete = c;
+            return this;
         }
 
-        public void SetLooping(bool l) {
+        public Timer SetLooping(bool l) {
             _looping = l;
+            return this;
         }
 
-        public void Complete() {
+        public Timer Complete() {
             _timer = _duration;
+            return this;
         }
 
         public void Run() {

@@ -7,17 +7,20 @@ public class GameController : MonoBehaviour {
 
     [SerializeField] private Area2D _enemySpawnArea = null;
     [SerializeField] private Transform _enemyParent = null;
+    [SerializeField] private EnemySpawner _enemySpawner = null;
 
     private NTUtils.Timer _spawnTimer;
 
     private List<Enemy> _enemies = new List<Enemy>();
 
     private void Awake() {
-        _spawnTimer = new NTUtils.Timer();
-        _spawnTimer.SetOnComplete(SpawnEnemy);
-        _spawnTimer.SetLooping(true);
-        _spawnTimer.Start(1.0f);
-        _spawnTimer.Complete();
+        
+        _spawnTimer = new NTUtils.Timer()
+            .SetOnComplete(SpawnEnemy)
+            .SetLooping(true)
+            .Start(1.0f)
+            .Complete();
+        
         _enemies = new List<Enemy>();
     }
 

@@ -10,6 +10,7 @@ public class Scene : MonoBehaviour {
     public static WorldUiController WorldUiController;
     public static GameController GameController;
     public static Player Player;
+    public static Effects Effects;
     
     private void Awake() {
 
@@ -17,5 +18,6 @@ public class Scene : MonoBehaviour {
         UiDirector = Object.FindObjectOfType<SimpleUi.Director>();
         GameController = Object.FindObjectOfType<GameController>();
         WorldUiController = Object.FindObjectOfType<WorldUiController>();
+        Effects = Object.FindObjectOfType<Effects>();
     }
 }

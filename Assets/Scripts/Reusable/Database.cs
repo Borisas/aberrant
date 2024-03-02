@@ -22,6 +22,7 @@ public class Database : MonoBehaviour {
 #endregion
 
     public DatabaseMain Main;
+    public DatabaseEffects Effects;
 
 
 }

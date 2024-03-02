@@ -9,7 +9,7 @@ using UnityEditor;
 using UnityEngine;
 
 public class ScriptableObjectCreator : OdinMenuEditorWindow {
-    static HashSet<Type> scriptableObjectTypes = AssemblyUtilities.GetTypes(AssemblyTypeFlags.CustomTypes)
+    static HashSet<Type> scriptableObjectTypes = AssemblyUtilities.GetTypes(AssemblyCategory.Scripts)
         .Where(t =>
             t.IsClass &&
             typeof(ScriptableObject).IsAssignableFrom(t) &&
