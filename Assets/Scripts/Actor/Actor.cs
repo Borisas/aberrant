@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using PrimeTween;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class Actor : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class Actor : MonoBehaviour {
     public System.Action<Actor> OnHealthChanged;
 
     [SerializeField] private SpriteRenderer _visual = null;
+    private SortingGroup _sorting = null;
     private Actor _target;
     protected Rigidbody2D _body = null;
     protected AgentNav2d _nav = null;
@@ -23,6 +25,7 @@ public class Actor : MonoBehaviour {
         _body = GetComponent<Rigidbody2D>();
         _nav = new AgentNav2d();
         _hitAnim  = new HitAnimation("_BlinkRatio", 0.2f, _visual);
+        _sorting = GetComponent<SortingGroup>();
     }
 
     protected void SetupHealth(float hp, float prc = 1.0f) {
@@ -61,7 +64,7 @@ public class Actor : MonoBehaviour {
     }
 
     protected virtual void LateUpdate() {
-        _visual.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100.0f);
+        _sorting.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100.0f);
     }
 
     protected virtual void FixedUpdate() { }

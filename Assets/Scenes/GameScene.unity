@@ -167,6 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842d4d525d3b6174a9a7727dc246712a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _debugDraw: 0
   _size: {x: 7.31, y: 4.32}
 --- !u!4 &172512728 stripped
 Transform:

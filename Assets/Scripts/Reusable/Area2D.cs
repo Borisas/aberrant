@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class Area2D : MonoBehaviour {
 
+    [SerializeField] private bool _debugDraw = false;
     [SerializeField] private Vector2 _size;
 
     private Vector2 _lastPoint = Vector2.zero;
@@ -37,6 +38,9 @@ public class Area2D : MonoBehaviour {
     }
 
     private void OnDrawGizmos() {
+
+        if (!_debugDraw) return;
+        
         var mat = Gizmos.matrix;
         Gizmos.matrix = transform.localToWorldMatrix;
 
