@@ -8,6 +8,7 @@ public class ActorHealthBar : MonoBehaviour {
     
     [SerializeField] private float _lift = 1.0f;
     private Actor _actor = null;
+    private GameObject _barVisual = null;
     private Transform _barInstance = null;
     private Image _barFill = null;
     private bool _initialised = false;
@@ -29,21 +30,29 @@ public class ActorHealthBar : MonoBehaviour {
         
         _barInstance = ObjectPool.Get(Database.GetInstance().Main.HealthBar,GetBarParent()).transform;
         if (_barInstance == null) return;
-
+        
+        _barVisual = _barInstance.Find("Bar").gameObject;
+        _barFill = _barInstance.Find("Bar/Fill").GetComponent<Image>();
 
         _initialised = true;
         _barInstance.transform.localScale = Vector3.one;
-
-        _barFill = _barInstance.Find("Bar").GetComponent<Image>();
         UpdateBarFill();
     }
 
     private void LateUpdate() {
 
         if (!_initialised) return;
-        
-        _barInstance.position = _actor.transform.position + Vector3.up * _lift;
-        UpdateBarFill();
+        bool fullHp = Mathf.Abs(_actor.GetHealth() - _actor.GetMaxHealth()) < Mathf.Epsilon;
+
+        if (fullHp) {
+            _barVisual.gameObject.SetActive(false);
+        }
+        else {
+            _barVisual.gameObject.SetActive(true);
+            _barInstance.position = _actor.transform.position + Vector3.up * _lift;
+            UpdateBarFill();
+        }
+
     }
 
     void UpdateBarFill() {
