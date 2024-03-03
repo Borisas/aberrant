@@ -19,7 +19,7 @@ public class Actor : MonoBehaviour {
     protected bool _alive = true;
     protected float _health = 10.0f;
     protected float _maxHealth = 10.0f;
-    protected bool _lastMoveRight = true;
+    protected float _lastX = 0.0f;
 
     protected HitAnimation _hitAnim;
 
@@ -41,7 +41,7 @@ public class Actor : MonoBehaviour {
         return Mathf.Abs(_health - _maxHealth) < Mathf.Epsilon;
     }
 
-    public bool GoTo(Vector2 position, float speed, ref bool movedRight, float minDist = 0.4f) {
+    public bool GoTo(Vector2 position, float speed, float minDist = 0.4f) {
         
         var cp = _body.position;
 
@@ -56,22 +56,25 @@ public class Actor : MonoBehaviour {
         
         _body.MovePosition(moveTo);
 
-        movedRight = dirVec.x > 0.0f;
-
         return true;
 
     }
 
-    protected bool GoToTarget(float speed, float minDist, ref bool movedRight) {
+    public bool GoToTarget(float speed, float minDist) {
         if (_target != null && _target._alive) {
-            return GoTo(_target.transform.position, speed, ref movedRight, minDist);
+            return GoTo(_target.transform.position, speed, minDist);
         }
         return false;
     }
 
+    protected virtual void Update() { }
+
     protected virtual void LateUpdate() {
         if (_turnToMovement) {
-            _visualTransform.localRotation = Quaternion.Euler(new Vector3(0.0f, _lastMoveRight ? 0.0f : 180.0f, 0.0f));
+            var x = transform.position.x;
+            bool lastMoveRight = x > _lastX;
+            _visualTransform.localRotation = Quaternion.Euler(new Vector3(0.0f, lastMoveRight ? 0.0f : 180.0f, 0.0f));
+            _lastX = x;
         }
 
         _sorting.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100.0f);
@@ -79,7 +82,7 @@ public class Actor : MonoBehaviour {
 
     protected virtual void FixedUpdate() { }
 
-    protected Actor GetTarget() => _target;
+    public Actor GetTarget() => _target;
 
     protected void SetTarget(Actor t) {
         if (_target != null) {

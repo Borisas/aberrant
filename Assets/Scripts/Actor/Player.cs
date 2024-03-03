@@ -23,12 +23,10 @@ public class Player : Actor {
 
 
     [SerializeField] List<PlayerLimb> _limbs = new List<PlayerLimb>();
+    private PlayerStats _stats = new PlayerStats();
     private readonly Collider2D[] _possibleTargets = new Collider2D[32];
 
-    private float _range = 0.525f;
     private float _attackTimer = 0.0f;
-    private float _attackInterval = 0.2f;
-    private float _speed = 1.0f;
 
     protected override void Awake() {
         base.Awake();
@@ -39,26 +37,28 @@ public class Player : Actor {
 
     protected override void LateUpdate() {
         base.LateUpdate();
-        if (_attackTimer < _attackInterval) {
+        if (_attackTimer < _stats.GetAttackInterval()) {
             _attackTimer += Time.deltaTime;
         }
     }
 
+    protected override void Update() {
+        base.Update();
+        _stats.Update();
+    }
+
     protected override void FixedUpdate() {
-        base.LateUpdate();
+        base.FixedUpdate();
 
         var t = GetTarget();
         if (t == null) {
             GetClosestTarget();
         }
         else {
-            if (!GoToTarget(_speed, _range * 0.9f, ref _lastMoveRight)) {
-                if (_attackTimer >= _attackInterval) {
-                    t.Hit(new HitInfo{
-                        Owner =  this,
-                        Damage = 5.0f
-                    });
-                    _attackTimer -= _attackInterval;
+            if (!GoToTarget(_stats.GetSpeed(), _stats.GetRange())) {
+                if (_attackTimer >= _stats.GetAttackInterval()) {
+                    AttackTarget();
+                    _attackTimer -= _stats.GetAttackInterval();
                 }
             }
 
@@ -66,8 +66,21 @@ public class Player : Actor {
 
     }
 
+    void AttackTarget() {
+        _stats.OnBeforeAttack();
+
+        var hi = new HitInfo {
+            Owner = this,
+            Damage = _stats.GetDamage()
+        };
+
+        _stats.ModifyHitInfo(ref hi);
+        
+        GetTarget().Hit(hi);
+    }
+
     public void GoToPosition(Vector2 p) {
-        GoTo(p, _speed, ref _lastMoveRight, 0.05f);
+        GoTo(p, _stats.GetSpeed(), 0.05f);
     }
 
     void GetClosestTarget() {
@@ -122,4 +135,6 @@ public class Player : Actor {
         SetTarget(null);
         GetClosestTarget();//try find new target immediately.
     }
+
+    public PlayerStats GetMutations() => _stats;
 }

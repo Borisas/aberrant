@@ -15,3 +15,14 @@ MonoBehaviour:
   Id: 1
   Prefab: {fileID: 8130746455804521030, guid: 71e6ffc7a822dc743b88f16bb9e5f2c6, type: 3}
   Health: 20
+  Behaviour:
+    rid: 2627042327733469184
+  references:
+    version: 2
+    RefIds:
+    - rid: 2627042327733469184
+      type: {class: MeleeChaseAttack, ns: , asm: Assembly-CSharp}
+      data:
+        _speed: 1
+        _attackSpeed: 2
+        _range: 0.525
