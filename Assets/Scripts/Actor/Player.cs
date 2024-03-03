@@ -28,6 +28,7 @@ public class Player : Actor {
     private float _range = 0.525f;
     private float _attackTimer = 0.0f;
     private float _attackInterval = 0.2f;
+    private float _speed = 1.0f;
 
     protected override void Awake() {
         base.Awake();
@@ -51,7 +52,7 @@ public class Player : Actor {
             GetClosestTarget();
         }
         else {
-            if (!GoToTarget(1.0f, _range * 0.9f, ref _lastMoveRight)) {
+            if (!GoToTarget(_speed, _range * 0.9f, ref _lastMoveRight)) {
                 if (_attackTimer >= _attackInterval) {
                     t.Hit(new HitInfo{
                         Owner =  this,
@@ -63,6 +64,10 @@ public class Player : Actor {
 
         }
 
+    }
+
+    public void GoToPosition(Vector2 p) {
+        GoTo(p, _speed, ref _lastMoveRight, 0.05f);
     }
 
     void GetClosestTarget() {

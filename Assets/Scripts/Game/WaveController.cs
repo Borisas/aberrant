@@ -9,7 +9,6 @@ public class WaveController : MonoBehaviour {
 
     [SerializeField] private EnemySpawner _enemySpawner = null;
 
-    private List<Enemy> _enemies = new List<Enemy>();
     private int _enemiesInWave = 0;
     private int _enemiesSpawned = 0;
 
@@ -19,12 +18,9 @@ public class WaveController : MonoBehaviour {
     private bool _waveInProgress = false;
 
     private void Awake() {
-        _enemies = new List<Enemy>();
-        
     }
 
-    public void BeginWave() {
-        _enemies.Clear();
+    public void BeginWave(int index) {
         _waveInProgress = true;
         _enemiesSpawned = 0;
         _spawnInterval = 1.0f;
@@ -36,50 +32,32 @@ public class WaveController : MonoBehaviour {
 
         if (!_waveInProgress) return;
         
-        if (GetEnemiesRemaining() > 0) {
+        if (GetEnemySpawnsRemaining() > 0) {
             _spawnTimer += Time.deltaTime;
             if (_spawnTimer >= _spawnInterval) {
                 var e = _enemySpawner.SpawnEnemy();
-                _enemies.Add(e);
+                e.OnDie += Enemy_OnDie;
                 _spawnTimer -= _spawnInterval;
                 _enemiesSpawned++;
             }
         }
         else {
-
-            if (IsAllEnemiesDead()) {
+            if (_enemySpawner.GetLivingEnemyCount() <= 0) {
                 _waveInProgress = false;
                 OnWaveCompleted?.Invoke();
             }
         }
     }
 
-    public int GetEnemiesRemaining() {
+    void Enemy_OnDie(Actor e) {
+        e.OnDie -= Enemy_OnDie;
+    }
+
+    public int GetEnemySpawnsRemaining() {
         return _enemiesInWave - _enemiesSpawned;
     }
 
-    public int GetEnemiesRemainingAlive() {
-
-        int deadCount = 0;
-        
-        for (int i = 0; i < _enemies.Count; i++) {
-            if (_enemies[i] == null || !_enemies[i].IsAlive()) {
-                deadCount++;
-            }
-        }
-
-        return _enemiesInWave - deadCount;
+    public bool IsInProgress() {
+        return _waveInProgress;
     }
-
-    bool IsAllEnemiesDead() {
-
-        for (int i = 0; i < _enemies.Count; i++) {
-            if (_enemies[i] == null || !_enemies[i].IsAlive()) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
 }

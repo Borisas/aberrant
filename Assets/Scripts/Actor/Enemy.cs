@@ -14,6 +14,7 @@ public class Enemy : Actor {
     }
 
     public void Setup(EnemyConfiguration cfg) {
+        _alive = true;
         SetTarget(Scene.Player);//force target player
         SetupHealth(cfg.Health);
     }
@@ -47,7 +48,8 @@ public class Enemy : Actor {
     }
 
     protected override void Die() {
-        base.Die();
+        _hitAnim.Kill();
+        gameObject.SetActive(false);
         Scene.Effects.SpawnBloodDrop(transform, Random.Range(1,4));
     }
 }

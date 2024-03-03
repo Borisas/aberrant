@@ -9,14 +9,20 @@ public class GameController : MonoBehaviour {
     [SerializeField] private WaveController _waveController = null;
 
     private void Awake() {
-    
-        _waveController.BeginWave();
-        _waveController.OnWaveCompleted += WaveController_OnWaveCompleted;
+        
         _instance = new RunInstance();
+    
+        _waveController.BeginWave(_instance.WaveIndex);
+        _waveController.OnWaveCompleted += WaveController_OnWaveCompleted;
+    }
+
+    void Update() {
+        if (!_waveController.IsInProgress()) {
+            Scene.Player.GoToPosition(Vector2.zero);
+        }
     }
 
     private void WaveController_OnWaveCompleted() {
-        
     }
 
     public RunInstance GetRunInstance() {

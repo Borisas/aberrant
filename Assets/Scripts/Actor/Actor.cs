@@ -37,7 +37,7 @@ public class Actor : MonoBehaviour {
     public float GetHealth() => _health;
     public float GetMaxHealth() => _maxHealth;
 
-    protected bool GoTo(Vector2 position, float speed, ref bool movedRight, float minDist = 0.4f) {
+    public bool GoTo(Vector2 position, float speed, ref bool movedRight, float minDist = 0.4f) {
         
         var cp = _body.position;
 

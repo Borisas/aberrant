@@ -24,6 +24,12 @@ namespace SimpleUi {
             view.gameObject.SetActive(true);
         }
 
+        public void OpenViewAdditive<T>(bool animate = true) where T : View {
+            var view = GetView<T>();
+            if (view == null) return;
+            view.gameObject.SetActive(true);
+        }
+
         public T GetView<T>() where T : View {
 
             for (int i = 0; i < _views.Length; i++) {
