@@ -386,7 +386,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 6360549334133230144}
         m_TargetAssemblyTypeName: ViewGameplay, Assembly-CSharp
-        m_MethodName: ClickTest
+        m_MethodName: OnClickTest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

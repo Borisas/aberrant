@@ -23,6 +23,12 @@ public class GameController : MonoBehaviour {
     }
 
     private void WaveController_OnWaveCompleted() {
+        Scene.UiDirector.GetView<ViewGameplay>().OpenIntermission();
+    }
+
+    public void NextWave() {
+        _instance.NextWave();
+        _waveController.BeginWave(_instance.WaveIndex);
     }
 
     public RunInstance GetRunInstance() {

@@ -32,7 +32,12 @@ public class ViewGameplay : UiView {
         _viewIntermission.SetActive(false);
     }
 
-    void OpenIntermission() {
-        _viewIntermission.SetActive(false);
+    public void OpenIntermission() {
+        _viewIntermission.SetActive(true);
+    }
+
+    public void OnClickTest() {
+        CloseIntermission();
+        Scene.GameController.NextWave();
     }
 }
