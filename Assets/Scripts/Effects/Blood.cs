@@ -39,6 +39,8 @@ public class Blood : MonoBehaviour {
 
     void OnTargetReached() {
 
+        var ba = new BloodAmount(1);
+        ba.Add();
         Scene.GameController.GetRunInstance().AddBlood();
         
         gameObject.SetActive(false);

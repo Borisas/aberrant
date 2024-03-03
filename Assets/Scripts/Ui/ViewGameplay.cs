@@ -9,7 +9,7 @@ public class ViewGameplay : UiView {
     [SerializeField] private TMP_Text _labelWaveProgress = null;
     [SerializeField] private TMP_Text _labelBlood = null;
     [Header("Intermission")] 
-    [SerializeField] private GameObject _viewIntermission = null;
+    [SerializeField] private GameplayIntermission _intermission = null;
 
     private void Start() {
 
@@ -29,14 +29,24 @@ public class ViewGameplay : UiView {
     }
 
     void CloseIntermission() {
-        _viewIntermission.SetActive(false);
+        _intermission.Close();
     }
 
     public void OpenIntermission() {
-        _viewIntermission.SetActive(true);
+        _intermission.Open();
     }
 
-    public void OnClickTest() {
+    public void OnRecoverButton() {
+        
+        var pr = Scene.GameController.GetPriceRecovery();
+        if (!pr.CanPay()) return;
+        pr.Remove();
+        
+        Scene.Player.RestoreHealth(Scene.Player.GetMaxHealth() - Scene.Player.GetHealth());
+        _intermission.Resetup();
+    }
+
+    public void OnContinueButton() {
         CloseIntermission();
         Scene.GameController.NextWave();
     }

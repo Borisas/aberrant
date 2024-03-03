@@ -34,4 +34,9 @@ public class GameController : MonoBehaviour {
     public RunInstance GetRunInstance() {
         return _instance;
     }
+
+
+    public BloodAmount GetPriceRecovery() {
+        return new BloodAmount(50);
+    }
 }

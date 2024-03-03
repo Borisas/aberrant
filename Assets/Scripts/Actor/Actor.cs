@@ -36,6 +36,10 @@ public class Actor : MonoBehaviour {
 
     public float GetHealth() => _health;
     public float GetMaxHealth() => _maxHealth;
+    
+    public bool IsFullHealth() {
+        return Mathf.Abs(_health - _maxHealth) < Mathf.Epsilon;
+    }
 
     public bool GoTo(Vector2 position, float speed, ref bool movedRight, float minDist = 0.4f) {
         
@@ -104,12 +108,17 @@ public class Actor : MonoBehaviour {
         }
     }
 
+    public virtual void RestoreHealth(float health) {
+        _health += health;
+        _health = Mathf.Clamp(_health, 0.0f, _maxHealth);
+        OnHealthChanged?.Invoke(this);
+    }
+
     protected void PlayHitAnimation() {
 
         _hitAnim.Play();
     }
-
-
+    
     protected virtual void Die() {
         _hitAnim.Kill();
         Destroy(gameObject);

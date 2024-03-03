@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c6023806763cee14d9b8a0fec5539b03
+guid: cacc52067c0de2a448c042ea41550322
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,7 +97,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ui_button_gameplay_0
+      name: ui_button_game_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +111,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed549943401c7f44c8c9a91aa961ae66
-      internalID: 163640132
+      spriteID: c6a1f8765cebfee4d85aa4821d2572f3
+      internalID: -111091815
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: ui_button_gameplay_1
+      name: ui_button_game_1
       rect:
         serializedVersion: 2
         x: 256
@@ -132,8 +132,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 21495ff1682d25e4d94e7be42538b53f
-      internalID: -964607041
+      spriteID: 1b05e76314184874b9c9e6bf15aecd06
+      internalID: 2099292282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ui_button_game_2
+      rect:
+        serializedVersion: 2
+        x: 512
+        y: 0
+        width: 256
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffd16027c612e3d429a7ffd806659389
+      internalID: -121708179
       vertices: []
       indices: 
       edges: []
@@ -149,8 +170,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      ui_button_gameplay_0: 163640132
-      ui_button_gameplay_1: -964607041
+      ui_button_game_0: -111091815
+      ui_button_game_1: 2099292282
+      ui_button_game_2: -121708179
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

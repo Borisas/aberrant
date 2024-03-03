@@ -9,6 +9,10 @@ public class RunInstance {
         Blood += value;
     }
 
+    public void RemoveBlood(int value = 1) {
+        Blood -= value;
+    }
+
     public void NextWave() {
         WaveIndex++;
     }

@@ -37,6 +37,12 @@ public class ButtonAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExit
         _shadowSize = _shadow.effectDistance;
     }
 
+    private void OnDisable() {
+        _hoveredState = false;
+        _downState = false;
+        UpdateVisual();
+    }
+
     public void OnPointerEnter(PointerEventData eventData) {
         _hoveredState = true;
         UpdateVisual();
