@@ -10,10 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2d14ac7b399ed548bba790dc4d599ae, type: 3}
-  m_Name: 01_
+  m_Name: 02_PoisonCloud
   m_EditorClassIdentifier: 
-  Id: 0
-  Limb: 6
+  Obtainable: 1
+  Id: 2
+  Title: Poison Cloud
+  Limb: 5
+  MaxLevel: 999
+  Tier: 3
   Icon: {fileID: 0}
   Visual: {fileID: 21300000, guid: bb842b987d743b24387ac822ddccc281, type: 3}
   Attach: 0

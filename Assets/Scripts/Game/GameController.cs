@@ -7,10 +7,12 @@ public class GameController : MonoBehaviour {
 
     private RunInstance _instance = new RunInstance();
     [SerializeField] private WaveController _waveController = null;
+    MutationController _mutationController = null;
 
     private void Awake() {
         
         _instance = new RunInstance();
+        _mutationController = new MutationController();
     
         _waveController.BeginWave(_instance.WaveIndex);
         _waveController.OnWaveCompleted += WaveController_OnWaveCompleted;
@@ -24,6 +26,7 @@ public class GameController : MonoBehaviour {
 
     private void WaveController_OnWaveCompleted() {
         Scene.UiDirector.GetView<ViewGameplay>().OpenIntermission();
+        ViewMutation.Open();
     }
 
     public void NextWave() {
@@ -38,5 +41,13 @@ public class GameController : MonoBehaviour {
 
     public BloodAmount GetPriceRecovery() {
         return new BloodAmount(50);
+    }
+
+    public BloodAmount GetPriceMutate() {
+        return new BloodAmount(50);
+    }
+
+    public MutationController GetMutationController() {
+        return _mutationController;
     }
 }

@@ -33,6 +33,7 @@ public class Player : Actor {
         SetupHealth(100.0f);
         
         _hitAnim  = new HitAnimation("_BlinkRatio", 0.2f, _limbs.Select(x=>x.Sprite).ToArray(), _visualTransform);
+        _stats.OnMutationChanged += Stats_OnMutationsChanged;
     }
 
     protected override void LateUpdate() {
@@ -61,9 +62,7 @@ public class Player : Actor {
                     _attackTimer -= _stats.GetAttackInterval();
                 }
             }
-
         }
-
     }
 
     void AttackTarget() {
@@ -136,5 +135,13 @@ public class Player : Actor {
         GetClosestTarget();//try find new target immediately.
     }
 
-    public PlayerStats GetMutations() => _stats;
+    public PlayerStats GetStats() => _stats;
+
+    void Stats_OnMutationsChanged() {
+        LoadVisuals();
+    }
+
+    void LoadVisuals() {
+        
+    }
 }

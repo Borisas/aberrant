@@ -50,4 +50,16 @@ public class ViewGameplay : UiView {
         CloseIntermission();
         Scene.GameController.NextWave();
     }
+
+    public void OnMutateButton() {
+        
+        var pr = Scene.GameController.GetPriceMutate();
+        if (!pr.CanPay()) return;
+        pr.Remove();
+
+        ViewMutation.Open();
+        
+        _intermission.OnMutate();
+        _intermission.Resetup();
+    }
 }
