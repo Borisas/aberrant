@@ -21,7 +21,13 @@ public class Projectile : DamageEntity {
     }
 
     private void FixedUpdate() {
-        _body.MovePosition(_body.position + _direction * (_speed * Time.fixedDeltaTime));
+        
+        var p = _body.position + _direction * (_speed * Time.fixedDeltaTime);
+        _body.MovePosition(p);
+
+        if (Mathf.Abs(p.x) > 20.0f || Mathf.Abs(p.y) > 20.0f) {
+            DestroySelf();
+        }
     }
 
     protected override HitInfo GenerateHit() {
