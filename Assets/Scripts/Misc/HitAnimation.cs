@@ -61,5 +61,13 @@ public class HitAnimation {
         }
         _scaleAnim.Stop();
         _rendTransform.localScale = _originalScale;
+        
+        foreach (var r in _rend) {
+            r.GetPropertyBlock(_block);
+            _block.SetFloat(_shaderBlinkRatio, 0.0f);
+            r.SetPropertyBlock(_block);
+        }
     }
+    
+    
 }

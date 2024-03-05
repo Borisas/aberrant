@@ -78,10 +78,11 @@ public class Player : Actor {
         var target = GetTarget();
         
         target.Hit(hit);
+    }
 
-        if (!target.IsAlive()) {
-            _stats.OnKill(hit, target);
-        }
+    public override void OnKilled(in HitInfo hit, Actor k) {
+        base.OnKilled(hit, k);
+        _stats.OnKill(hit,k);
     }
 
     public void GoToPosition(Vector2 p) {

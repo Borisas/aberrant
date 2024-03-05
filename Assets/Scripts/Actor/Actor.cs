@@ -12,7 +12,6 @@ public class Actor : MonoBehaviour {
 
     [SerializeField] private bool _turnToMovement = false;
     [SerializeField] protected Transform _visualTransform = null;
-    private SortingGroup _sorting = null;
     private Actor _target;
     protected Rigidbody2D _body = null;
     protected AgentNav2d _nav = null;
@@ -26,7 +25,10 @@ public class Actor : MonoBehaviour {
     protected virtual void Awake() {
         _body = GetComponent<Rigidbody2D>();
         _nav = new AgentNav2d();
-        _sorting = GetComponent<SortingGroup>();
+    }
+
+    private void OnEnable() {
+        _hitAnim.Kill();
     }
 
     protected void SetupHealth(float hp, float prc = 1.0f) {
@@ -76,8 +78,6 @@ public class Actor : MonoBehaviour {
             _visualTransform.localRotation = Quaternion.Euler(new Vector3(0.0f, lastMoveRight ? 0.0f : 180.0f, 0.0f));
             _lastX = x;
         }
-
-        _sorting.sortingOrder = -Mathf.RoundToInt(transform.position.y * 100.0f);
     }
 
     protected virtual void FixedUpdate() { }
@@ -104,6 +104,10 @@ public class Actor : MonoBehaviour {
         OnHealthChanged?.Invoke(this);
         if (_health <= 0.0f) {
             Die();
+            if (hit.Owner != null) {
+                hit.Owner.OnKilled(hit, this);
+            }
+
             OnDie?.Invoke(this);
         }
         else {
@@ -130,8 +134,8 @@ public class Actor : MonoBehaviour {
     public bool IsAlive() => _alive;
 
     public bool CanHit(Actor other) {
-        
-        Debug.Log($"Can hit? {this.GetType()} != {other.GetType()}");
         return this.GetType() != other.GetType();
     }
+
+    public virtual void OnKilled(in HitInfo hit, Actor k) { }
 }

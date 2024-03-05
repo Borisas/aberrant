@@ -24,3 +24,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 433f016aa749640fe8703760fea0d8f6, type: 2}
   LimbIcons: []
   SpikeProjectile: {fileID: 333137064685856217, guid: ad7c2cb82e45dfb4d87efda995140295, type: 3}
+  PoisonCloud: {fileID: 2690278415415091956, guid: 35a625a1da9482c4ba833e70d239adae, type: 3}

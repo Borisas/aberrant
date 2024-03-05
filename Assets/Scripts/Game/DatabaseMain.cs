@@ -14,6 +14,7 @@ public class DatabaseMain : ScriptableObject {
     public List<Utils.LimbSprite> LimbIcons;
     [Header("Mutation Effects")] 
     public Projectile SpikeProjectile;
+    public DamagingZone PoisonCloud;
     
     public EnemyConfiguration GetEnemyById(EnemyId id) {
         for (int i = 0; i < Enemies.Count; i++) {

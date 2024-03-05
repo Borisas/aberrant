@@ -56,6 +56,21 @@ public class PlayerStats {
 
     public void OnKill(in HitInfo hit, Actor target) {
 
+        int poisonCloud = GetMutationLevel(MutationId.PoisonCloud);
+        if (poisonCloud > 0) {
+
+            var cfg = Database.GetInstance().Main.GetMutationConfig(MutationId.PoisonCloud);
+            
+            float spawnChance = cfg.Values[1] + cfg.ScaleValues[1] * (float)(poisonCloud-1);
+            
+            bool spawn = Random.value <= spawnChance;
+            if (spawn) {
+                float damage = cfg.Values[0] + cfg.ScaleValues[0] * (float) (poisonCloud - 1);
+                var cloud = ObjectPool.Get(Database.GetInstance().Main.PoisonCloud);
+                cloud.Setup(Scene.Player,damage);
+                cloud.transform.position = target.transform.position;
+            }
+        }
     }
 
     public int GetMutationLevel(MutationId id) {

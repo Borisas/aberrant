@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 593349594698483150}
   - component: {fileID: 7747895829417784789}
   - component: {fileID: 5083312474103628596}
+  - component: {fileID: 7956043623615102805}
   m_Layer: 7
   m_Name: 01_Blob
   m_TagString: Untagged
@@ -134,8 +135,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb28adefce1e8142a7ffa72d6b50a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _turnToMovement: 0
   _visualTransform: {fileID: 2139051144767752903}
   _visual: {fileID: 1731247151863027005}
+  _behaviour:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!50 &593349594698483150
 Rigidbody2D:
   serializedVersion: 4
@@ -188,6 +197,18 @@ SortingGroup:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_SortAtRoot: 0
+--- !u!114 &7956043623615102805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3598988101793340148}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c5a50c5d2e81f543a851e0509953bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6270997132631435007
 GameObject:
   m_ObjectHideFlags: 0
