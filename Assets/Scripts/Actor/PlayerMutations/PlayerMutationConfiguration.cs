@@ -12,4 +12,6 @@ public class PlayerMutationConfiguration : ScriptableObject {
     public Sprite Icon;
     public Sprite Visual;
     public bool Attach;
+    public float[] Values;
+    public float[] ScaleValues;
 }

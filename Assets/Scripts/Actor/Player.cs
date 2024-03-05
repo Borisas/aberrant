@@ -21,7 +21,7 @@ public class Player : Actor {
         public SpriteRenderer Sprite;
     }
 
-
+    [SerializeField] private Transform _projectileSpawnPos;
     [SerializeField] List<PlayerLimb> _limbs = new List<PlayerLimb>();
     private PlayerStats _stats = new PlayerStats();
     private readonly Collider2D[] _possibleTargets = new Collider2D[32];
@@ -68,14 +68,20 @@ public class Player : Actor {
     void AttackTarget() {
         _stats.OnBeforeAttack();
 
-        var hi = new HitInfo {
+        var hit = new HitInfo {
             Owner = this,
             Damage = _stats.GetDamage()
         };
 
-        _stats.ModifyHitInfo(ref hi);
+        _stats.ModifyHitInfo(ref hit);
+
+        var target = GetTarget();
         
-        GetTarget().Hit(hi);
+        target.Hit(hit);
+
+        if (!target.IsAlive()) {
+            _stats.OnKill(hit, target);
+        }
     }
 
     public void GoToPosition(Vector2 p) {
@@ -108,6 +114,10 @@ public class Player : Actor {
         if (e == null) return;
 
         SetTarget(e);
+    }
+
+    public Vector3 GetProjectileSpawnPos() {
+        return _projectileSpawnPos.position;
     }
 
     public override void Hit(HitInfo hit) {

@@ -128,4 +128,10 @@ public class Actor : MonoBehaviour {
     }
 
     public bool IsAlive() => _alive;
+
+    public bool CanHit(Actor other) {
+        
+        Debug.Log($"Can hit? {this.GetType()} != {other.GetType()}");
+        return this.GetType() != other.GetType();
+    }
 }

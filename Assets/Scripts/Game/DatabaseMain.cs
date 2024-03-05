@@ -12,6 +12,8 @@ public class DatabaseMain : ScriptableObject {
     public List<EnemyConfiguration> Enemies;
     public List<PlayerMutationConfiguration> PlayerMutations;
     public List<Utils.LimbSprite> LimbIcons;
+    [Header("Mutation Effects")] 
+    public Projectile SpikeProjectile;
     
     public EnemyConfiguration GetEnemyById(EnemyId id) {
         for (int i = 0; i < Enemies.Count; i++) {

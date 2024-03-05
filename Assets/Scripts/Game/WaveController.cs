@@ -60,4 +60,6 @@ public class WaveController : MonoBehaviour {
     public bool IsInProgress() {
         return _waveInProgress;
     }
+
+    public EnemySpawner GetEnemySpawner() => _enemySpawner;
 }

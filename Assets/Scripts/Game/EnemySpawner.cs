@@ -31,4 +31,6 @@ public class EnemySpawner : MonoBehaviour {
         }
         return count;
     }
+
+    public IEnumerable<Enemy> GetEnemies() => _livingEnemies;
 }
