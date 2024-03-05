@@ -15,6 +15,7 @@ public class DatabaseMain : ScriptableObject {
     [Header("Mutation Effects")] 
     public Projectile SpikeProjectile;
     public DamagingZone PoisonCloud;
+    public GameObject BloodCross;
     
     public EnemyConfiguration GetEnemyById(EnemyId id) {
         for (int i = 0; i < Enemies.Count; i++) {

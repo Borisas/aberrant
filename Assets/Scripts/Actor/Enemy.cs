@@ -42,6 +42,11 @@ public class Enemy : Actor {
     protected override void Die() {
         _hitAnim.Kill();
         gameObject.SetActive(false);
-        Scene.Effects.SpawnBloodDrop(transform, Random.Range(1,4));
+
+        int min = 1;
+        int max = 4;
+
+        Scene.Player.GetStats().ModifyBloodSpawn(ref min, ref max);
+        Scene.Effects.SpawnBloodDrop(transform, Random.Range(min,max));
     }
 }

@@ -23,10 +23,17 @@ public class WaveController : MonoBehaviour {
     public void BeginWave(int index) {
         _waveInProgress = true;
         _enemiesSpawned = 0;
-        _spawnInterval = 1.0f;
-        _enemiesInWave = UnityEngine.Random.Range(15, 21);
+
+        _spawnInterval = GetSpawnInterval(index);
+        
+        int min = 15 + index * 2;
+        int max = 21 + index * 3;
+        _enemiesInWave = UnityEngine.Random.Range(min, max);
     }
 
+    float GetSpawnInterval(int index) {
+        return Mathf.Max(0.25f, 1.0f - (float)index * 0.1f);
+    }
 
     private void Update() {
 

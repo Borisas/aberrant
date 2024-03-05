@@ -19,9 +19,9 @@ public class GameplayIntermission : MonoBehaviour {
     bool _mutated = false;
     
     public void Open() {
+        _mutated = false;
         gameObject.SetActive(true);
         SetupState();
-        _mutated = false;
     }
 
     public void Close() {

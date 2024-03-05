@@ -25,3 +25,4 @@ MonoBehaviour:
   LimbIcons: []
   SpikeProjectile: {fileID: 333137064685856217, guid: ad7c2cb82e45dfb4d87efda995140295, type: 3}
   PoisonCloud: {fileID: 2690278415415091956, guid: 35a625a1da9482c4ba833e70d239adae, type: 3}
+  BloodCross: {fileID: 1923848157146598433, guid: 857cadfd2addfb04f8e30e49a7cbb976, type: 3}

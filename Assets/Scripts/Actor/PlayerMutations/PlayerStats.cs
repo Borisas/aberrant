@@ -24,6 +24,7 @@ public class PlayerStats {
     List<MutationInstance> _activeMutations = new List<MutationInstance>();
 
     private NTUtils.Timer _spikeTimer = new NTUtils.Timer();
+    private NTUtils.Timer _bloodHaloTimer = new NTUtils.Timer();
     
     public float GetDamage() {
         
@@ -48,6 +49,7 @@ public class PlayerStats {
 
     public void Update() {
         _spikeTimer.Run();
+        _bloodHaloTimer.Run();
     }
 
     public void ModifyHitInfo(ref HitInfo hit) {
@@ -71,6 +73,18 @@ public class PlayerStats {
                 cloud.transform.position = target.transform.position;
             }
         }
+    }
+
+    public void ModifyBloodSpawn(ref int min, ref int max) {
+
+        int detector = GetMutationLevel(MutationId.Detector);
+        if (detector > 0) {
+            var cfg = Database.GetInstance().Main.GetMutationConfig(MutationId.Detector);
+            int add = Mathf.RoundToInt(cfg.Values[0] + ((float) detector - 1) * cfg.ScaleValues[0]);
+            min += add;
+            max += add;
+        }
+
     }
 
     public int GetMutationLevel(MutationId id) {
@@ -103,8 +117,7 @@ public class PlayerStats {
     }
 
     void MutationsChanged(MutationId id) {
-
-
+        
         if (id == MutationId.Spikes) {
 
             var cfg = Database.GetInstance().Main.GetMutationConfig(id);
@@ -121,6 +134,23 @@ public class PlayerStats {
                 .SetLooping(true)
                 .SetOnComplete(FireSpike)
                 .Start(fireInterval);
+        }
+        else if (id == MutationId.BloodHalo) {
+
+            var cfg = Database.GetInstance().Main.GetMutationConfig(id);
+            var lvl = GetMutationLevel(id);
+
+            float interval = cfg.Values[1];
+
+            if (lvl > 1) {
+                interval *= 1.0f / (1.0f + (cfg.ScaleValues[1] * (float) lvl));
+            }
+
+            _bloodHaloTimer.Stop();
+            _bloodHaloTimer = new NTUtils.Timer()
+                .SetLooping(true)
+                .SetOnComplete(BloodHaloHit)
+                .Start(interval);
         }
 
         OnMutationChanged?.Invoke();
@@ -159,6 +189,26 @@ public class PlayerStats {
         p.transform.position = startPos;
     }
 
+    void BloodHaloHit() {
+
+        var lvl = GetMutationLevel(MutationId.BloodHalo);
+        var cfg = Database.GetInstance().Main.GetMutationConfig(MutationId.BloodHalo);
+
+        float dmg = cfg.Values[0] + (float) (lvl - 1) * cfg.ScaleValues[0];
+
+        var e = GetFurthestEnemy();
+        if (e == null) return;
+
+        var p = e.transform.position;
+        e.Hit(new HitInfo{
+            Owner = Scene.Player,
+            Damage = dmg
+        });
+
+        var go = ObjectPool.Get(Database.GetInstance().Main.BloodCross);
+        go.transform.position = p;
+    }
+
 #endregion
 
 #region MISC
@@ -180,6 +230,32 @@ public class PlayerStats {
             else {
                 var newDist = (mpos - e.transform.position).sqrMagnitude;
                 if (newDist < sqrD) {
+                    closestActor = e;
+                    sqrD = newDist;
+                }
+            }
+        }
+
+        return closestActor;
+    }
+
+    Actor GetFurthestEnemy() {
+        var mpos = Scene.Player.transform.position;
+
+        var enemies = Scene.WaveController.GetEnemySpawner().GetEnemies();
+
+        Actor closestActor = null;
+        float sqrD = 0.0f;
+
+        foreach (var e in enemies) {
+            if (e.IsAlive() == false) continue;
+            if (closestActor == null) {
+                closestActor = e;
+                sqrD = (mpos - e.transform.position).sqrMagnitude;
+            }
+            else {
+                var newDist = (mpos - e.transform.position).sqrMagnitude;
+                if (newDist > sqrD) {
                     closestActor = e;
                     sqrD = newDist;
                 }
