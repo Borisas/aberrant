@@ -1,5 +1,5 @@
 [ ] 2nd enemy
-[ ] Elite enemies
+[X] Elite enemies
 [ ] Intermission screen not clear enough
 [ ] Intermission button pricing unclear
 [ ] Initial gameplay requires player interaction
