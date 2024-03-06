@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class DamagingZone : DamageEntity {
 
+    [SerializeField] private AppearAnimator _appear = null;
     [SerializeField] private float _tickInterval = 0.25f;
     [SerializeField] private float _duration = 5.0f;
 
@@ -76,6 +77,12 @@ public class DamagingZone : DamageEntity {
     }
 
     void DestroySelf() {
-        gameObject.SetActive(false);
+        if (_appear != null) {
+            _appear.PlayDisappear(() => { gameObject.SetActive(false); });
+        }
+        else {
+            gameObject.SetActive(false);
+        }
+
     }
 }

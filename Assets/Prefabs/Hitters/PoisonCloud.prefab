@@ -115,6 +115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ea2b3e4f5df29044b327ece6e990280, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _appear: {fileID: 4509524147955475117}
   _tickInterval: 0.25
   _duration: 5
 --- !u!50 &5965754525257594877
@@ -166,6 +167,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6811722329570347757}
   - component: {fileID: 6825857059565983403}
+  - component: {fileID: 4336955464571256168}
+  - component: {fileID: 4509524147955475117}
   m_Layer: 0
   m_Name: Visual
   m_TagString: Untagged
@@ -208,7 +211,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 946a46dcc4c86bf47af7c725200352d8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -240,3 +243,32 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!111 &4336955464571256168
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8410757759866613759}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 8499020746c2f22469dd820cd5ef36cd, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 8499020746c2f22469dd820cd5ef36cd, type: 2}
+  - {fileID: 7400000, guid: 44e7f6a8219f95d45b900907edfd276c, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!114 &4509524147955475117
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8410757759866613759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3739059bf4cee1147bfdc7d9f46d086c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

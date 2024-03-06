@@ -86,6 +86,9 @@ public class Enemy : Actor {
 
         Scene.Player.GetStats().ModifyBloodSpawn(ref min, ref max);
         Scene.Effects.SpawnBloodDrop(transform, Random.Range(min,max));
+
+        var go = ObjectPool.Get(Database.GetInstance().Effects.BloodSplatterer);
+        go.transform.position = transform.position;
     }
 
     public float GetDamageMultiplier() => _damageMultiplier;

@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitAnim: {fileID: 2944086418483304108, guid: f274fde8b0a7fb248a1afa69edf3c328, type: 3}
   Blood: {fileID: 1530335279981639738, guid: 492c6d9230a29354ba457193db45fae2, type: 3}
+  BloodSplatterer: {fileID: 6335756187846118, guid: 2aea7493377746246b8c5742e2c964c7, type: 3}
