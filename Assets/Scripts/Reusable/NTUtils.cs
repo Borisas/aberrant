@@ -12,13 +12,11 @@ using UnityEditor;
 
 public static class NTUtils {
     
-    public delegate void DelVoidVoid();
-    
     public class Timer {
         private bool _running = false;
         private float _duration;
         private float _timer;
-        private DelVoidVoid _onComplete;
+        private System.Action _onComplete;
         private bool _looping = false;
 
         public Timer Start(float duration) {
@@ -39,7 +37,7 @@ public static class NTUtils {
             return this;
         }
 
-        public Timer SetOnComplete(DelVoidVoid c) {
+        public Timer SetOnComplete(System.Action c) {
             _onComplete = c;
             return this;
         }

@@ -5,8 +5,10 @@ using UnityEngine;
 
 public class Projectile : DamageEntity {
     private Rigidbody2D _body = null;
-    
+
+    [SerializeField] private GameObject _destroyAnimation = null;
     [SerializeField] private float _speed;
+    [SerializeField] private bool _rotateToDirection = true;
     private float _damage;
     private Vector2 _direction;
 
@@ -18,6 +20,14 @@ public class Projectile : DamageEntity {
         _owner = owner;
         _damage = damage;
         _direction = direction;
+
+        if (_rotateToDirection) {
+            var r = _direction.AngleDeg();
+            var rot = transform.localRotation.eulerAngles;
+            rot.z = r;
+            transform.localRotation = Quaternion.Euler(rot);
+        }
+
     }
 
     private void FixedUpdate() {
@@ -54,5 +64,12 @@ public class Projectile : DamageEntity {
 
     void DestroySelf() {
         gameObject.SetActive(false);
+
+        if (_destroyAnimation != null) {
+            var go = ObjectPool.Get(_destroyAnimation);
+            var t = transform;
+            go.transform.position = t.position;
+            go.transform.rotation = t.rotation;
+        }
     }
 }

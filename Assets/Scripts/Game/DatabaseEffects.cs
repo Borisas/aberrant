@@ -9,4 +9,5 @@ public class DatabaseEffects : ScriptableObject {
 
     public GameObject HitAnim;
     public GameObject Blood;
+    public GameObject SpikeHitAnim;
 }
