@@ -2,13 +2,17 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = System.Random;
 
 public class WaveController : MonoBehaviour {
-
+    private const int SPAWN_ELITES_FROM_WAVE = 3;
+    
     public System.Action OnWaveCompleted;
 
     [SerializeField] private EnemySpawner _enemySpawner = null;
 
+    private float _eliteChance = 0.15f;
+    
     private int _enemiesInWave = 0;
     private int _enemiesSpawned = 0;
 
@@ -17,10 +21,13 @@ public class WaveController : MonoBehaviour {
 
     private bool _waveInProgress = false;
 
+    private int _waveIndex = 0;
+
     private void Awake() {
     }
 
     public void BeginWave(int index) {
+        _waveIndex = index;
         _waveInProgress = true;
         _enemiesSpawned = 0;
 
@@ -42,7 +49,13 @@ public class WaveController : MonoBehaviour {
         if (GetEnemySpawnsRemaining() > 0) {
             _spawnTimer += Time.deltaTime;
             if (_spawnTimer >= _spawnInterval) {
-                var e = _enemySpawner.SpawnEnemy();
+
+                bool elite = false;
+                if (_waveIndex >= SPAWN_ELITES_FROM_WAVE) {
+                    elite = UnityEngine.Random.value <= _eliteChance;
+                }
+
+                var e = _enemySpawner.SpawnEnemy(elite);
                 e.OnDie += Enemy_OnDie;
                 _spawnTimer -= _spawnInterval;
                 _enemiesSpawned++;

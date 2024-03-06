@@ -1,17 +1,13 @@
-[ ] 4 mutations
-    [ ] Icon 
-    [ ] Effect
-[ ] Intermission screen (recover life)
-    [X] Recover life
-    [ ] Get power?
-    [ ] Increase stats?
-    [X] Continue
-[ ] Assets:
-    [X] Button Basic
-    [X] Button gameplay
-    [X] Button cell mutation
-    [ ] Icons
-[ ] Main Menu
-[ ] Mutation screen
 [ ] 2nd enemy
-[ ] Mutations
+[ ] Elite enemies
+[ ] Intermission screen not clear enough
+[ ] Intermission button pricing unclear
+[ ] Initial gameplay requires player interaction
+    [ ] Select first mutation immediatelly or initial character
+    [ ] Add player input
+        - maybe some simple click and do
+        - or some power that is more clearly displayed
+    [ ] First enemies for first wave should come sooner
+[ ] Add glow on the mutation cell light
+[ ] Make mutations for all body parts
+[ ] 

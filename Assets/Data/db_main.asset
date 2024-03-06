@@ -24,6 +24,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 433f016aa749640fe8703760fea0d8f6, type: 2}
   LimbIcons: []
   MutationInstance: {fileID: 918885553544731460, guid: a973ce8f7f225ab418bb27546dd7b496, type: 3}
+  MaterialCharacterRegular: {fileID: 2100000, guid: d9ca136b5ed7332418220ea6a0e4ab83, type: 2}
+  MaterialCharacterElite: {fileID: 2100000, guid: 9ae1da5c56359614d9b93220f6611e14, type: 2}
   SpikeProjectile: {fileID: 333137064685856217, guid: ad7c2cb82e45dfb4d87efda995140295, type: 3}
   PoisonCloud: {fileID: 2690278415415091956, guid: 35a625a1da9482c4ba833e70d239adae, type: 3}
   BloodCross: {fileID: 1923848157146598433, guid: 857cadfd2addfb04f8e30e49a7cbb976, type: 3}

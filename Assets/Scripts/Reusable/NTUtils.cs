@@ -69,7 +69,30 @@ public static class NTUtils {
         }
 
     }
+
+    public class CachedValue<T> {
+        private T _value;
+        private bool _updated = false;
+
+        public bool IsUpdated() => _updated;
+
+        public void UpdateValue(T v) {
+            _value = v;
+            _updated = true;
+        }
+
+        public void UpdateValueIfDirty(T v) {
+            if (_updated == true) return;
+            UpdateValue(v);
+        }
+
+        public bool SetDirty() => _updated = false;
+
+        public T GetValue() => _value;
+    }
     
+    
+
     public static T DeepClone<T>(T obj) {
         UnityEngine.Profiling.Profiler.BeginSample("NTUtils.DeepClone()");
         using (var ms = new MemoryStream())

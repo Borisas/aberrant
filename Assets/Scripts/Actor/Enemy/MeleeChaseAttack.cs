@@ -29,7 +29,7 @@ public class MeleeChaseAttack : EnemyBehaviour {
                 if (_attackTimer >= GetAttackInterval()) {
                     t.Hit(new HitInfo{
                         Owner =  _owner,
-                        Damage = 1.0f
+                        Damage = _config.Damage * _owner.GetDamageMultiplier()
                     });
                     _attackTimer -= GetAttackInterval();
                     _owner.Turn(t.transform.position.x > _owner.transform.position.x);

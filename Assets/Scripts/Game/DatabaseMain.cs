@@ -14,6 +14,8 @@ public class DatabaseMain : ScriptableObject {
     public List<PlayerMutationConfiguration> PlayerMutations;
     public List<Utils.LimbSprite> LimbIcons;
     public SpriteRenderer MutationInstance;
+    public Material MaterialCharacterRegular;
+    public Material MaterialCharacterElite;
     [Header("Mutation Effects")] 
     public Projectile SpikeProjectile;
     public DamagingZone PoisonCloud;

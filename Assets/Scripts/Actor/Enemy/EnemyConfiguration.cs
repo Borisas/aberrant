@@ -12,5 +12,6 @@ public class EnemyConfiguration : ScriptableObject {
     public EnemyId Id;
     public Enemy Prefab;
     public float Health;
+    public float Damage;
     [SerializeReference] public EnemyBehaviour Behaviour;
 }

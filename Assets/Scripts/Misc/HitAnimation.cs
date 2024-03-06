@@ -68,6 +68,10 @@ public class HitAnimation {
             r.SetPropertyBlock(_block);
         }
     }
-    
-    
+
+
+    public void SetOriginalScale(Vector3 s) {
+        _originalScale = s;
+    }
+
 }
