@@ -4,6 +4,7 @@ using System.Linq;
 using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class DatabaseMain : ScriptableObject {
 
@@ -12,6 +13,7 @@ public class DatabaseMain : ScriptableObject {
     public List<EnemyConfiguration> Enemies;
     public List<PlayerMutationConfiguration> PlayerMutations;
     public List<Utils.LimbSprite> LimbIcons;
+    public SpriteRenderer MutationInstance;
     [Header("Mutation Effects")] 
     public Projectile SpikeProjectile;
     public DamagingZone PoisonCloud;

@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Player : Actor {
 
@@ -23,6 +25,7 @@ public class Player : Actor {
 
     [SerializeField] private Transform _projectileSpawnPos;
     [SerializeField] List<PlayerLimb> _limbs = new List<PlayerLimb>();
+    [FormerlySerializedAs("_loadedVisuals")] [SerializeField] [ReadOnly] private List<MutationId> _loadedMutations = new List<MutationId>();
     private PlayerStats _stats = new PlayerStats();
     private readonly Collider2D[] _possibleTargets = new Collider2D[32];
 
@@ -59,6 +62,7 @@ public class Player : Actor {
             if (!GoToTarget(_stats.GetSpeed(), _stats.GetRange())) {
                 if (_attackTimer >= _stats.GetAttackInterval()) {
                     AttackTarget();
+                    Turn(t.transform.position.x > transform.position.x);
                     _attackTimer -= _stats.GetAttackInterval();
                 }
             }
@@ -153,6 +157,29 @@ public class Player : Actor {
     }
 
     void LoadVisuals() {
-        
+        var mutations = _stats.GetActiveMutations();
+
+        List<MutationId> newMutationsLoaded = new List<MutationId>();
+
+        foreach (var mutation in mutations) {
+            if (_loadedMutations.Contains(mutation.Id)) continue;
+
+            var cfg = Database.GetInstance().Main.GetMutationConfig(mutation.Id);
+
+            var limb = _limbs.FirstOrDefault(x => x.Limb == cfg.Limb);
+            if (limb == null) continue;
+            
+            if (cfg.Attach) {
+                var go = Instantiate(Database.GetInstance().Main.MutationInstance, limb.Sprite.transform);
+                go.sprite = cfg.Visual;
+            }
+            else {
+                limb.Sprite.sprite = cfg.Visual;
+            }
+
+            newMutationsLoaded.Add(mutation.Id);
+        }
+
+        _loadedMutations.AddRange(newMutationsLoaded);
     }
 }

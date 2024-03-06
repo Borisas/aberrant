@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 public class Actor : MonoBehaviour {
+    private const float MIN_X_DIFF_TO_TURN = 0.1f;
 
     public System.Action<Actor> OnDie;
     public System.Action<Actor> OnHealthChanged;
@@ -19,7 +20,7 @@ public class Actor : MonoBehaviour {
     protected float _health = 10.0f;
     protected float _maxHealth = 10.0f;
     protected float _lastX = 0.0f;
-
+    protected bool _canTurnAgain = true;
     protected HitAnimation _hitAnim;
 
     protected virtual void Awake() {
@@ -74,14 +75,25 @@ public class Actor : MonoBehaviour {
     protected virtual void LateUpdate() {
         if (_turnToMovement) {
             var x = transform.position.x;
-            bool lastMoveRight = x > _lastX;
-            _visualTransform.localRotation = Quaternion.Euler(new Vector3(0.0f, lastMoveRight ? 0.0f : 180.0f, 0.0f));
-            _lastX = x;
+            if (Mathf.Abs(_lastX - x) > MIN_X_DIFF_TO_TURN) {
+                bool lastMoveRight = x > _lastX;
+                Turn(lastMoveRight);
+                _lastX = x;
+            }
         }
+
+        _canTurnAgain = true;
     }
 
-    protected virtual void FixedUpdate() { }
 
+    protected virtual void FixedUpdate() { }
+    
+    public void Turn(bool right) {
+        if (!_canTurnAgain) return;
+        _visualTransform.localRotation = Quaternion.Euler(new Vector3(0.0f, right ? 0.0f : 180.0f, 0.0f));
+        _canTurnAgain = false;
+    }
+    
     public Actor GetTarget() => _target;
 
     protected void SetTarget(Actor t) {
@@ -122,7 +134,6 @@ public class Actor : MonoBehaviour {
     }
 
     protected void PlayHitAnimation() {
-
         _hitAnim.Play();
     }
     

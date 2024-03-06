@@ -32,6 +32,7 @@ public class MeleeChaseAttack : EnemyBehaviour {
                         Damage = 1.0f
                     });
                     _attackTimer -= GetAttackInterval();
+                    _owner.Turn(t.transform.position.x > _owner.transform.position.x);
                 }
             }
         }
