@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour {
     private RunInstance _instance = new RunInstance();
     [SerializeField] private WaveController _waveController = null;
     MutationController _mutationController = null;
-
+    
     private void Awake() {
         
         _instance = new RunInstance();

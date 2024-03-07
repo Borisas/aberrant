@@ -12,6 +12,7 @@ public class Scene : MonoBehaviour {
     public static Player Player;
     public static Effects Effects;
     public static WaveController WaveController;
+    public static Camera camera;
     
     private void Awake() {
 
@@ -21,5 +22,6 @@ public class Scene : MonoBehaviour {
         WaveController = Object.FindObjectOfType<WaveController>();
         WorldUiController = Object.FindObjectOfType<WorldUiController>();
         Effects = Object.FindObjectOfType<Effects>();
+        camera = Camera.main;
     }
 }

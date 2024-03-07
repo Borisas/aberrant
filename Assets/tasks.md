@@ -10,4 +10,4 @@
     [ ] First enemies for first wave should come sooner
 [ ] Add glow on the mutation cell light
 [ ] Make mutations for all body parts
-[ ] 
+[ ] Game Lose (player death)

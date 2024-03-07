@@ -54,10 +54,15 @@ public class Projectile : DamageEntity {
         var actor = rb.GetComponent<Actor>();
         if (actor == null) return;
 
-        if (!_owner.CanHit(actor)) {
-            return;
+        if (_owner == null) {
+            if (actor is Player) return;// cnat hit player
         }
-        
+        else {
+            if (!_owner.CanHit(actor)) {
+                return;
+            }
+        }
+
         actor.Hit(GenerateHit());
         DestroySelf();
     }
