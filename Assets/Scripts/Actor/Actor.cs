@@ -13,6 +13,8 @@ public class Actor : MonoBehaviour {
 
     [SerializeField] private bool _turnToMovement = false;
     [SerializeField] protected Transform _visualTransform = null;
+    [SerializeField] private Collider2D _hitbox = null;
+    [SerializeField] protected Transform _projectileSpawnPos;
     private Actor _target;
     protected Rigidbody2D _body = null;
     protected AgentNav2d _nav = null;
@@ -80,6 +82,12 @@ public class Actor : MonoBehaviour {
                 Turn(lastMoveRight);
                 _lastX = x;
             }
+            else if (GetTarget() != null) {
+                var t = GetTarget();
+                var diff = t.transform.position - transform.position;
+                bool lastMoveRight = diff.x > 0.0f;
+                Turn(lastMoveRight);
+            }
         }
 
         _canTurnAgain = true;
@@ -138,6 +146,7 @@ public class Actor : MonoBehaviour {
     }
     
     protected virtual void Die() {
+        _alive = false;
         _hitAnim.Kill();
         Destroy(gameObject);
     }
@@ -149,4 +158,7 @@ public class Actor : MonoBehaviour {
     }
 
     public virtual void OnKilled(in HitInfo hit, Actor k) { }
+
+    public Collider2D GetHitbox() => _hitbox;
+    public Transform GetProjectileSpawnPos() => _projectileSpawnPos;
 }

@@ -180,8 +180,8 @@ public class PlayerStats {
         var e = GetClosestEnemy();
         if (e == null) return;
 
-        var startPos = Scene.Player.GetProjectileSpawnPos();
-        var targetPos = e.transform.position;
+        var startPos = Scene.Player.GetProjectileSpawnPos().position;
+        var targetPos = e.GetHitbox().transform.position;
         var dir = (targetPos - startPos).normalized;
         
         var p = ObjectPool.Get(Database.GetInstance().Main.SpikeProjectile);

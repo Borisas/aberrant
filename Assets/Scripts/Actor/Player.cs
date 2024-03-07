@@ -23,7 +23,6 @@ public class Player : Actor {
         public SpriteRenderer Sprite;
     }
 
-    [SerializeField] private Transform _projectileSpawnPos;
     [SerializeField] List<PlayerLimb> _limbs = new List<PlayerLimb>();
     [FormerlySerializedAs("_loadedVisuals")] [SerializeField] [ReadOnly] private List<MutationId> _loadedMutations = new List<MutationId>();
     private PlayerStats _stats = new PlayerStats();
@@ -119,10 +118,6 @@ public class Player : Actor {
         if (e == null) return;
 
         SetTarget(e);
-    }
-
-    public Vector3 GetProjectileSpawnPos() {
-        return _projectileSpawnPos.position;
     }
 
     public override void Hit(HitInfo hit) {

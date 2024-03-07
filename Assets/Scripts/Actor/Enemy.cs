@@ -32,7 +32,7 @@ public class Enemy : Actor {
         SetupHealth(cfg.Health);
 
         if (cfg.Behaviour != null) {
-            _behaviour = NTUtils.DeepClone(cfg.Behaviour);
+            _behaviour = cfg.Behaviour.ShallowClone();
             _behaviour.Setup(this, cfg);
         }
     }

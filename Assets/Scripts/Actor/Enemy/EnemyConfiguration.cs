@@ -5,6 +5,9 @@ using UnityEngine;
 public enum EnemyId {
     None = 0,
     Blob = 1,
+    Eye = 2,
+    Flower = 3,
+    Hunchback = 4,
 }
 
 public class EnemyConfiguration : ScriptableObject {

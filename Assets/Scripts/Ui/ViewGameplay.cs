@@ -20,7 +20,7 @@ public class ViewGameplay : UiView {
     }
 
     private void Update() {
-        _labelWaveProgress.text = $"{Scene.WaveController.GetEnemySpawnsRemaining()}";
+        _labelWaveProgress.text = $"{Scene.WaveController.GetWaveTimeRemaining():0}s";
         _labelBlood.text = $"{Scene.GameController.GetRunInstance().Blood}";
     }
 

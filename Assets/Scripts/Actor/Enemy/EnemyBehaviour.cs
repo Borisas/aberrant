@@ -14,4 +14,8 @@ public abstract class EnemyBehaviour {
     }
     public abstract void Update();
     public abstract void FixedUpdate();
+
+    public EnemyBehaviour ShallowClone() {
+        return (EnemyBehaviour) this.MemberwiseClone();
+    }
 }

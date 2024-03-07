@@ -19,8 +19,13 @@ public class ActorHealthBar : MonoBehaviour {
     }
 
     private void OnDie(Actor obj) {
-        _barInstance.gameObject.SetActive(false);
-        _barInstance = null;//
+
+
+        if (_barInstance != null) {
+            _barInstance.gameObject.SetActive(false);
+            _barInstance = null; 
+        }
+
         _initialised = false;
     }
 

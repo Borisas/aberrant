@@ -16,6 +16,9 @@ MonoBehaviour:
   DamageNumberLabel: {fileID: 1910239837784235121, guid: a3752b955692659418b77997148b5b39, type: 3}
   Enemies:
   - {fileID: 11400000, guid: 7a6e54f0b9bb10d4fafb8136b93b773f, type: 2}
+  - {fileID: 11400000, guid: c059603ccb8cf824eb750b3aa1fe9345, type: 2}
+  - {fileID: 11400000, guid: 936597b9c5e33c249a7eef62937ab5fc, type: 2}
+  - {fileID: 11400000, guid: 54b8a2b3cda0b984a87769286912f0af, type: 2}
   PlayerMutations:
   - {fileID: 11400000, guid: 70f453c7aa44ff64aabf4dc03295b565, type: 2}
   - {fileID: 11400000, guid: 7573b0e12524942bb97f1f0ab752790a, type: 2}

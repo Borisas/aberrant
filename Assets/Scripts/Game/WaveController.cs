@@ -23,6 +23,9 @@ public class WaveController : MonoBehaviour {
 
     private int _waveIndex = 0;
 
+    private float _waveDuration = 15.0f;
+    private float _waveTimer = 0.0f;
+
     private void Awake() {
     }
 
@@ -32,6 +35,9 @@ public class WaveController : MonoBehaviour {
         _enemiesSpawned = 0;
 
         _spawnInterval = GetSpawnInterval(index);
+
+        _waveDuration = Mathf.Min(15.0f + index * 5.0f,60.0f);
+        _waveTimer = 0.0f;
         
         int min = 15 + index * 2;
         int max = 21 + index * 3;
@@ -45,8 +51,10 @@ public class WaveController : MonoBehaviour {
     private void Update() {
 
         if (!_waveInProgress) return;
+
+        _waveTimer += Time.deltaTime;
         
-        if (GetEnemySpawnsRemaining() > 0) {
+        if (_waveTimer < _waveDuration) {
             _spawnTimer += Time.deltaTime;
             if (_spawnTimer >= _spawnInterval) {
 
@@ -55,7 +63,7 @@ public class WaveController : MonoBehaviour {
                     elite = UnityEngine.Random.value <= _eliteChance;
                 }
 
-                var e = _enemySpawner.SpawnEnemy(elite);
+                var e = _enemySpawner.SpawnEnemy(elite, UnityEngine.Random.value < 0.2f ? EnemyId.Eye : EnemyId.Blob);
                 e.OnDie += Enemy_OnDie;
                 _spawnTimer -= _spawnInterval;
                 _enemiesSpawned++;
@@ -73,8 +81,8 @@ public class WaveController : MonoBehaviour {
         e.OnDie -= Enemy_OnDie;
     }
 
-    public int GetEnemySpawnsRemaining() {
-        return _enemiesInWave - _enemiesSpawned;
+    public float GetWaveTimeRemaining() {
+        return Mathf.Max(_waveDuration - _waveTimer,0.0f);
     }
 
     public bool IsInProgress() {

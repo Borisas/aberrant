@@ -9,9 +9,9 @@ public class EnemySpawner : MonoBehaviour {
     private List<Enemy> _livingEnemies = new List<Enemy>();
     
     //only this should spawn an enemy.
-    public Enemy SpawnEnemy(bool elite) {
+    public Enemy SpawnEnemy(bool elite, EnemyId id) {
         var p = _enemySpawnArea.GetRandomPoint();
-        var cfg = Database.GetInstance().Main.GetEnemyById(EnemyId.Blob);
+        var cfg = Database.GetInstance().Main.GetEnemyById(id);
         var go = ObjectPool.Get(cfg.Prefab, _enemyParent);
         go.Setup(cfg, elite);
         go.transform.position = p;
