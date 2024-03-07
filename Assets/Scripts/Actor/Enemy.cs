@@ -78,6 +78,7 @@ public class Enemy : Actor {
     }
 
     protected override void Die() {
+        _alive = false;
         _hitAnim.Kill();
         gameObject.SetActive(false);
 
