@@ -54,7 +54,7 @@ public class Player : Actor {
         base.FixedUpdate();
 
         var t = GetTarget();
-        if (t == null) {
+        if (t == null || t.IsAlive() == false) {
             GetClosestTarget();
         }
         else {

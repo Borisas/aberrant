@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerInputGuns : MonoBehaviour {
 
@@ -14,11 +15,13 @@ public class PlayerInputGuns : MonoBehaviour {
     
     void Update() {
 
+        if (Scene.GameController.IsWaveInProgress() == false) return;
+
         if (_fireTimer < _fireInterval) {
             _fireTimer += Time.deltaTime;
         }
 
-        if (Input.GetMouseButtonDown(0) && _fireTimer >= _fireInterval) {
+        if (Input.GetMouseButton(0) && _fireTimer >= _fireInterval) {
             FireBulletAtScreenPos(Input.mousePosition);
             _fireTimer -= _fireInterval;
         }

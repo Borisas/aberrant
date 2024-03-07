@@ -38,6 +38,9 @@ public class GameController : MonoBehaviour {
         return _instance;
     }
 
+    public bool IsWaveInProgress() {
+        return _waveController.IsInProgress();
+    }
 
     public BloodAmount GetPriceRecovery() {
         return new BloodAmount(50);
