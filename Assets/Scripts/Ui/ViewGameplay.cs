@@ -36,16 +36,6 @@ public class ViewGameplay : UiView {
         _intermission.Open();
     }
 
-    public void OnRecoverButton() {
-        
-        var pr = Scene.GameController.GetPriceRecovery();
-        if (!pr.CanPay()) return;
-        pr.Remove();
-        
-        Scene.Player.RestoreHealth(Scene.Player.GetMaxHealth() - Scene.Player.GetHealth());
-        _intermission.Resetup();
-    }
-
     public void OnContinueButton() {
         CloseIntermission();
         Scene.GameController.NextWave();
@@ -53,13 +43,25 @@ public class ViewGameplay : UiView {
 
     public void OnMutateButton() {
         
-        var pr = Scene.GameController.GetPriceMutate();
-        if (!pr.CanPay()) return;
-        pr.Remove();
-
-        ViewMutation.Open();
+        if (!Scene.GameController.PurchaseMutate() ) return;
         
         _intermission.OnMutate();
+        _intermission.Resetup();
+    }
+
+    public void OnRecoverButton() {
+        
+        if (!Scene.GameController.PurchaseRecover() ) return;
+
+        _intermission.OnRecover();
+        _intermission.Resetup();
+    }
+
+    public void OnMoreLifeButton() {
+        
+        if (!Scene.GameController.PurchaseMoreLife() ) return;
+        
+        _intermission.OnMoreLife();
         _intermission.Resetup();
     }
 }

@@ -42,7 +42,7 @@ public class WaveController : MonoBehaviour {
     public void BeginWave(int index) {
         _waveIndex = index;
         _waveInProgress = true;
-        _waveDuration = Mathf.Min(15.0f + index * 5.0f,60.0f);
+        _waveDuration = Mathf.Min(_config.WaveDurationMin + index * _config.WaveDurationPerWave,_config.WaveDurationMax);
         _waveTimer = 0.0f;
 
         _spawnTimer = 0.0f;
@@ -96,10 +96,15 @@ public class WaveController : MonoBehaviour {
                 //spawn blob
                 e = defaultEnemy;
             }
-            toSpawn -= e.Weight;
 
-            bool elite = _waveIndex >= _config.ElitesFromWave && UnityEngine.Random.value <= _config.EliteChance;
+            bool elite = 
+                _waveIndex >= _config.ElitesFromWave && 
+                UnityEngine.Random.value <= _config.EliteChance && 
+                _waveIndex >= e.Weight * 2;
             
+
+            toSpawn -= e.Weight * (elite ? 2 : 1);
+
             _enemySpawner.SpawnEnemyNotNewArea(elite, e.Id);
 
             eindex++;

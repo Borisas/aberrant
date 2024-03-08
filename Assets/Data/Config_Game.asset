@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Config_Game
   m_EditorClassIdentifier: 
   PriceRecovery: 30
+  PriceRecoveryIncrease: 5
   PriceMutate: 50
+  PriceMutateIncrease: 10
+  PriceMoreLife: 20
+  PriceMoreLifeIncrease: 20
   MinBloodDropBase: 2
   MaxBloodDropBase: 4
+  TurretBaseDamage: 2
+  MoreLifeIncrease: 20

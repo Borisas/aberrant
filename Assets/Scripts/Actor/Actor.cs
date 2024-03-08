@@ -37,6 +37,7 @@ public class Actor : MonoBehaviour {
     protected virtual void SetupHealth(float hp, float prc = 1.0f) {
         _maxHealth = hp;
         _health = Mathf.Min(hp * prc, _maxHealth);
+        OnHealthChanged?.Invoke(this);
     }
 
     public float GetHealth() => _health;

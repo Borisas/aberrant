@@ -11,15 +11,23 @@ public class GameplayIntermission : MonoBehaviour {
     [Header("Button Mutate")] 
     [SerializeField] private GameObject _buttonMutate;
     [SerializeField] private PriceBlock _priceBlockMutate;
+    [Header("Button MoreLife")] 
+    [SerializeField] private GameObject _buttonMoreLife;
+    [SerializeField] private PriceBlock _priceBlockMoreLife;
     [Header("Button Continue")] 
     [SerializeField] private GameObject _buttonContinue;
 
     private BloodAmount _priceRecover = default;
     private BloodAmount _priceMutate = default;
+    private BloodAmount _priceMoreLife = default;
     bool _mutated = false;
+    bool _lifeIncreased = false;
+    bool _recovered = false;
     
     public void Open() {
         _mutated = false;
+        _recovered = false;
+        _lifeIncreased = false;
         gameObject.SetActive(true);
         SetupState();
     }
@@ -36,27 +44,35 @@ public class GameplayIntermission : MonoBehaviour {
         _mutated = true;
     }
 
+    public void OnRecover() {
+        _recovered = true;
+    }
+
+    public void OnMoreLife() {
+        _lifeIncreased = true;
+    }
+
     void SetupState() {
 
         _buttonContinue.SetActive(true);
 
-        bool fullHealth = Scene.Player.IsFullHealth();
-        if (fullHealth) {
-            _buttonRecover.SetActive(false);
-        }
-        else {
-            _buttonRecover.SetActive(true);
-            _priceRecover = Scene.GameController.GetPriceRecovery();
-            _priceBlockRecover.Setup(_priceRecover);
-        }
+        _priceRecover = Scene.GameController.GetPriceRecovery();
+        _priceMoreLife = Scene.GameController.GetPriceMoreLife();
+        _priceMutate = Scene.GameController.GetPriceMutate();
 
-        if ( _mutated ) {
-            _buttonMutate.SetActive(false);
+        SetupPurchaseButton(_recovered, _priceRecover, _buttonRecover, _priceBlockRecover);
+        SetupPurchaseButton(_mutated, _priceMutate, _buttonMutate, _priceBlockMutate);
+        SetupPurchaseButton(_lifeIncreased, _priceMoreLife, _buttonMoreLife, _priceBlockMoreLife);
+    }
+
+    void SetupPurchaseButton(bool purchased, BloodAmount price, GameObject button, PriceBlock priceBlock) {
+
+        if ( purchased ) {
+            button.SetActive(false);
         }
         else {
-            _buttonMutate.SetActive(true);
-            _priceMutate = Scene.GameController.GetPriceMutate();
-            _priceBlockMutate.Setup(_priceMutate);
+            button.SetActive(true);
+            priceBlock.Setup(price);
         }
     }
 }

@@ -9,7 +9,6 @@ public class PlayerInputGuns : MonoBehaviour {
     [SerializeField] private Animation _gunRight = null;
     [SerializeField] private Projectile _bulletProjectile = null;
 
-    [SerializeField] private float _bulletDamage = 0.0f;
     [SerializeField] private float _fireInterval = 0.15f;
     private float _fireTimer = 0.0f;
     
@@ -43,7 +42,7 @@ public class PlayerInputGuns : MonoBehaviour {
         weapon.Play("Gun_Fire");
 
         var proj = ObjectPool.Get(_bulletProjectile);
-        proj.Setup(null, _bulletDamage, dir);
+        proj.Setup(null, Scene.GameController.GetTurretDamage(), dir);
         proj.transform.position = weapon.transform.position;
     }
 }

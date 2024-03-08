@@ -38,6 +38,8 @@ public class GameController : MonoBehaviour {
         _waveController.BeginWave(_instance.WaveIndex);
     }
 
+    public GameConfig GetConfig() => _config;
+
     public RunInstance GetRunInstance() {
         return _instance;
     }
@@ -46,12 +48,62 @@ public class GameController : MonoBehaviour {
         return _waveController.IsInProgress();
     }
 
+    public MutationController GetMutationController() {
+        return _mutationController;
+    }
+
+#region PURCHASES
+    public bool PurchaseMutate() {
+
+        var pr = Scene.GameController.GetPriceMutate();
+        if (!pr.CanPay()) return false;
+        pr.Remove();
+
+        ViewMutation.Open();
+        _instance.OnMutationPurchased();
+        return true;
+    }
+
+    public bool PurchaseRecover() {
+
+        var pr = Scene.GameController.GetPriceRecovery();
+        if (!pr.CanPay()) return false;
+        pr.Remove();
+        
+        Scene.Player.RestoreHealth(Scene.Player.GetMaxHealth() - Scene.Player.GetHealth());
+        _instance.OnRecoveryPurchased();
+        return true;
+    }
+
+    public bool PurchaseMoreLife() {
+
+        var pr = Scene.GameController.GetPriceMoreLife();
+        if (!pr.CanPay()) return false;
+        pr.Remove();
+        
+        Scene.Player.IncreaseLife(Scene.GameController.GetConfig().MoreLifeIncrease);
+        _instance.OnMoreLifePurchased();
+        return true;
+    }
+#endregion
+
+#region CONFIGS
     public BloodAmount GetPriceRecovery() {
-        return new BloodAmount(_config.PriceRecovery);
+        return new BloodAmount(_config.PriceRecovery
+            + _instance.PurchasedRecoveries * _config.PriceRecoveryIncrease
+        );
     }
 
     public BloodAmount GetPriceMutate() {
-        return new BloodAmount(_config.PriceMutate);
+        return new BloodAmount(_config.PriceMutate
+            + _instance.PurchasedMutations * _config.PriceMutateIncrease
+        );
+    }
+
+    public BloodAmount GetPriceMoreLife() {
+        return new BloodAmount(_config.PriceMoreLife
+            + _instance.PurchasedMoreLife * _config.PriceMoreLifeIncrease
+        );
     }
 
     public (float min, float max) GetBloodDropAmountBase() {
@@ -61,7 +113,8 @@ public class GameController : MonoBehaviour {
         );
     }
 
-    public MutationController GetMutationController() {
-        return _mutationController;
+    public int GetTurretDamage() {
+        return _config.TurretBaseDamage;
     }
+#endregion
 }

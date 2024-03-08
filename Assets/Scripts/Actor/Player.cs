@@ -177,4 +177,10 @@ public class Player : Actor {
 
         _loadedMutations.AddRange(newMutationsLoaded);
     }
+
+    public void IncreaseLife(int by) {
+        _health += by;
+        _maxHealth += by;
+        OnHealthChanged?.Invoke(this);
+    }
 }

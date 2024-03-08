@@ -14,6 +14,10 @@ public class WaveControllerConfig : ScriptableObject {
     public float MaxDelayLossPerWave = 0.05f;
     public float FirstSpawnDelay = 0.0f;
     public float HighSpawnDelayIncrease = 1.5f;
+    [Header("Wave Duration")]
+    public float WaveDurationMin = 15.0f;
+    public float WaveDurationMax = 60.0f;
+    public float WaveDurationPerWave = 2.0f;
     [Header("Other")]
     public float EliteChance = 0.15f;
     public int ElitesFromWave = 3;
