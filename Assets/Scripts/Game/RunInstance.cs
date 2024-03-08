@@ -2,7 +2,7 @@
 public class RunInstance {
 
     public int Blood;
-    public int WaveIndex;
+    public int WaveIndex = 0;
 
 
     public void AddBlood(int value = 1) {

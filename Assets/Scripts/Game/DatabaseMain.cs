@@ -16,6 +16,9 @@ public class DatabaseMain : ScriptableObject {
     public SpriteRenderer MutationInstance;
     public Material MaterialCharacterRegular;
     public Material MaterialCharacterElite;
+    [Header("Configs")]
+    public WaveControllerConfig WaveControllerConfig;
+    public GameConfig GameConfig;
     [Header("Mutation Effects")] 
     public Projectile SpikeProjectile;
     public DamagingZone PoisonCloud;

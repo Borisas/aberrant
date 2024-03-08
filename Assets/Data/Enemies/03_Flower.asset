@@ -16,6 +16,8 @@ MonoBehaviour:
   Prefab: {fileID: 8130746455804521030, guid: 494562427890ff64582243cbb0a3b626, type: 3}
   Health: 30
   Damage: 2
+  Weight: 4
+  BloodDropMultiplier: 2
   Behaviour:
     rid: 2627042428801253376
   references:
@@ -24,5 +26,5 @@ MonoBehaviour:
     - rid: 2627042428801253376
       type: {class: RangedBomb, ns: , asm: Assembly-CSharp}
       data:
-        _attackSpeed: 2
+        _attackSpeed: 3
         _projectile: {fileID: 333137064685856217, guid: c24d798d4bfa3ed428f8ca6fba2098b6, type: 3}

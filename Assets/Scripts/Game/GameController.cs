@@ -6,6 +6,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour {
 
     private RunInstance _instance = new RunInstance();
+    GameConfig _config;
     [SerializeField] private WaveController _waveController = null;
     MutationController _mutationController = null;
     
@@ -13,7 +14,10 @@ public class GameController : MonoBehaviour {
         
         _instance = new RunInstance();
         _mutationController = new MutationController();
-    
+        _config = Database.GetInstance().Main.GameConfig;
+    }
+
+    void Start() {
         _waveController.BeginWave(_instance.WaveIndex);
         _waveController.OnWaveCompleted += WaveController_OnWaveCompleted;
     }
@@ -43,11 +47,18 @@ public class GameController : MonoBehaviour {
     }
 
     public BloodAmount GetPriceRecovery() {
-        return new BloodAmount(50);
+        return new BloodAmount(_config.PriceRecovery);
     }
 
     public BloodAmount GetPriceMutate() {
-        return new BloodAmount(50);
+        return new BloodAmount(_config.PriceMutate);
+    }
+
+    public (float min, float max) GetBloodDropAmountBase() {
+        return (
+            min: _config.MinBloodDropBase,
+            max: _config.MaxBloodDropBase
+        );
     }
 
     public MutationController GetMutationController() {

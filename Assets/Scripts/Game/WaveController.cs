@@ -1,72 +1,65 @@
 ﻿
 using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using Random = System.Random;
 
 public class WaveController : MonoBehaviour {
-    private const int SPAWN_ELITES_FROM_WAVE = 3;
+
+    [System.Serializable]
+    struct SpawnSettings {
+        public int TotalWeight;
+        public float Delay;
+
+        public override string ToString() {
+            return $"Spawn: {JsonWrapper.Serialize(this)}";
+        }
+    }
+
     
     public System.Action OnWaveCompleted;
 
     [SerializeField] private EnemySpawner _enemySpawner = null;
 
-    private float _eliteChance = 0.15f;
-    
-    private int _enemiesInWave = 0;
-    private int _enemiesSpawned = 0;
-
-    private float _spawnInterval = 0.0f;
-    private float _spawnTimer = 0.0f;
-
-    private bool _waveInProgress = false;
-
     private int _waveIndex = 0;
-
+    private bool _waveInProgress = false;
     private float _waveDuration = 15.0f;
     private float _waveTimer = 0.0f;
 
+    private SpawnSettings _nextSpawnSettings = new SpawnSettings();
+    private float _spawnTimer = 0.0f;
+    WaveControllerConfig _config;
+
+
     private void Awake() {
+        _config = Database.GetInstance().Main.WaveControllerConfig;
+    }
+
+    private void Start() {
     }
 
     public void BeginWave(int index) {
         _waveIndex = index;
         _waveInProgress = true;
-        _enemiesSpawned = 0;
-
-        _spawnInterval = GetSpawnInterval(index);
-
         _waveDuration = Mathf.Min(15.0f + index * 5.0f,60.0f);
         _waveTimer = 0.0f;
-        
-        int min = 15 + index * 2;
-        int max = 21 + index * 3;
-        _enemiesInWave = UnityEngine.Random.Range(min, max);
-    }
 
-    float GetSpawnInterval(int index) {
-        return Mathf.Max(0.25f, 1.0f - (float)index * 0.1f);
+        _spawnTimer = 0.0f;
+        GenerateNextSpawn(true);
     }
 
     private void Update() {
 
         if (!_waveInProgress) return;
-
         _waveTimer += Time.deltaTime;
         
         if (_waveTimer < _waveDuration) {
             _spawnTimer += Time.deltaTime;
-            if (_spawnTimer >= _spawnInterval) {
-
-                bool elite = false;
-                if (_waveIndex >= SPAWN_ELITES_FROM_WAVE) {
-                    elite = UnityEngine.Random.value <= _eliteChance;
-                }
-
-                var e = _enemySpawner.SpawnEnemy(elite, UnityEngine.Random.value < 0.2f ? EnemyId.Eye : EnemyId.Blob);
-                e.OnDie += Enemy_OnDie;
-                _spawnTimer -= _spawnInterval;
-                _enemiesSpawned++;
+            if (_spawnTimer >= _nextSpawnSettings.Delay) {
+                ExecuteSpawn();
+                GenerateNextSpawn();
+                _spawnTimer -= _nextSpawnSettings.Delay;
             }
         }
         else {
@@ -75,6 +68,73 @@ public class WaveController : MonoBehaviour {
                 OnWaveCompleted?.Invoke();
             }
         }
+    }
+
+
+    void ExecuteSpawn() {
+
+        var eids = NTUtils.GetEnumList<EnemyId>();
+        var possibleEnemies = new List<EnemyInfoMin>();
+        for ( int i = 0; i < eids.Count; i++ ) {
+            var cfg = Database.GetInstance().Main.GetEnemyById(eids[i]);
+            if ( cfg == null || cfg.Weight > _waveIndex + 1 ) {
+                continue;
+            }
+            possibleEnemies.Add(cfg.GetInfoMin());
+        }
+
+        var defaultEnemy = Database.GetInstance().Main.GetEnemyById(EnemyId.Blob).GetInfoMin();
+        defaultEnemy.Weight = 1;//force weight to 1 for safety reasons
+
+
+        int toSpawn = _nextSpawnSettings.TotalWeight;
+        int eindex = 0;
+
+        while ( toSpawn > 0 ) {
+            var e = possibleEnemies.Random();
+            if ( e.Weight > toSpawn ) {
+                //spawn blob
+                e = defaultEnemy;
+            }
+            toSpawn -= e.Weight;
+
+            bool elite = _waveIndex >= _config.ElitesFromWave && UnityEngine.Random.value <= _config.EliteChance;
+            
+            _enemySpawner.SpawnEnemyNotNewArea(elite, e.Id);
+
+            eindex++;
+        }
+    }
+
+    void GenerateNextSpawn(bool firstSpawn = false) {
+
+        int minimumWeight = Mathf.RoundToInt(_config.MinWeight + _waveIndex * _config.MinWeightPerWave);
+        int maximumWeight = Mathf.RoundToInt(_config.MaxWeight + _waveIndex * _config.MaxWeightPerWave);
+
+        float delayMin = _config.MinDelay;
+        float delayMax = _config.MaxDelay - (float)_waveIndex * _config.MaxDelayLossPerWave;
+        delayMax = Mathf.Max(delayMax,delayMin);
+
+
+        if ( firstSpawn ) {
+            delayMin = 0.0f;
+            delayMax = 0.0f;
+        }   
+        else {
+            bool lastHigh = _nextSpawnSettings.TotalWeight >= maximumWeight * _config.HighSpawnLimit;
+            if ( lastHigh ) {
+                minimumWeight = Mathf.Max(1, Mathf.RoundToInt(minimumWeight * _config.HighSpawnReductor));
+                maximumWeight = Mathf.Max(1, Mathf.RoundToInt(maximumWeight * _config.HighSpawnReductor));
+                delayMin *= _config.HighSpawnDelayIncrease;
+                delayMax *= _config.HighSpawnDelayIncrease;
+            }
+
+        }
+
+        
+        _nextSpawnSettings.Delay = UnityEngine.Random.Range(delayMin, delayMax);
+        _nextSpawnSettings.TotalWeight = UnityEngine.Random.Range(minimumWeight, maximumWeight+1);
+        _enemySpawner.GenerateNewArea();
     }
 
     void Enemy_OnDie(Actor e) {

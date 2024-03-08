@@ -15,6 +15,7 @@ public class Enemy : Actor {
     private float _damageMultiplier = 1.0f;
     private NTUtils.CachedValue<Vector3> _initialScale = new NTUtils.CachedValue<Vector3>();
     private NTUtils.CachedValue<float> _initialColliderRadius = new NTUtils.CachedValue<float>();
+    EnemyConfiguration _config;
     
     protected override void Awake() {
         base.Awake();
@@ -26,6 +27,8 @@ public class Enemy : Actor {
         
         _initialScale.UpdateValueIfDirty(_visual.transform.localScale);
         _initialColliderRadius.UpdateValueIfDirty(_collider.radius);
+
+        _config = cfg;
         
         SetTarget(Scene.Player);//force target player
         SetupElite(elite);
@@ -81,12 +84,18 @@ public class Enemy : Actor {
         _alive = false;
         _hitAnim.Kill();
         gameObject.SetActive(false);
+        
+        var baseBlood = Scene.GameController.GetBloodDropAmountBase();
 
-        int min = 1;
-        int max = 4;
+        int bloodSpawn = Mathf.RoundToInt(Random.Range(
+                baseBlood.min * _config.BloodDropMultiplier,
+                baseBlood.max * _config.BloodDropMultiplier
+            ));
 
-        Scene.Player.GetStats().ModifyBloodSpawn(ref min, ref max);
-        Scene.Effects.SpawnBloodDrop(transform, Random.Range(min,max));
+
+        Scene.Player.GetStats().ModifyBloodSpawn(ref bloodSpawn);
+
+        Scene.Effects.SpawnBloodDrop(transform, bloodSpawn);
 
         var go = ObjectPool.Get(Database.GetInstance().Effects.BloodSplatterer);
         go.transform.position = transform.position;

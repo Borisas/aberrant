@@ -75,14 +75,13 @@ public class PlayerStats {
         }
     }
 
-    public void ModifyBloodSpawn(ref int min, ref int max) {
+    public void ModifyBloodSpawn(ref int spawn) {
 
         int detector = GetMutationLevel(MutationId.Detector);
         if (detector > 0) {
             var cfg = Database.GetInstance().Main.GetMutationConfig(MutationId.Detector);
             int add = Mathf.RoundToInt(cfg.Values[0] + ((float) detector - 1) * cfg.ScaleValues[0]);
-            min += add;
-            max += add;
+            spawn += add;
         }
 
     }
