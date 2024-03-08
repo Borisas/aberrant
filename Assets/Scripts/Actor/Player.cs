@@ -24,7 +24,7 @@ public class Player : Actor {
     }
 
     [SerializeField] List<PlayerLimb> _limbs = new List<PlayerLimb>();
-    [FormerlySerializedAs("_loadedVisuals")] [SerializeField] [ReadOnly] private List<MutationId> _loadedMutations = new List<MutationId>();
+    [SerializeField] [ReadOnly] private List<MutationId> _loadedMutations = new List<MutationId>();
     private PlayerStats _stats = new PlayerStats();
     private readonly Collider2D[] _possibleTargets = new Collider2D[32];
 

@@ -5,8 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerInputGuns : MonoBehaviour {
 
-    [SerializeField] private GameObject _gunLeft = null;
-    [SerializeField] private GameObject _gunRight = null;
+    [SerializeField] private Animation _gunLeft = null;
+    [SerializeField] private Animation _gunRight = null;
     [SerializeField] private Projectile _bulletProjectile = null;
 
     [SerializeField] private float _bulletDamage = 0.0f;
@@ -34,11 +34,13 @@ public class PlayerInputGuns : MonoBehaviour {
         Fire(_gunLeft, worldPos);
     }
 
-    void Fire(GameObject weapon, Vector3 worldPos) {
+    void Fire(Animation weapon, Vector3 worldPos) {
         var dir = worldPos - weapon.transform.position;
         var rot = (new Vector2(dir.x, dir.y)).AngleDeg();
 
-        weapon.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rot + 90.0f);
+        weapon.transform.rotation = Quaternion.Euler(0.0f, 0.0f, rot - 90.0f);
+        weapon.Stop("Gun_Fire");
+        weapon.Play("Gun_Fire");
 
         var proj = ObjectPool.Get(_bulletProjectile);
         proj.Setup(null, _bulletDamage, dir);

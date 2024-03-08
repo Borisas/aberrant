@@ -5,21 +5,29 @@ using UnityEngine;
 
 public class Projectile : DamageEntity {
     private Rigidbody2D _body = null;
+    private TrailRenderer _trail = null;
 
     [SerializeField] private GameObject _destroyAnimation = null;
     [SerializeField] private float _speed;
     [SerializeField] private bool _rotateToDirection = true;
     private float _damage;
     private Vector2 _direction;
+    bool _firstFrame = false;
 
     private void Awake() {
         _body = GetComponent<Rigidbody2D>();
+        _trail = GetComponent<TrailRenderer>();
     }
 
     public void Setup(Actor owner, float damage, Vector2 direction) {
         _owner = owner;
         _damage = damage;
         _direction = direction;
+        _firstFrame = true;
+
+        if ( _trail != null ) {
+            _trail.enabled = false;
+        }
 
         if (_rotateToDirection) {
             var r = _direction.AngleDeg();
@@ -28,6 +36,14 @@ public class Projectile : DamageEntity {
             transform.localRotation = Quaternion.Euler(rot);
         }
 
+    }
+
+    void Update() {
+        if ( _firstFrame && _trail != null ) {
+            _trail.enabled = true;
+            _trail.Clear();
+            _firstFrame = false;
+        }
     }
 
     private void FixedUpdate() {
