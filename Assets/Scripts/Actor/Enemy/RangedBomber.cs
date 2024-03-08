@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class RangedBomb : EnemyBehaviour {
+public class RangedBomber : EnemyBehaviour {
     [SerializeField] private float _attackSpeed = 2.0f;
-    [SerializeField] private Projectile _projectile = null;
-    
+    [SerializeField] private ArchingProjectile _projectile = null;
+
     private float _attackTimer = 0.0f;
 
     float GetAttackInterval() {
@@ -14,14 +14,14 @@ public class RangedBomb : EnemyBehaviour {
     }
 
     public override void Update() {
-        
+
         if (_attackTimer < GetAttackInterval()) {
             _attackTimer += Time.deltaTime;
         }
     }
 
     public override void FixedUpdate() {
-        
+
         var t = _owner.GetTarget();
         if (t != null) {
             if (_attackTimer >= GetAttackInterval()) {
@@ -29,9 +29,9 @@ public class RangedBomb : EnemyBehaviour {
                 var targetPos = t.GetHitbox().transform.position;
                 var startPos = _owner.GetProjectileSpawnPos().position;
                 var dir = (targetPos - startPos).normalized;
-                    
+
                 var proj = ObjectPool.Get(_projectile);
-                proj.Setup(_owner,_config.Damage, dir);
+                proj.Setup(_owner, _config.Damage, startPos, targetPos);
                 proj.transform.position = _owner.GetProjectileSpawnPos().position;
                 _owner.Turn(t.transform.position.x > _owner.transform.position.x);
                 _attackTimer -= GetAttackInterval();

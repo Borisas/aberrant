@@ -39,9 +39,11 @@ public class Projectile : DamageEntity, ISetupHitterWithDirection {
     }
 
     void Update() {
-        if (_firstFrame && _trail != null) {
-            _trail.enabled = true;
-            _trail.Clear();
+        if (_firstFrame) {
+            if (_trail != null) {
+                _trail.enabled = true;
+                _trail.Clear();
+            }
             _firstFrame = false;
         }
     }
