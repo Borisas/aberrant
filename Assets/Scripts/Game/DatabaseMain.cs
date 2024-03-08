@@ -19,11 +19,12 @@ public class DatabaseMain : ScriptableObject {
     [Header("Configs")]
     public WaveControllerConfig WaveControllerConfig;
     public GameConfig GameConfig;
-    [Header("Mutation Effects")] 
+    [Header("Mutation Effects")]
     public Projectile SpikeProjectile;
     public DamagingZone PoisonCloud;
     public GameObject BloodCross;
-    
+    public DamagingZoneProjectile EyeLaser;
+
     public EnemyConfiguration GetEnemyById(EnemyId id) {
         for (int i = 0; i < Enemies.Count; i++) {
             if (Enemies[i].Id == id) {
@@ -45,8 +46,8 @@ public class DatabaseMain : ScriptableObject {
     }
 
     public Sprite GetSpriteForLimb(Player.Limb limb) {
-        for ( int i = 0; i < LimbIcons.Count; i++ ) {
-            if ( LimbIcons[i].Limb == limb ) return LimbIcons[i].Sprite;
+        for (int i = 0; i < LimbIcons.Count; i++) {
+            if (LimbIcons[i].Limb == limb) return LimbIcons[i].Sprite;
         }
         return null;
     }

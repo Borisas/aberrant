@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : DamageEntity {
+public class Projectile : DamageEntity, ISetupHitterWithDirection {
     private Rigidbody2D _body = null;
     private TrailRenderer _trail = null;
 
@@ -25,7 +25,7 @@ public class Projectile : DamageEntity {
         _direction = direction;
         _firstFrame = true;
 
-        if ( _trail != null ) {
+        if (_trail != null) {
             _trail.enabled = false;
         }
 
@@ -39,7 +39,7 @@ public class Projectile : DamageEntity {
     }
 
     void Update() {
-        if ( _firstFrame && _trail != null ) {
+        if (_firstFrame && _trail != null) {
             _trail.enabled = true;
             _trail.Clear();
             _firstFrame = false;
@@ -47,7 +47,7 @@ public class Projectile : DamageEntity {
     }
 
     private void FixedUpdate() {
-        
+
         var p = _body.position + _direction * (_speed * Time.fixedDeltaTime);
         _body.MovePosition(p);
 

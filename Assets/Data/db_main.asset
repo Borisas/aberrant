@@ -25,6 +25,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d13d8dc84083d4f61a92eb98f29e57e5, type: 2}
   - {fileID: 11400000, guid: 05b5c756c0aec4744bab9ce8e3d7b84d, type: 2}
   - {fileID: 11400000, guid: 433f016aa749640fe8703760fea0d8f6, type: 2}
+  - {fileID: 11400000, guid: 2c0b850186d43458e8ea7dcc73d8f41c, type: 2}
+  - {fileID: 11400000, guid: b91c6581235b3450dbaf8dded1d23b7d, type: 2}
+  - {fileID: 11400000, guid: 31817fbc51b01469390feac199473033, type: 2}
+  - {fileID: 11400000, guid: 44c2695a1c857404e81ebbd6417ed019, type: 2}
   LimbIcons: []
   MutationInstance: {fileID: 918885553544731460, guid: a973ce8f7f225ab418bb27546dd7b496, type: 3}
   MaterialCharacterRegular: {fileID: 2100000, guid: d9ca136b5ed7332418220ea6a0e4ab83, type: 2}
@@ -34,3 +38,4 @@ MonoBehaviour:
   SpikeProjectile: {fileID: 333137064685856217, guid: ad7c2cb82e45dfb4d87efda995140295, type: 3}
   PoisonCloud: {fileID: 2690278415415091956, guid: 35a625a1da9482c4ba833e70d239adae, type: 3}
   BloodCross: {fileID: 1923848157146598433, guid: 857cadfd2addfb04f8e30e49a7cbb976, type: 3}
+  EyeLaser: {fileID: 4501494317999063491, guid: 55c78e7c6d85d447a91bb88d0b318227, type: 3}

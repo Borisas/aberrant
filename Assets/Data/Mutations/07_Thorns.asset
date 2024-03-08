@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2d14ac7b399ed548bba790dc4d599ae, type: 3}
+  m_Name: 07_Thorns
+  m_EditorClassIdentifier: 
+  Obtainable: 1
+  Id: 7
+  Title: Thorns
+  Limb: 2
+  MaxLevel: 6
+  Tier: 5
+  Icon: {fileID: 21300000, guid: ab9a8bd7230548246b27e175a8718180, type: 3}
+  Visual: {fileID: 21300000, guid: 25db314fff903428c8ad5dcaea70edac, type: 3}
+  Attach: 0
+  Values:
+  - 50
+  ScaleValues:
+  - 25

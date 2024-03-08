@@ -42,13 +42,13 @@ public class Actor : MonoBehaviour {
 
     public float GetHealth() => _health;
     public float GetMaxHealth() => _maxHealth;
-    
+
     public bool IsFullHealth() {
         return Mathf.Abs(_health - _maxHealth) < Mathf.Epsilon;
     }
 
     public bool GoTo(Vector2 position, float speed, float minDist = 0.4f) {
-        
+
         var cp = _body.position;
 
         float sqrD = (cp - position).sqrMagnitude;
@@ -56,10 +56,10 @@ public class Actor : MonoBehaviour {
             return false;//no need to move anywhere
         }
 
-        var np = _nav.GetNextPoint(cp,position);
+        var np = _nav.GetNextPoint(cp, position);
         Vector2 dirVec = (np - cp).normalized;
         var moveTo = cp + (dirVec) * (Time.fixedDeltaTime * speed);
-        
+
         _body.MovePosition(moveTo);
 
         return true;
@@ -96,13 +96,13 @@ public class Actor : MonoBehaviour {
 
 
     protected virtual void FixedUpdate() { }
-    
+
     public void Turn(bool right) {
         if (!_canTurnAgain) return;
         _visualTransform.localRotation = Quaternion.Euler(new Vector3(0.0f, right ? 0.0f : 180.0f, 0.0f));
         _canTurnAgain = false;
     }
-    
+
     public Actor GetTarget() => _target;
 
     protected void SetTarget(Actor t) {
@@ -136,6 +136,12 @@ public class Actor : MonoBehaviour {
         }
     }
 
+    public virtual void Heal(float amount) {
+
+        _health = Mathf.Min(_maxHealth, _health + amount);
+        OnHealthChanged?.Invoke(this);
+    }
+
     public virtual void RestoreHealth(float health) {
         _health += health;
         _health = Mathf.Clamp(_health, 0.0f, _maxHealth);
@@ -145,7 +151,7 @@ public class Actor : MonoBehaviour {
     protected void PlayHitAnimation() {
         _hitAnim.Play();
     }
-    
+
     protected virtual void Die() {
         _alive = false;
         _hitAnim.Kill();

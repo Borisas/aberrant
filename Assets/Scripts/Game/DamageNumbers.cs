@@ -7,16 +7,16 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class DamageNumbers : MonoBehaviour {
-    
+
     [SerializeField] private float _animDuration = 0.5f;
     [SerializeField] private float _animLift = 0.2f;
-    
-    private static readonly Color _colorCrit = new Color(1.0f, 1.0f, 0.0f,1.0f);
-    private static readonly Color _colorDamage = new Color(1.0f, 1.0f, 1.0f,1.0f);
-    private static readonly Color _colorLostHealth = new Color(1.0f, 0.0f, 0.0f,1.0f);
+
+    private static readonly Color _colorCrit = new Color(1.0f, 1.0f, 0.0f, 1.0f);
+    private static readonly Color _colorDamage = new Color(1.0f, 1.0f, 1.0f, 1.0f);
+    private static readonly Color _colorLostHealth = new Color(1.0f, 0.0f, 0.0f, 1.0f);
     private static readonly Vector2 _lift = new Vector2(0.0f, 0.5f);
     private static readonly Vector2 _randomness = new Vector2(0.1f, 0.1f);
-    
+
     private List<TMP_Text> _numbers = new List<TMP_Text>();
     private Transform _transform = null;
 
@@ -54,17 +54,17 @@ public class DamageNumbers : MonoBehaviour {
         var n = ObjectPool.Get(Database.GetInstance().Main.DamageNumberLabel, _transform);
 
         n.color = _colorDamage;
-        
+
         var nt = n.transform;
 
         nt.SetParent(_transform);
-        
+
         var spawnP = at + _lift;
         spawnP.x += Random.Range(-_randomness.x, _randomness.x);
         spawnP.y += Random.Range(-_randomness.y, _randomness.y);
-        
+
         nt.position = spawnP;
-        
+
         nt.SetParent(_transform);
 
         _numbers.Add(n);
@@ -83,5 +83,17 @@ public class DamageNumbers : MonoBehaviour {
         var t = SpawnNumber(at);
         t.color = _colorLostHealth;
         t.text = $"-{Mathf.FloorToInt(hit.Damage)}";
+    }
+
+    public void ShowCustomLabelOnPlayer(Vector2 at, string str) {
+        var t = SpawnNumber(at);
+        t.color = _colorLostHealth;
+        t.text = str;//$"-{Mathf.FloorToInt(hit.Damage)}";
+    }
+
+    public void ShowCustomLabelOnEnemy(Vector2 at, string str) {
+        var t = SpawnNumber(at);
+        t.color = _colorDamage;
+        t.text = str;
     }
 }

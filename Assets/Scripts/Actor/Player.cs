@@ -24,7 +24,7 @@ public class Player : Actor {
     }
 
     [SerializeField] List<PlayerLimb> _limbs = new List<PlayerLimb>();
-    [SerializeField] [ReadOnly] private List<MutationId> _loadedMutations = new List<MutationId>();
+    [SerializeField][ReadOnly] private List<MutationId> _loadedMutations = new List<MutationId>();
     private PlayerStats _stats = new PlayerStats();
     private readonly Collider2D[] _possibleTargets = new Collider2D[32];
 
@@ -32,9 +32,12 @@ public class Player : Actor {
 
     protected override void Awake() {
         base.Awake();
+
+        _stats.SetOwner(this);
+
         SetupHealth(100.0f);
-        
-        _hitAnim  = new HitAnimation("_BlinkRatio", 0.2f, _limbs.Select(x=>x.Sprite).ToArray(), _visualTransform);
+
+        _hitAnim = new HitAnimation("_BlinkRatio", 0.2f, _limbs.Select(x => x.Sprite).ToArray(), _visualTransform);
         _stats.OnMutationChanged += Stats_OnMutationsChanged;
     }
 
@@ -79,13 +82,13 @@ public class Player : Actor {
         _stats.ModifyHitInfo(ref hit);
 
         var target = GetTarget();
-        
+
         target.Hit(hit);
     }
 
     public override void OnKilled(in HitInfo hit, Actor k) {
         base.OnKilled(hit, k);
-        _stats.OnKill(hit,k);
+        _stats.OnKill(hit, k);
     }
 
     public void GoToPosition(Vector2 p) {
@@ -105,8 +108,8 @@ public class Player : Actor {
             if (rb == null) continue;
             var enemy = rb.GetComponent<Enemy>();
             if (enemy == null) continue;
-            
-            
+
+
             if (enemy.IsAlive() == false) continue;
             float d = (enemy.transform.position - transform.position).sqrMagnitude;
             if (d < minD) {
@@ -121,18 +124,28 @@ public class Player : Actor {
     }
 
     public override void Hit(HitInfo hit) {
+
+        if (_stats.IsHitAvoided()) {
+            Scene.WorldUiController.GetDamageNumbers().ShowCustomLabelOnPlayer(transform.position, "DODGE");
+            return;
+        }
+
         base.Hit(hit);
+
+        if (IsAlive()) {
+            _stats.OnAfterHitTaken(hit);
+        }
 
         if (GetTarget() != null) {
             var pme = transform.position;
-            
+
             var d = (pme - hit.Owner.transform.position).sqrMagnitude;
             var dToTarget = (pme - GetTarget().transform.position).sqrMagnitude;
             if (d < dToTarget * 0.95f) {
                 SetTarget(hit.Owner);
             }
         }
-        else if ( hit.Owner != null ) {
+        else if (hit.Owner != null) {
             SetTarget(hit.Owner);
         }
 
@@ -163,7 +176,7 @@ public class Player : Actor {
 
             var limb = _limbs.FirstOrDefault(x => x.Limb == cfg.Limb);
             if (limb == null) continue;
-            
+
             if (cfg.Attach) {
                 var go = Instantiate(Database.GetInstance().Main.MutationInstance, limb.Sprite.transform);
                 go.sprite = cfg.Visual;

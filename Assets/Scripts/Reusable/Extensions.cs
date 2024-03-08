@@ -14,6 +14,19 @@ public static class NTExtensions {
         return radians * (180f / (float)Mathf.PI);
     }
 
+    public static Vector2 Rotate(this Vector2 v, float degrees) {
+        float radians = degrees * Mathf.Deg2Rad;
+        float sin = Mathf.Sin(radians);
+        float cos = Mathf.Cos(radians);
+
+        float tx = v.x;
+        float ty = v.y;
+        v.x = (cos * tx) - (sin * ty);
+        v.y = (sin * tx) + (cos * ty);
+
+        return v;
+    }
+
     public static T Random<T>(this List<T> self) {
         if (self.Count <= 0) return default;
         return self[UnityEngine.Random.Range(0, self.Count)];
