@@ -123,6 +123,9 @@ public class Actor : MonoBehaviour {
         if (_alive == false) return;
         _health -= hit.Damage;
         OnHealthChanged?.Invoke(this);
+
+        SoundManager.Play("hit");
+        
         if (_health <= 0.0f) {
             Die();
             if (hit.Owner != null) {
