@@ -1,4 +1,4 @@
-[ ] 2nd enemy
+[X] 2nd enemy
 [X] Elite enemies
 [ ] Intermission screen not clear enough
 [ ] Intermission button pricing unclear
@@ -11,3 +11,4 @@
 [ ] Add glow on the mutation cell light
 [ ] Make mutations for all body parts
 [ ] Game Lose (player death)
+[X] player input click damage

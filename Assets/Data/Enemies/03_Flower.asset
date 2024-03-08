@@ -17,13 +17,12 @@ MonoBehaviour:
   Health: 30
   Damage: 2
   Behaviour:
-    rid: 2627042419528957952
+    rid: 2627042428801253376
   references:
     version: 2
     RefIds:
-    - rid: 2627042419528957952
-      type: {class: MeleeChaseAttack, ns: , asm: Assembly-CSharp}
+    - rid: 2627042428801253376
+      type: {class: RangedBomb, ns: , asm: Assembly-CSharp}
       data:
-        _speed: 1
         _attackSpeed: 2
-        _range: 0.525
+        _projectile: {fileID: 333137064685856217, guid: c24d798d4bfa3ed428f8ca6fba2098b6, type: 3}

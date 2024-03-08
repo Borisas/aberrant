@@ -24,6 +24,6 @@ MonoBehaviour:
     - rid: 2627042327733469184
       type: {class: MeleeChaseAttack, ns: , asm: Assembly-CSharp}
       data:
-        _speed: 1
+        _speed: 1.25
         _attackSpeed: 2
         _range: 0.525

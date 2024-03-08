@@ -28,7 +28,7 @@ public class PlayerInputGuns : MonoBehaviour {
     }
 
     void FireBulletAtScreenPos(Vector3 screenPos) {
-        Vector3 worldPos = Scene.camera.ScreenToWorldPoint(screenPos);
+        Vector3 worldPos = Scene.GameCamera.ScreenToWorldPoint(screenPos);
 
         Fire(_gunRight, worldPos);
         Fire(_gunLeft, worldPos);
