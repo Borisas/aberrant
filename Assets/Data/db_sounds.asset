@@ -32,9 +32,9 @@ MonoBehaviour:
     - Clip: {fileID: 8300000, guid: 3b5222a6edb1b2047819a585c9fde16a, type: 3}
       Volume: 0.15
     - Clip: {fileID: 8300000, guid: 3dc4de8654d69884ba2bd12e0621a910, type: 3}
-      Volume: 0.25
+      Volume: 0.15
     - Clip: {fileID: 8300000, guid: 65341bbc1d6a81940ad6525fa8d14511, type: 3}
-      Volume: 0.2
+      Volume: 0.15
     - Clip: {fileID: 8300000, guid: 39c8e1b9c1760924f8e734d0cbe44760, type: 3}
       Volume: 0.3
     - Clip: {fileID: 8300000, guid: c2acd33e0ecb15b4da1304513463b02c, type: 3}

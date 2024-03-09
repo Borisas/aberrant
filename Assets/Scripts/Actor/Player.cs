@@ -191,6 +191,17 @@ public class Player : Actor {
         _loadedMutations.AddRange(newMutationsLoaded);
     }
 
+    protected override void Die() {
+        _alive = false;
+        _hitAnim.Kill();
+        gameObject.SetActive(false);
+
+        for (int i = 0; i < 3; i++) {
+            var go = ObjectPool.Get(Database.GetInstance().Effects.BloodSplatterer);
+            go.transform.position = transform.position;
+        }
+    }
+
     public void IncreaseLife(int by) {
         _health += by;
         _maxHealth += by;

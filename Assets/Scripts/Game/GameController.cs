@@ -20,6 +20,14 @@ public class GameController : MonoBehaviour {
     void Start() {
         _waveController.BeginWave(_instance.WaveIndex);
         _waveController.OnWaveCompleted += WaveController_OnWaveCompleted;
+        
+        Scene.Player.OnDie += Player_OnDie;
+    }
+
+    private void Player_OnDie(Actor obj) {
+        PrimeTween.Tween.Delay(1.5f, () => {
+            Scene.UiDirector.OpenView<ViewLose>();
+        });
     }
 
     void Update() {

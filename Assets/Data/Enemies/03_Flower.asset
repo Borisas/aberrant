@@ -26,5 +26,5 @@ MonoBehaviour:
     - rid: 4338366230908370954
       type: {class: RangedBomber, ns: , asm: Assembly-CSharp}
       data:
-        _attackSpeed: 0.5
+        _attackSpeed: 0.55
         _projectile: {fileID: 2293579357579248458, guid: 63f675052044a42e4ae86688b4575734, type: 3}
