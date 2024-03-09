@@ -202,6 +202,7 @@ MonoBehaviour:
   _destroyAnimation: {fileID: 7763689403964994127, guid: dd2e9ce4ec01b24418e1d66aed222ac5, type: 3}
   _speed: 5
   _rotateToDirection: 1
+  index: 0
 --- !u!50 &9148702014769635372
 Rigidbody2D:
   serializedVersion: 4
@@ -237,7 +238,7 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7450931252874148852}
   m_Enabled: 1
-  m_SortingLayerID: -437256263
-  m_SortingLayer: -1
-  m_SortingOrder: 1
+  m_SortingLayerID: -791716949
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_SortAtRoot: 0

@@ -14,12 +14,20 @@ public class Projectile : DamageEntity, ISetupHitterWithDirection {
     private Vector2 _direction;
     bool _firstFrame = false;
 
+    private static int counter = 0;
+    public int index = 0;
+
     private void Awake() {
         _body = GetComponent<Rigidbody2D>();
         _trail = GetComponent<TrailRenderer>();
+        index = counter++;
     }
 
     public void Setup(Actor owner, float damage, Vector2 direction) {
+
+        // //Safety for if it spawns outside of bounds?
+        // transform.position = Vector3.zero;
+        
         _owner = owner;
         _damage = damage;
         _direction = direction;
@@ -46,16 +54,17 @@ public class Projectile : DamageEntity, ISetupHitterWithDirection {
             }
             _firstFrame = false;
         }
+
+        var p = transform.position;
+        if (Mathf.Abs(p.x) > 20.0f || Mathf.Abs(p.y) > 20.0f) {
+            DestroySelf(false);
+        }
     }
 
     private void FixedUpdate() {
 
         var p = _body.position + _direction * (_speed * Time.fixedDeltaTime);
         _body.MovePosition(p);
-
-        if (Mathf.Abs(p.x) > 20.0f || Mathf.Abs(p.y) > 20.0f) {
-            DestroySelf();
-        }
     }
 
     protected override HitInfo GenerateHit() {
@@ -85,14 +94,17 @@ public class Projectile : DamageEntity, ISetupHitterWithDirection {
         DestroySelf();
     }
 
-    void DestroySelf() {
+    void DestroySelf(bool anim = true) {
+        
         gameObject.SetActive(false);
 
-        if (_destroyAnimation != null) {
-            var go = ObjectPool.Get(_destroyAnimation);
-            var t = transform;
-            go.transform.position = t.position;
-            go.transform.rotation = t.rotation;
+        if (anim) {
+            if (_destroyAnimation != null) {
+                var go = ObjectPool.Get(_destroyAnimation);
+                var t = transform;
+                go.transform.position = t.position;
+                go.transform.rotation = t.rotation;
+            }
         }
     }
 }

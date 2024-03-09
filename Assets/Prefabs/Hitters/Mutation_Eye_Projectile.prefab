@@ -251,9 +251,9 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7450931252874148852}
   m_Enabled: 1
-  m_SortingLayerID: -437256263
-  m_SortingLayer: -1
-  m_SortingOrder: 1
+  m_SortingLayerID: -791716949
+  m_SortingLayer: 1
+  m_SortingOrder: 0
   m_SortAtRoot: 0
 --- !u!96 &7549307312655213137
 TrailRenderer:

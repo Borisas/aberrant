@@ -67,15 +67,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Spikes 1
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 10ab2f7fd2f3550429ea30331e03df51, type: 2}
-  m_sharedMaterial: {fileID: 7294338665570156322, guid: 10ab2f7fd2f3550429ea30331e03df51, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 032994d3d3e06f949947802902b81120, type: 2}
+  m_sharedMaterial: {fileID: 7294338665570156322, guid: 032994d3d3e06f949947802902b81120, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278992714
-  m_fontColor: {r: 0.2901961, g: 0.24705884, b: 0.04705883, a: 1}
+    rgba: 4278390317
+  m_fontColor: {r: 0.1764706, g: 0.054901965, b: 0.011764707, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

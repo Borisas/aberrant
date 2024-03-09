@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Obtainable: 1
   Id: 3
-  Title: Detector
+  Title: Consumer
   Limb: 1
   MaxLevel: 3
   Tier: 5

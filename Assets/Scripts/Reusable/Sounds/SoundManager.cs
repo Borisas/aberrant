@@ -4,11 +4,14 @@ using UnityEngine;
 
 // [RequireComponent(typeof(AudioSource))]
 public class SoundManager : MonoBehaviour {
-
+    private const string SoundKey = "SOUND";
+    
     [SerializeField] private SoundManagerData _data = null;
     private List<AudioSource> _sources = new List<AudioSource>();
     private AudioSource _musicSource = null;
     private static SoundManager _instance = null;
+
+    private bool _muteState = false;
     
     void Awake() {
 
@@ -24,6 +27,49 @@ public class SoundManager : MonoBehaviour {
     }
 
     void OnEnable() {
+        _muteState = IsMute();
+        PlayMusic();
+    }
+
+    public static void Play(string sound, float minInterval = 0.1f) {
+        if (_instance == null) return;
+
+        var ef = _instance._data.GetSound(sound);
+        _instance.PlaySound(ef, minInterval);
+    }
+
+    public static void ToggleMute() {
+        var v = PlayerPrefs.GetInt(SoundKey, 1);
+        PlayerPrefs.SetInt(SoundKey, v == 1 ? 0 : 1);
+        
+        if (_instance != null) {
+            _instance.MuteChanged();
+        }
+    }
+
+    public static bool IsMute() => PlayerPrefs.GetInt(SoundKey, 1) != 1;
+
+    void MuteChanged() {
+
+        _muteState = IsMute();
+
+        if (IsMute()) {
+            foreach (var src in _sources) {
+                src.Stop();
+            }
+
+            if (_musicSource != null) {
+                _musicSource.Stop();
+            }
+        }
+        else {
+            PlayMusic();
+        }
+    }
+
+    void PlayMusic() {
+
+        if (_muteState) return;
         if (_data.MusicTrack == null) return;
 
         if (_musicSource == null) {
@@ -40,15 +86,9 @@ public class SoundManager : MonoBehaviour {
         src.Play();
     }
 
-    public static void Play(string sound, float minInterval = 0.1f) {
-        if (_instance == null) return;
-
-        var ef = _instance._data.GetSound(sound);
-        _instance.PlaySound(ef, minInterval);
-    }
-
-
     void PlaySound(SoundEffect ef, float minInterval) {
+
+        if (_muteState) return;
 
         if (minInterval > 0.0f) {
             foreach (var s in _sources) {
