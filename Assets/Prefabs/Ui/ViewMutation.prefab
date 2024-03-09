@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2569399841219836010
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1363940950954676295}
+  - component: {fileID: 7881140008681362967}
+  m_Layer: 0
+  m_Name: ButtonParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1363940950954676295
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2569399841219836010}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 786791896005940537}
+  m_Father: {fileID: 887548751683080232}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 89}
+  m_SizeDelta: {x: 256, y: 64}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!111 &7881140008681362967
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2569399841219836010}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: c06116a5a3e474925ab8ae449b4febb2, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: c06116a5a3e474925ab8ae449b4febb2, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &6003876773384664212
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,6 +63,8 @@ GameObject:
   m_Component:
   - component: {fileID: 887548751683080232}
   - component: {fileID: 8875192285928073092}
+  - component: {fileID: 932862866914962737}
+  - component: {fileID: 2485395549787208946}
   m_Layer: 0
   m_Name: ViewMutation
   m_TagString: Untagged
@@ -31,7 +86,7 @@ RectTransform:
   m_Children:
   - {fileID: 827862099060281702}
   - {fileID: 8290803961717201674}
-  - {fileID: 786791896005940537}
+  - {fileID: 1363940950954676295}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -55,6 +110,35 @@ MonoBehaviour:
   - {fileID: 8691383625770783131}
   - {fileID: 118913884034060650}
   - {fileID: 112994364944983255}
+  _buttonSelect: {fileID: 2569399841219836010}
+--- !u!111 &932862866914962737
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003876773384664212}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 25e25e05e4b1e4c9987773272ba455e6, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 25e25e05e4b1e4c9987773272ba455e6, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
+--- !u!225 &2485395549787208946
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003876773384664212}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &7172141623408517951
 GameObject:
   m_ObjectHideFlags: 0
@@ -201,7 +285,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 887548751683080232}
+    m_TransformParent: {fileID: 1363940950954676295}
     m_Modifications:
     - target: {fileID: 1586154168404273844, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}
       propertyPath: m_Pivot.x
@@ -217,7 +301,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1586154168404273844, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1586154168404273844, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}
       propertyPath: m_AnchorMin.x
@@ -225,7 +309,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1586154168404273844, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1586154168404273844, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -269,7 +353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1586154168404273844, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 89
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1586154168404273844, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -285,7 +369,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2213532827916703607, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}
       propertyPath: m_Name
-      value: ButtonGame
+      value: Button
       objectReference: {fileID: 0}
     - target: {fileID: 4471767438033608182, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -302,8 +386,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2213532827916703607, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3761087195245341894}
   m_SourcePrefab: {fileID: 100100000, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}
+--- !u!1 &166656969418926330 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2213532827916703607, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}
+  m_PrefabInstance: {fileID: 2082943141814140813}
+  m_PrefabAsset: {fileID: 0}
+--- !u!225 &3761087195245341894
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 166656969418926330}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!224 &786791896005940537 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1586154168404273844, guid: 8ba774747f563b64fac109a6379ce4d9, type: 3}

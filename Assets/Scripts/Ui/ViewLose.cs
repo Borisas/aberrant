@@ -17,6 +17,7 @@ public class ViewLose : UiView {
     [SerializeField] private TMP_Text _labelWaves = null;
     [SerializeField] private TMP_Text _labelBlood = null;
     [SerializeField] private TMP_Text _labelKills = null;
+    [SerializeField] private TMP_Text _labelMutations = null;
     [Header("Player Visuals")]
     [SerializeField] Image _prefabLimb = null;
     [SerializeField] List<PlayerLimb> _limbs = new List<PlayerLimb>();
@@ -34,6 +35,7 @@ public class ViewLose : UiView {
         _labelWaves.text = run.WaveIndex.ToString();
         _labelBlood.text = run.TotalBlood.ToString();
         _labelKills.text = run.TotalKills.ToString();
+        _labelMutations.text = Scene.Player.GetStats().GetActiveMutations().Sum(x => x.Level).ToString();
     }
 
 
@@ -62,6 +64,8 @@ public class ViewLose : UiView {
     }
 
     public void OnReturnButton() {
-        SceneManager.LoadScene("MenuScene");
+        Scene.PlaySceneExit(() => {
+            SceneManager.LoadScene("MenuScene");
+        });
     }
 }

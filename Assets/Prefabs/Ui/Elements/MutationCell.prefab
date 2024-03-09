@@ -697,6 +697,7 @@ GameObject:
   - component: {fileID: 6741696407303016609}
   - component: {fileID: 1441380459729018481}
   - component: {fileID: 6483654727762066180}
+  - component: {fileID: 5566513035635973012}
   m_Layer: 0
   m_Name: MutationCell
   m_TagString: Untagged
@@ -859,3 +860,15 @@ MonoBehaviour:
   _regular: {fileID: -1531000926, guid: 5dbeab3107c5cbb4ca0b19e096ee23f3, type: 3}
   _hover: {fileID: -1531000926, guid: 5dbeab3107c5cbb4ca0b19e096ee23f3, type: 3}
   _down: {fileID: -1069794345, guid: 5dbeab3107c5cbb4ca0b19e096ee23f3, type: 3}
+--- !u!225 &5566513035635973012
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566498379621204641}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

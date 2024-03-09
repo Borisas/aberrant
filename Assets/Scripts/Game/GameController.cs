@@ -39,7 +39,6 @@ public class GameController : MonoBehaviour {
     private void WaveController_OnWaveCompleted() {
 
         PrimeTween.Tween.Delay(1.5f, () => {
-            Scene.UiDirector.GetView<ViewGameplay>().OpenIntermission();
             ViewMutation.Open();
         });
     }

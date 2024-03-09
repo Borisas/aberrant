@@ -144,6 +144,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5706138521605972620}
   - component: {fileID: 3201204048242150067}
+  - component: {fileID: 4177061721850592970}
   m_Layer: 0
   m_Name: Intermission
   m_TagString: Untagged
@@ -191,6 +192,22 @@ MonoBehaviour:
   _buttonMoreLife: {fileID: 7392162898952824051}
   _priceBlockMoreLife: {fileID: 9115270967237149579}
   _buttonContinue: {fileID: 3424822966336115290}
+--- !u!111 &4177061721850592970
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2197439122506762885}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 38c9364731058414fba2b068476ab571, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 38c9364731058414fba2b068476ab571, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &3232102680982058142
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class ViewMainMenu : UiView {
     public void OnBeginButton() {
-        SceneManager.LoadScene("GameScene");
+        Scene.PlaySceneExit(() => {
+            SceneManager.LoadScene("GameScene");
+        });
     }
 
     public void OnExitButton() {

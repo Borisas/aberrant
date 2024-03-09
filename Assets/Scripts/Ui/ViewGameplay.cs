@@ -8,7 +8,7 @@ public class ViewGameplay : UiView {
     [SerializeField] private TMP_Text _labelPlayerHealth = null;
     [SerializeField] private TMP_Text _labelWaveProgress = null;
     [SerializeField] private TMP_Text _labelBlood = null;
-    [Header("Intermission")] 
+    [Header("Intermission")]
     [SerializeField] private GameplayIntermission _intermission = null;
 
     private void Start() {
@@ -17,6 +17,8 @@ public class ViewGameplay : UiView {
         player.OnHealthChanged += Player_OnHealthChanged;
         _labelPlayerHealth.text = $"{player.GetHealth():0}";
         CloseIntermission();
+
+        Scene.UiDirector.GetView<ViewMutation>().OnClose += ViewMutation_OnClose;
     }
 
     private void Update() {
@@ -32,8 +34,13 @@ public class ViewGameplay : UiView {
         _intermission.Close();
     }
 
-    public void OpenIntermission() {
-        _intermission.Open();
+    void OpenIntermission() {
+
+        if (Scene.GameController.IsWaveInProgress()) return;
+
+        if (gameObject.activeInHierarchy && !_intermission.gameObject.activeSelf) {
+            _intermission.Open();
+        }
     }
 
     public void OnContinueButton() {
@@ -42,26 +49,30 @@ public class ViewGameplay : UiView {
     }
 
     public void OnMutateButton() {
-        
-        if (!Scene.GameController.PurchaseMutate() ) return;
-        
+
+        if (!Scene.GameController.PurchaseMutate()) return;
+
         _intermission.OnMutate();
         _intermission.Resetup();
     }
 
     public void OnRecoverButton() {
-        
-        if (!Scene.GameController.PurchaseRecover() ) return;
+
+        if (!Scene.GameController.PurchaseRecover()) return;
 
         _intermission.OnRecover();
         _intermission.Resetup();
     }
 
     public void OnMoreLifeButton() {
-        
-        if (!Scene.GameController.PurchaseMoreLife() ) return;
-        
+
+        if (!Scene.GameController.PurchaseMoreLife()) return;
+
         _intermission.OnMoreLife();
         _intermission.Resetup();
+    }
+
+    void ViewMutation_OnClose() {
+        OpenIntermission();
     }
 }
