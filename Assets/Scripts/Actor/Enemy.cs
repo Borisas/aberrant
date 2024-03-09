@@ -7,29 +7,29 @@ public class Enemy : Actor {
     private const float ELITE_HEALTH_MULTIPLIER = 1.5f;
     private const float ELITE_SIZE_MULTIPLIER = 1.5f;
     private const float ELITE_DAMAGE_MULTIPLIER = 1.5f;
-    
+
     [SerializeField] private SpriteRenderer _visual = null;
     [SerializeField] private CircleCollider2D _collider = null;
-    [SerializeReference] [ReadOnly] private EnemyBehaviour _behaviour = null;
+    [SerializeReference][ReadOnly] private EnemyBehaviour _behaviour = null;
     private bool _elite = false;
     private float _damageMultiplier = 1.0f;
     private NTUtils.CachedValue<Vector3> _initialScale = new NTUtils.CachedValue<Vector3>();
     private NTUtils.CachedValue<float> _initialColliderRadius = new NTUtils.CachedValue<float>();
     EnemyConfiguration _config;
-    
+
     protected override void Awake() {
         base.Awake();
-        _hitAnim  = new HitAnimation("_BlinkRatio", 0.2f, _visual, _visualTransform);
+        _hitAnim = new HitAnimation("_BlinkRatio", 0.2f, _visual, _visualTransform);
     }
 
     public void Setup(EnemyConfiguration cfg, bool elite) {
         _alive = true;
-        
+
         _initialScale.UpdateValueIfDirty(_visual.transform.localScale);
         _initialColliderRadius.UpdateValueIfDirty(_collider.radius);
 
         _config = cfg;
-        
+
         SetTarget(Scene.Player);//force target player
         SetupElite(elite);
         SetupHealth(cfg.Health);
@@ -42,11 +42,11 @@ public class Enemy : Actor {
 
     void SetupElite(bool e) {
         _elite = e;
-        
+
         Vector3 newScale = _initialScale.GetValue() * (_elite ? ELITE_SIZE_MULTIPLIER : 1.0f);
         _visual.transform.localScale = newScale;
         _hitAnim.SetOriginalScale(newScale);
-        
+
         _collider.radius = _initialColliderRadius.GetValue() * (_elite ? ELITE_SIZE_MULTIPLIER : 1.0f);
 
         _damageMultiplier = _elite ? ELITE_DAMAGE_MULTIPLIER : 1.0f;
@@ -62,7 +62,7 @@ public class Enemy : Actor {
         }
 
         base.SetupHealth(hp, prc);
-        
+
     }
 
     protected override void Update() {
@@ -84,7 +84,7 @@ public class Enemy : Actor {
         _alive = false;
         _hitAnim.Kill();
         gameObject.SetActive(false);
-        
+
         var baseBlood = Scene.GameController.GetBloodDropAmountBase();
 
         int bloodSpawn = Mathf.RoundToInt(Random.Range(
@@ -99,6 +99,8 @@ public class Enemy : Actor {
 
         var go = ObjectPool.Get(Database.GetInstance().Effects.BloodSplatterer);
         go.transform.position = transform.position;
+
+        Scene.GameController.OnEnemyKilled(this);
     }
 
     public float GetDamageMultiplier() => _damageMultiplier;

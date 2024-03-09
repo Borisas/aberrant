@@ -4,6 +4,11 @@ using UnityEngine;
 
 public static class NTExtensions {
 
+    public static void DestroyAllChildren(this Transform t) {
+        for (int i = 0; i < t.childCount; i++) {
+            GameObject.Destroy(t.GetChild(i).gameObject);
+        }
+    }
 
     public static float AngleRad(this Vector2 v) {
         return (float)Mathf.Atan2(v.y, v.x);

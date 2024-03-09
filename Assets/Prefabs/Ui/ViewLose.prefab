@@ -2024,9 +2024,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6296a3ec827a17a4295ccdeea140fd1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _labelWaves: {fileID: 0}
-  _labelBlood: {fileID: 0}
-  _labelKills: {fileID: 0}
+  _labelWaves: {fileID: 1284354573660213260}
+  _labelBlood: {fileID: 2083617963172270306}
+  _labelKills: {fileID: 5808245510488124007}
+  _prefabLimb: {fileID: 8369808855765087089, guid: d117638fb555b4fb88e58d43a1b602c3, type: 3}
+  _limbs:
+  - Limb: 4
+    Sprite: {fileID: 1801784221201487433}
+  - Limb: 3
+    Sprite: {fileID: 5380476317297650850}
+  - Limb: 5
+    Sprite: {fileID: 2892786566005635741}
+  - Limb: 6
+    Sprite: {fileID: 859685360512480962}
+  - Limb: 2
+    Sprite: {fileID: 4653292118876901172}
+  - Limb: 1
+    Sprite: {fileID: 3190807059271970920}
 --- !u!1001 &5028028616295670898
 PrefabInstance:
   m_ObjectHideFlags: 0

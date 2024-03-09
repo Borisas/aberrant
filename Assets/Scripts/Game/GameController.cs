@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour {
     void Start() {
         _waveController.BeginWave(_instance.WaveIndex);
         _waveController.OnWaveCompleted += WaveController_OnWaveCompleted;
-        
+
         Scene.Player.OnDie += Player_OnDie;
     }
 
@@ -61,6 +61,10 @@ public class GameController : MonoBehaviour {
 
     public MutationController GetMutationController() {
         return _mutationController;
+    }
+
+    public void OnEnemyKilled(Enemy e) {
+        _instance.EnemyKilled(e);
     }
 
     #region PURCHASES
