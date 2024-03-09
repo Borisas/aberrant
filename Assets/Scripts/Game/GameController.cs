@@ -9,9 +9,9 @@ public class GameController : MonoBehaviour {
     GameConfig _config;
     [SerializeField] private WaveController _waveController = null;
     MutationController _mutationController = null;
-    
+
     private void Awake() {
-        
+
         _instance = new RunInstance();
         _mutationController = new MutationController();
         _config = Database.GetInstance().Main.GameConfig;
@@ -29,8 +29,11 @@ public class GameController : MonoBehaviour {
     }
 
     private void WaveController_OnWaveCompleted() {
-        Scene.UiDirector.GetView<ViewGameplay>().OpenIntermission();
-        ViewMutation.Open();
+
+        PrimeTween.Tween.Delay(1.5f, () => {
+            Scene.UiDirector.GetView<ViewGameplay>().OpenIntermission();
+            ViewMutation.Open();
+        });
     }
 
     public void NextWave() {
@@ -52,7 +55,7 @@ public class GameController : MonoBehaviour {
         return _mutationController;
     }
 
-#region PURCHASES
+    #region PURCHASES
     public bool PurchaseMutate() {
 
         var pr = Scene.GameController.GetPriceMutate();
@@ -69,7 +72,7 @@ public class GameController : MonoBehaviour {
         var pr = Scene.GameController.GetPriceRecovery();
         if (!pr.CanPay()) return false;
         pr.Remove();
-        
+
         Scene.Player.RestoreHealth(Scene.Player.GetMaxHealth() - Scene.Player.GetHealth());
         _instance.OnRecoveryPurchased();
         return true;
@@ -80,14 +83,14 @@ public class GameController : MonoBehaviour {
         var pr = Scene.GameController.GetPriceMoreLife();
         if (!pr.CanPay()) return false;
         pr.Remove();
-        
+
         Scene.Player.IncreaseLife(Scene.GameController.GetConfig().MoreLifeIncrease);
         _instance.OnMoreLifePurchased();
         return true;
     }
-#endregion
+    #endregion
 
-#region CONFIGS
+    #region CONFIGS
     public BloodAmount GetPriceRecovery() {
         return new BloodAmount(_config.PriceRecovery
             + _instance.PurchasedRecoveries * _config.PriceRecoveryIncrease
@@ -116,5 +119,5 @@ public class GameController : MonoBehaviour {
     public int GetTurretDamage() {
         return _config.TurretBaseDamage;
     }
-#endregion
+    #endregion
 }

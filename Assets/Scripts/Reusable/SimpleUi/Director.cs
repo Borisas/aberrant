@@ -3,10 +3,10 @@ using UnityEngine;
 
 namespace SimpleUi {
     public class Director : MonoBehaviour {
-        [Sirenix.OdinInspector.ReadOnly] [SerializeField] private View[] _views = null;
+        [Sirenix.OdinInspector.ReadOnly][SerializeField] private View[] _views = null;
 
         protected virtual void Awake() {
-            _views = GetComponentsInChildren<View>();
+            _views = GetComponentsInChildren<View>(true);
         }
 
         protected virtual void Start() { }

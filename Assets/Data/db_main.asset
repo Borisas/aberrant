@@ -29,7 +29,19 @@ MonoBehaviour:
   - {fileID: 11400000, guid: b91c6581235b3450dbaf8dded1d23b7d, type: 2}
   - {fileID: 11400000, guid: 31817fbc51b01469390feac199473033, type: 2}
   - {fileID: 11400000, guid: 44c2695a1c857404e81ebbd6417ed019, type: 2}
-  LimbIcons: []
+  LimbIcons:
+  - Limb: 4
+    Sprite: {fileID: -535397233, guid: 18be2ebc2e28b4f1d9ea9a7d61d29724, type: 3}
+  - Limb: 3
+    Sprite: {fileID: -441432114, guid: 18be2ebc2e28b4f1d9ea9a7d61d29724, type: 3}
+  - Limb: 6
+    Sprite: {fileID: -1712171662, guid: 18be2ebc2e28b4f1d9ea9a7d61d29724, type: 3}
+  - Limb: 5
+    Sprite: {fileID: 495676875, guid: 18be2ebc2e28b4f1d9ea9a7d61d29724, type: 3}
+  - Limb: 1
+    Sprite: {fileID: -674610589, guid: 18be2ebc2e28b4f1d9ea9a7d61d29724, type: 3}
+  - Limb: 2
+    Sprite: {fileID: -1425253578, guid: 18be2ebc2e28b4f1d9ea9a7d61d29724, type: 3}
   MutationInstance: {fileID: 918885553544731460, guid: a973ce8f7f225ab418bb27546dd7b496, type: 3}
   MaterialCharacterRegular: {fileID: 2100000, guid: d9ca136b5ed7332418220ea6a0e4ab83, type: 2}
   MaterialCharacterElite: {fileID: 2100000, guid: 9ae1da5c56359614d9b93220f6611e14, type: 2}

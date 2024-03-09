@@ -202,7 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 4
   _arcLift: 0.5
-  _explosion: {fileID: 0}
+  _explosion: {fileID: 2944086418483304108, guid: 2a5734e30f40f456babf6e7a90181042, type: 3}
   _radius: 0.5
   _rotationSpeed: -540
 --- !u!50 &9148702014769635372

@@ -17,7 +17,7 @@ public class WaveController : MonoBehaviour {
         }
     }
 
-    
+
     public System.Action OnWaveCompleted;
 
     [SerializeField] private EnemySpawner _enemySpawner = null;
@@ -42,18 +42,20 @@ public class WaveController : MonoBehaviour {
     public void BeginWave(int index) {
         _waveIndex = index;
         _waveInProgress = true;
-        _waveDuration = Mathf.Min(_config.WaveDurationMin + index * _config.WaveDurationPerWave,_config.WaveDurationMax);
+        _waveDuration = Mathf.Min(_config.WaveDurationMin + index * _config.WaveDurationPerWave, _config.WaveDurationMax);
         _waveTimer = 0.0f;
 
         _spawnTimer = 0.0f;
         GenerateNextSpawn(true);
+
+        ViewWaveInfo.Open(_waveIndex);
     }
 
     private void Update() {
 
         if (!_waveInProgress) return;
         _waveTimer += Time.deltaTime;
-        
+
         if (_waveTimer < _waveDuration) {
             _spawnTimer += Time.deltaTime;
             if (_spawnTimer >= _nextSpawnSettings.Delay) {
@@ -75,9 +77,9 @@ public class WaveController : MonoBehaviour {
 
         var eids = NTUtils.GetEnumList<EnemyId>();
         var possibleEnemies = new List<EnemyInfoMin>();
-        for ( int i = 0; i < eids.Count; i++ ) {
+        for (int i = 0; i < eids.Count; i++) {
             var cfg = Database.GetInstance().Main.GetEnemyById(eids[i]);
-            if ( cfg == null || cfg.Weight > _waveIndex + 1 ) {
+            if (cfg == null || cfg.Weight > _waveIndex + 1) {
                 continue;
             }
             possibleEnemies.Add(cfg.GetInfoMin());
@@ -90,18 +92,18 @@ public class WaveController : MonoBehaviour {
         int toSpawn = _nextSpawnSettings.TotalWeight;
         int eindex = 0;
 
-        while ( toSpawn > 0 ) {
+        while (toSpawn > 0) {
             var e = possibleEnemies.Random();
-            if ( e.Weight > toSpawn ) {
+            if (e.Weight > toSpawn) {
                 //spawn blob
                 e = defaultEnemy;
             }
 
-            bool elite = 
-                _waveIndex >= _config.ElitesFromWave && 
-                UnityEngine.Random.value <= _config.EliteChance && 
+            bool elite =
+                _waveIndex >= _config.ElitesFromWave &&
+                UnityEngine.Random.value <= _config.EliteChance &&
                 _waveIndex >= e.Weight * 2;
-            
+
 
             toSpawn -= e.Weight * (elite ? 2 : 1);
 
@@ -118,16 +120,16 @@ public class WaveController : MonoBehaviour {
 
         float delayMin = _config.MinDelay;
         float delayMax = _config.MaxDelay - (float)_waveIndex * _config.MaxDelayLossPerWave;
-        delayMax = Mathf.Max(delayMax,delayMin);
+        delayMax = Mathf.Max(delayMax, delayMin);
 
 
-        if ( firstSpawn ) {
-            delayMin = 0.0f;
-            delayMax = 0.0f;
-        }   
+        if (firstSpawn) {
+            // delayMin = 0.0f;
+            // delayMax = 0.0f;
+        }
         else {
             bool lastHigh = _nextSpawnSettings.TotalWeight >= maximumWeight * _config.HighSpawnLimit;
-            if ( lastHigh ) {
+            if (lastHigh) {
                 minimumWeight = Mathf.Max(1, Mathf.RoundToInt(minimumWeight * _config.HighSpawnReductor));
                 maximumWeight = Mathf.Max(1, Mathf.RoundToInt(maximumWeight * _config.HighSpawnReductor));
                 delayMin *= _config.HighSpawnDelayIncrease;
@@ -136,9 +138,9 @@ public class WaveController : MonoBehaviour {
 
         }
 
-        
+
         _nextSpawnSettings.Delay = UnityEngine.Random.Range(delayMin, delayMax);
-        _nextSpawnSettings.TotalWeight = UnityEngine.Random.Range(minimumWeight, maximumWeight+1);
+        _nextSpawnSettings.TotalWeight = UnityEngine.Random.Range(minimumWeight, maximumWeight + 1);
         _enemySpawner.GenerateNewArea();
     }
 
@@ -147,7 +149,7 @@ public class WaveController : MonoBehaviour {
     }
 
     public float GetWaveTimeRemaining() {
-        return Mathf.Max(_waveDuration - _waveTimer,0.0f);
+        return Mathf.Max(_waveDuration - _waveTimer, 0.0f);
     }
 
     public bool IsInProgress() {
