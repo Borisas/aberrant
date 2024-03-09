@@ -4,9 +4,9 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class Enemy : Actor {
-    private const float ELITE_HEALTH_MULTIPLIER = 1.5f;
+    private const float ELITE_HEALTH_MULTIPLIER = 1.75f;
     private const float ELITE_SIZE_MULTIPLIER = 1.5f;
-    private const float ELITE_DAMAGE_MULTIPLIER = 1.5f;
+    private const float ELITE_DAMAGE_MULTIPLIER = 1.75f;
 
     [SerializeField] private SpriteRenderer _visual = null;
     [SerializeField] private CircleCollider2D _collider = null;

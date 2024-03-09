@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Obtainable: 1
   Id: 5
-  Title: Blood Halo
+  Title: Halo
   Limb: 1
   MaxLevel: 5
   Tier: 5

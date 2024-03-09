@@ -18,7 +18,7 @@ MonoBehaviour:
   Limb: 4
   MaxLevel: 10
   Tier: 5
-  Icon: {fileID: 21300000, guid: ab9a8bd7230548246b27e175a8718180, type: 3}
+  Icon: {fileID: 21300000, guid: 7936f1a0c06b58e489d6675bbafbb3a0, type: 3}
   Visual: {fileID: 21300000, guid: b4ec87ca6354d41e6a82c5cfd6aaf878, type: 3}
   Attach: 0
   Values:

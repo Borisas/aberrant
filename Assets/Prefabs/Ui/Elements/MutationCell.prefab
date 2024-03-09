@@ -698,6 +698,7 @@ GameObject:
   - component: {fileID: 1441380459729018481}
   - component: {fileID: 6483654727762066180}
   - component: {fileID: 5566513035635973012}
+  - component: {fileID: 7877590344872293600}
   m_Layer: 0
   m_Name: MutationCell
   m_TagString: Untagged
@@ -872,3 +873,17 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!114 &7877590344872293600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7566498379621204641}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f8463b542783cc4e8a50b1b775f2a83, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _soundUp: button_up
+  _soundDown: button_down
