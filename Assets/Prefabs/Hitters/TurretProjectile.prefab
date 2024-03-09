@@ -164,8 +164,9 @@ GameObject:
   - component: {fileID: 9148702014769635372}
   - component: {fileID: 7137992302393287045}
   - component: {fileID: 7549307312655213137}
+  - component: {fileID: 5637446421072273699}
   m_Layer: 8
-  m_Name: GunProjectile
+  m_Name: TurretProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -201,7 +202,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destroyAnimation: {fileID: 7763689403964994127, guid: dd2e9ce4ec01b24418e1d66aed222ac5, type: 3}
-  _speed: 5
+  _speed: 12
   _rotateToDirection: 1
 --- !u!50 &9148702014769635372
 Rigidbody2D:
@@ -355,3 +356,16 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &5637446421072273699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7450931252874148852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957bc5fcf0864074c9649ffe2317f952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: turret_shoot

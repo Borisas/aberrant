@@ -12,9 +12,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 663e99b17a80e8b4b927159ee13a06e8, type: 3}
   m_Name: db_sounds
   m_EditorClassIdentifier: 
+  MixerMusic: {fileID: 24100000, guid: f94c78f95fec23c4a87163328428be55, type: 2}
+  MusicTrack:
+    Clip: {fileID: 8300000, guid: 34dbe399b62c5244281db8d39ba10be5, type: 3}
+    Volume: 0.125
+  MixerSounds: {fileID: 24100000, guid: d2cd62f29b518fc46ad12647f3d7d0d9, type: 2}
   SoundEffects:
     m_keys:
     - hit
+    - blood_cross
+    - laser
+    - button_down
+    - explosion
+    - button_up
+    - turret_shoot
+    - bone_shoot
+    - toxic_pool
     m_values:
     - Clip: {fileID: 8300000, guid: 3b5222a6edb1b2047819a585c9fde16a, type: 3}
       Volume: 0.15
+    - Clip: {fileID: 8300000, guid: 3dc4de8654d69884ba2bd12e0621a910, type: 3}
+      Volume: 0.25
+    - Clip: {fileID: 8300000, guid: 65341bbc1d6a81940ad6525fa8d14511, type: 3}
+      Volume: 0.2
+    - Clip: {fileID: 8300000, guid: 39c8e1b9c1760924f8e734d0cbe44760, type: 3}
+      Volume: 0.3
+    - Clip: {fileID: 8300000, guid: c2acd33e0ecb15b4da1304513463b02c, type: 3}
+      Volume: 0.2
+    - Clip: {fileID: 8300000, guid: 0c8c6b13f9d5fd247b179243bc09c6b8, type: 3}
+      Volume: 0.2
+    - Clip: {fileID: 8300000, guid: 3c7c886ecb69d6d479f5c3a56fccaaa7, type: 3}
+      Volume: 0.175
+    - Clip: {fileID: 8300000, guid: 73a29ff245fdef6478640f4d8be7b016, type: 3}
+      Volume: 0.1
+    - Clip: {fileID: 8300000, guid: 2a2f47982f890e048bf35238feb3d8cf, type: 3}
+      Volume: 0.1

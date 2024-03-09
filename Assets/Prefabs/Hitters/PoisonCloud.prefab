@@ -79,6 +79,7 @@ GameObject:
   - component: {fileID: 2690278415415091956}
   - component: {fileID: 5965754525257594877}
   - component: {fileID: 5580194988245893003}
+  - component: {fileID: -4609771704602053142}
   m_Layer: 0
   m_Name: PoisonCloud
   m_TagString: Untagged
@@ -157,6 +158,19 @@ SortingGroup:
   m_SortingLayer: -1
   m_SortingOrder: 1
   m_SortAtRoot: 0
+--- !u!114 &-4609771704602053142
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618435240717596944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957bc5fcf0864074c9649ffe2317f952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: toxic_pool
 --- !u!1 &8410757759866613759
 GameObject:
   m_ObjectHideFlags: 0

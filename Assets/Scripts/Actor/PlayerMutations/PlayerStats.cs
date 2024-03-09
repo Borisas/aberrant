@@ -122,7 +122,6 @@ public class PlayerStats {
             float dmg = hit.Damage;
             var cfg = Database.GetInstance().Main.GetMutationConfig(MutationId.Thorns);
             float reflect = (cfg.Values[0] + (float)(thorns - 1) * cfg.ScaleValues[0]) / 100.0f;
-            Debug.Log($"REFLECT MUL = {reflect}");
 
             int finalDmg = Mathf.RoundToInt(dmg * reflect);
             if (finalDmg > 0) {

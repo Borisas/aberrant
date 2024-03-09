@@ -163,6 +163,7 @@ GameObject:
   - component: {fileID: 333137064685856217}
   - component: {fileID: 9148702014769635372}
   - component: {fileID: 7137992302393287045}
+  - component: {fileID: 5359897782274509889}
   m_Layer: 8
   m_Name: Spike
   m_TagString: Untagged
@@ -241,3 +242,16 @@ SortingGroup:
   m_SortingLayer: -1
   m_SortingOrder: 1
   m_SortAtRoot: 0
+--- !u!114 &5359897782274509889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7450931252874148852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957bc5fcf0864074c9649ffe2317f952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: bone_shoot

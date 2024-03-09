@@ -63,6 +63,7 @@ public class DamagingZone : DamageEntity, ISetupHitter {
 
     void HitAll() {
         for (int i = 0; i < _actors.Count; i++) {
+            if (!_actors[i].IsAlive()) continue;
             Hit(_actors[i]);
         }
     }

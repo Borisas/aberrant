@@ -174,6 +174,7 @@ GameObject:
   - component: {fileID: 9148702014769635372}
   - component: {fileID: 7137992302393287045}
   - component: {fileID: 7549307312655213137}
+  - component: {fileID: 5506879886840566045}
   m_Layer: 8
   m_Name: Mutation_Eye_Projectile
   m_TagString: Untagged
@@ -367,3 +368,16 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &5506879886840566045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7450931252874148852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 957bc5fcf0864074c9649ffe2317f952, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sound: laser

@@ -42,7 +42,7 @@ public class PlayerInputGuns : MonoBehaviour {
         weapon.Play("Gun_Fire");
 
         var proj = ObjectPool.Get(_bulletProjectile);
-        proj.Setup(null, Scene.GameController.GetTurretDamage(), dir);
+        proj.Setup(null, Scene.GameController.GetTurretDamage(), new Vector2(dir.x,dir.y).normalized);
         proj.transform.position = weapon.transform.position;
     }
 }
