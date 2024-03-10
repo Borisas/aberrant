@@ -66,11 +66,13 @@ public class Enemy : Actor {
     }
 
     protected override void Update() {
+        if (!IsActing()) return;
         base.Update();
         _behaviour.Update();
     }
 
     protected override void FixedUpdate() {
+        if (!IsActing()) return;
         base.FixedUpdate();
         _behaviour.FixedUpdate();
     }

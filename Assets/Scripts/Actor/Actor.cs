@@ -1,9 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using PrimeTween;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public class Actor : MonoBehaviour {
     private const float MIN_X_DIFF_TO_TURN = 0.1f;
@@ -16,6 +11,7 @@ public class Actor : MonoBehaviour {
     [SerializeField] private Collider2D _hitbox = null;
     [SerializeField] protected Transform _projectileSpawnPos;
     private Actor _target;
+    private bool _acting = true;
     protected Rigidbody2D _body = null;
     protected AgentNav2d _nav = null;
     protected bool _alive = true;
@@ -42,6 +38,9 @@ public class Actor : MonoBehaviour {
 
     public float GetHealth() => _health;
     public float GetMaxHealth() => _maxHealth;
+    
+    public void SetActing(bool a) => _acting = a;
+    protected bool IsActing() => _acting;
 
     public bool IsFullHealth() {
         return Mathf.Abs(_health - _maxHealth) < Mathf.Epsilon;
@@ -76,6 +75,7 @@ public class Actor : MonoBehaviour {
     protected virtual void Update() { }
 
     protected virtual void LateUpdate() {
+        if (!IsActing()) return;
         if (_turnToMovement) {
             var x = transform.position.x;
             if (Mathf.Abs(_lastX - x) > MIN_X_DIFF_TO_TURN) {

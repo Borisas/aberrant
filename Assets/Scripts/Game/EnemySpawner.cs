@@ -25,6 +25,7 @@ public class EnemySpawner : MonoBehaviour {
         go.transform.position = p;
         _livingEnemies.Add(go);
         go.OnDie += Enemy_OnDie;
+        OnEnemySpawn(go);
         return go;
     }
 
@@ -41,7 +42,16 @@ public class EnemySpawner : MonoBehaviour {
         go.transform.position = p;
         _livingEnemies.Add(go);
         go.OnDie += Enemy_OnDie;
+        OnEnemySpawn(go);
         return go;
+    }
+
+    void OnEnemySpawn(Enemy e) {
+
+        var s = ObjectPool.Get(Database.GetInstance().Main.SpawnAnimation);
+        s.transform.position = e.transform.position;
+
+        s.Spawn(e);
     }
 
     public void GenerateNewArea() {

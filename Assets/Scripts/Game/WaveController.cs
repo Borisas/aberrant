@@ -107,9 +107,24 @@ public class WaveController : MonoBehaviour {
 
             toSpawn -= e.Weight * (elite ? 2 : 1);
 
-            _enemySpawner.SpawnEnemyNotNewArea(elite, e.Id);
+            SpawnEnemy(eindex, elite, e.Id);
 
             eindex++;
+        }
+    }
+
+    void SpawnEnemy(int idx, bool elite, EnemyId id) {
+
+        void s() {
+            _enemySpawner.SpawnEnemyNotNewArea(elite, id);
+        }
+
+        const float delayStep = 0.1f;
+        if (idx == 0) {
+            s();
+        }
+        else {
+            PrimeTween.Tween.Delay((float) idx * delayStep, s);
         }
     }
 

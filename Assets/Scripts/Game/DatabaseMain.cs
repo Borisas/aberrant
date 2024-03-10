@@ -16,6 +16,7 @@ public class DatabaseMain : ScriptableObject {
     public SpriteRenderer MutationInstance;
     public Material MaterialCharacterRegular;
     public Material MaterialCharacterElite;
+    public SpawnAnimation SpawnAnimation;
     [Header("Configs")]
     public WaveControllerConfig WaveControllerConfig;
     public GameConfig GameConfig;

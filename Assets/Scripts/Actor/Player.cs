@@ -42,6 +42,7 @@ public class Player : Actor {
     }
 
     protected override void LateUpdate() {
+        if (!IsActing()) return;
         base.LateUpdate();
         if (_attackTimer < _stats.GetAttackInterval()) {
             _attackTimer += Time.deltaTime;
@@ -49,11 +50,13 @@ public class Player : Actor {
     }
 
     protected override void Update() {
+        if (!IsActing()) return;
         base.Update();
         _stats.Update();
     }
 
     protected override void FixedUpdate() {
+        if (!IsActing()) return;
         base.FixedUpdate();
 
         var t = GetTarget();
