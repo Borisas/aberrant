@@ -15,9 +15,9 @@ MonoBehaviour:
   MinWeight: 1
   MaxWeight: 2
   MinWeightPerWave: 1.075
-  MaxWeightPerWave: 1.35
+  MaxWeightPerWave: 1.425
   HighSpawnLimit: 0.75
-  HighSpawnReductor: 0.4
+  HighSpawnReductor: 0.45
   MinDelay: 1.25
   MaxDelay: 1.75
   MaxDelayLossPerWave: 0.01
