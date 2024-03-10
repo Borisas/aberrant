@@ -14,6 +14,9 @@ public class ViewLose : UiView {
         public Image Sprite;
     }
 
+    [SerializeField] private TMP_Text _labelWin = null;
+    [SerializeField] private TMP_Text _labelLose = null;
+    [Space]
     [SerializeField] private TMP_Text _labelWaves = null;
     [SerializeField] private TMP_Text _labelBlood = null;
     [SerializeField] private TMP_Text _labelKills = null;
@@ -22,8 +25,20 @@ public class ViewLose : UiView {
     [SerializeField] Image _prefabLimb = null;
     [SerializeField] List<PlayerLimb> _limbs = new List<PlayerLimb>();
 
+    public static void Open(bool win) {
+        var view = Scene.UiDirector.GetView<ViewLose>();
+        if (view == null) return;
+        view.SetWin(win);
+        Scene.UiDirector.OpenView<ViewLose>();
+    }
 
-    public void OnEnable() {
+
+    void SetWin(bool w) {
+        _labelWin.gameObject.SetActive(w);
+        _labelLose.gameObject.SetActive(!w);
+    }
+
+    void OnEnable() {
         LoadPlayerVisuals();
         LoadNumbers();
     }

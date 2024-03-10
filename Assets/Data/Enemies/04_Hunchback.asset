@@ -15,7 +15,7 @@ MonoBehaviour:
   Id: 4
   Prefab: {fileID: 8130746455804521030, guid: ccfbd77c41cff3b44b47a27fd739b547, type: 3}
   Health: 100
-  Damage: 4
+  Damage: 5
   Weight: 6
   BloodDropMultiplier: 4
   Behaviour:

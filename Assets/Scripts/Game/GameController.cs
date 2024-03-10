@@ -31,7 +31,7 @@ public class GameController : MonoBehaviour {
 
     private void Player_OnDie(Actor obj) {
         PrimeTween.Tween.Delay(1.5f, () => {
-            Scene.UiDirector.OpenView<ViewLose>();
+            ViewLose.Open(false);
         });
     }
 
@@ -45,9 +45,18 @@ public class GameController : MonoBehaviour {
 
         if (Scene.Player.IsAlive() == false) return;//no complete! >:(
 
-        PrimeTween.Tween.Delay(1.5f, () => {
-            ViewMutation.Open();
-        });
+
+        if (_instance.WaveIndex >= _config.FinalWave-1) {
+            //game win
+            ViewLose.Open(true);
+        }
+        else {
+            PrimeTween.Tween.Delay(1.5f, () => {
+                if (!ViewMutation.Open()) {
+                    Scene.UiDirector.GetView<ViewGameplay>().OpenIntermission();
+                }
+            });
+        }
     }
 
     public void NextWave() {
@@ -80,7 +89,7 @@ public class GameController : MonoBehaviour {
         if (!pr.CanPay()) return false;
         pr.Remove();
 
-        ViewMutation.Open();
+        if (!ViewMutation.Open()) return false;
         _instance.OnMutationPurchased();
         return true;
     }

@@ -15,4 +15,5 @@ public class GameConfig : ScriptableObject {
     [Header("Other")]
     public int TurretBaseDamage = 2;
     public int MoreLifeIncrease = 20;
+    public int FinalWave = 51;
 }

@@ -36,7 +36,7 @@ public class ViewGameplay : UiView {
         _intermission.Close();
     }
 
-    void OpenIntermission() {
+    public void OpenIntermission() {
 
         if (Scene.GameController.IsWaveInProgress()) return;
 
@@ -74,7 +74,7 @@ public class ViewGameplay : UiView {
         _intermission.Resetup();
     }
 
-    void ViewMutation_OnClose() {
+    public void ViewMutation_OnClose() {
         OpenIntermission();
     }
 }

@@ -60,8 +60,10 @@ public class GameplayIntermission : MonoBehaviour {
         _priceMoreLife = Scene.GameController.GetPriceMoreLife();
         _priceMutate = Scene.GameController.GetPriceMutate();
 
+        bool mutationsLeft = Scene.GameController.GetMutationController().AnyMutationsLeft();
+
         SetupPurchaseButton(_recovered, _priceRecover, _buttonRecover, _priceBlockRecover);
-        SetupPurchaseButton(_mutated, _priceMutate, _buttonMutate, _priceBlockMutate);
+        SetupPurchaseButton(_mutated || !mutationsLeft, _priceMutate, _buttonMutate, _priceBlockMutate);
         SetupPurchaseButton(_lifeIncreased, _priceMoreLife, _buttonMoreLife, _priceBlockMoreLife);
     }
 

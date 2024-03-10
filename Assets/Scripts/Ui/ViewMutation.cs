@@ -12,12 +12,14 @@ public class ViewMutation : UiView {
 
     bool _anyCellSelected = false;
 
-    public static void Open() {
+    public static bool Open() {
 
         var view = Scene.UiDirector.GetView<ViewMutation>();
-        if (view == null) return;
+        if (view == null) return false;
+        if (!Scene.GameController.GetMutationController().AnyMutationsLeft()) return false;
         view.SetupNewMutations();
         Scene.UiDirector.OpenViewAdditive<ViewMutation>();
+        return true;
     }
 
     void OnDisable() {
@@ -29,13 +31,13 @@ public class ViewMutation : UiView {
         _anyCellSelected = false;
     }
 
-    bool SetupNewMutations() {
+    void SetupNewMutations() {
 
         var mc = Scene.GameController.GetMutationController();
 
         var newMutations = mc.GenerateMutationSelection();
 
-        if (newMutations == null || newMutations.Length <= 0) return false;
+        if (newMutations == null || newMutations.Length <= 0) return;
 
         //else new mutations : thumbsup, show them.
 
@@ -50,7 +52,7 @@ public class ViewMutation : UiView {
         }
 
 
-        return true;
+        return;
     }
 
     public void OnContinue() {

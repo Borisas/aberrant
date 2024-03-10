@@ -38,5 +38,10 @@ public class MutationController {
         return r;
     }
 
+    public bool AnyMutationsLeft() {
+        var muts = GenerateMutationSelection();
+        return muts != null && muts.Length > 0;
+    }
+
     IEnumerable<MutationInstance> CollectPlayerMutations() => Scene.Player.GetStats().GetActiveMutations();
 }

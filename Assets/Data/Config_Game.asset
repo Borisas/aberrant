@@ -22,3 +22,4 @@ MonoBehaviour:
   MaxBloodDropBase: 4
   TurretBaseDamage: 2
   MoreLifeIncrease: 20
+  FinalWave: 51
