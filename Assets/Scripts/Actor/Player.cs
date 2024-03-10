@@ -129,6 +129,8 @@ public class Player : Actor {
 
     public override void Hit(HitInfo hit) {
 
+        if (Scene.GameController.IsWaveInProgress() == false) return;//dont take damage if wave over.
+
         if (_stats.IsHitAvoided()) {
             Scene.WorldUiController.GetDamageNumbers().ShowCustomLabelOnPlayer(transform.position, "DODGE");
             return;

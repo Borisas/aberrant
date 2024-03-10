@@ -14,6 +14,7 @@ public class PlayerInputGuns : MonoBehaviour {
     
     void Update() {
 
+        if (Scene.Player.IsAlive() == false) return;
         if (Scene.GameController.IsWaveInProgress() == false) return;
 
         if (_fireTimer < _fireInterval) {

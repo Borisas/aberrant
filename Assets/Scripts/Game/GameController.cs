@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour {
 
     private void WaveController_OnWaveCompleted() {
 
+        if (Scene.Player.IsAlive() == false) return;//no complete! >:(
+
         PrimeTween.Tween.Delay(1.5f, () => {
             ViewMutation.Open();
         });

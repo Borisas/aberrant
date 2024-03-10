@@ -6,7 +6,7 @@
 [X] Show max life
 [X] change growth to be flat instead of %-tal
 [X] Show some small mutation description once received
-[ ] Fix spawn push bug
+[X] Fix spawn push bug
 
 
 ## LOW
