@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _appear: {fileID: 0}
-  _tickInterval: 0.15
+  _tickInterval: 0.2
   _duration: -1
   _speed: 4
   _rotateToDirection: 1
