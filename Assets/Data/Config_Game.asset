@@ -15,9 +15,9 @@ MonoBehaviour:
   PriceRecovery: 30
   PriceRecoveryIncrease: 5
   PriceMutate: 50
-  PriceMutateIncrease: 15
+  PriceMutateIncrease: 25
   PriceMoreLife: 20
-  PriceMoreLifeIncrease: 30
+  PriceMoreLifeIncrease: 35
   MinBloodDropBase: 2
   MaxBloodDropBase: 4
   TurretBaseDamage: 2

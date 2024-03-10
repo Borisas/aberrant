@@ -18,7 +18,9 @@ public class WaveControllerConfig : ScriptableObject {
     public float WaveDurationMin = 15.0f;
     public float WaveDurationMax = 60.0f;
     public float WaveDurationPerWave = 2.0f;
-    [Header("Other")]
+    [Header("Elite")]
     public float EliteChance = 0.15f;
     public int ElitesFromWave = 3;
+    public int DoubleEliteChanceFromWave = 50;
+    public float EliteWeightMultiplier = 1.75f;
 }

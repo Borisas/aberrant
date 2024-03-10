@@ -100,7 +100,7 @@ public class Player : Actor {
 
     void GetClosestTarget() {
 
-        var size = Physics2D.OverlapCircleNonAlloc(transform.position, 10.0f, _possibleTargets, LayerMask.GetMask("Enemy"));
+        var size = Physics2D.OverlapCircleNonAlloc(transform.position, 10.0f, _possibleTargets, LayerMask.GetMask("Hitbox"));
         if (size <= 0) return;
 
         float minD = float.MaxValue;
@@ -114,6 +114,7 @@ public class Player : Actor {
 
 
             if (enemy.IsAlive() == false) continue;
+            
             float d = (enemy.transform.position - transform.position).sqrMagnitude;
             if (d < minD) {
                 minD = d;

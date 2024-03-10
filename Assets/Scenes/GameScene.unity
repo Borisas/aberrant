@@ -586,9 +586,9 @@ Camera:
   m_NormalizedViewPortRect:
     serializedVersion: 2
     x: 0
-    y: 0
-    width: 1
-    height: 1
+    y: 0.055555556
+    width: 0.33333334
+    height: 0.3333333
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
@@ -1433,7 +1433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842d4d525d3b6174a9a7727dc246712a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugDraw: 0
+  _debugDraw: 1
   _size: {x: 8, y: 1.25}
 --- !u!1 &1476345670
 GameObject:
@@ -1542,8 +1542,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842d4d525d3b6174a9a7727dc246712a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugDraw: 0
-  _size: {x: 1.25, y: 5}
+  _debugDraw: 1
+  _size: {x: 1.25, y: 3.68}
 --- !u!224 &1575422782 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 887548751683080232, guid: 87dc9343272965e48a06de524cda9e37, type: 3}
@@ -1970,7 +1970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842d4d525d3b6174a9a7727dc246712a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugDraw: 0
+  _debugDraw: 1
   _size: {x: 8, y: 1.25}
 --- !u!1 &2075759865
 GameObject:
@@ -2016,8 +2016,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 842d4d525d3b6174a9a7727dc246712a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _debugDraw: 0
-  _size: {x: 1.25, y: 5}
+  _debugDraw: 1
+  _size: {x: 1.25, y: 3.68}
 --- !u!1001 &1277276178613855105
 PrefabInstance:
   m_ObjectHideFlags: 0

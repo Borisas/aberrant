@@ -99,13 +99,17 @@ public class WaveController : MonoBehaviour {
                 e = defaultEnemy;
             }
 
+            float eChance = _waveIndex >= _config.DoubleEliteChanceFromWave
+                ? _config.EliteChance * 2.0f
+                : _config.EliteChance;
+
             bool elite =
                 _waveIndex >= _config.ElitesFromWave &&
-                UnityEngine.Random.value <= _config.EliteChance &&
-                _waveIndex >= e.Weight * 2;
+                _waveIndex >= e.Weight * 2 &&
+                UnityEngine.Random.value <= eChance;
 
 
-            toSpawn -= e.Weight * (elite ? 2 : 1);
+            toSpawn -= Mathf.RoundToInt((float)e.Weight * (elite ? _config.EliteWeightMultiplier : 1.0f));
 
             SpawnEnemy(eindex, elite, e.Id);
 

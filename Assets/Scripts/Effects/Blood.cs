@@ -29,7 +29,11 @@ public class Blood : MonoBehaviour {
 
         if (vec.sqrMagnitude > Mathf.Pow(0.01f, 2.0f)) {
             var v = vec.normalized;
-            _transform.position += v * (Time.deltaTime * _speed);
+            var move = v * (Time.deltaTime * _speed);
+            if (move.magnitude > vec.magnitude) {
+                move = vec;
+            }
+            _transform.position += move;
             _speed += _acceleration * Time.deltaTime;
         }
         else {
