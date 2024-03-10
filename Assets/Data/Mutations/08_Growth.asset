@@ -22,6 +22,6 @@ MonoBehaviour:
   Visual: {fileID: 21300000, guid: 0e4eec61d68324866b8d664061c15867, type: 3}
   Attach: 1
   Values:
-  - 1.25
+  - 0.8
   ScaleValues:
   - 0.1

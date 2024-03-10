@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 
 [ExecuteAlways]
-[RequireComponent(typeof(Animation))]
+// [RequireComponent(typeof(Animation))]
 [RequireComponent(typeof(SpriteRenderer))]
 public class SpriteAnimationWrapper : MonoBehaviour {
 

@@ -1,8 +1,11 @@
 [X] check why sometimes turret bullet doesn't appear
 [X] Audio button
 [X] Intermission button pricing unclear
-[ ] Enemy spawn animation
-[ ] Controls screen (first open tell how to control)
+[X] Enemy spawn animation
+[X] Controls screen (first open tell how to control)
+[ ] Show max life
+[ ] Show some small mutation description once received
+[ ] change growth to be flat instead of %-tal
 
 ## LOW
 [ ] Resolution

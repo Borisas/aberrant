@@ -1,9 +1,7 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Sirenix.OdinInspector;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using Vector2 = UnityEngine.Vector2;
+using Vector3 = UnityEngine.Vector3;
 
 public class Area2D : MonoBehaviour {
 
@@ -12,11 +10,14 @@ public class Area2D : MonoBehaviour {
 
     private Vector2 _lastPoint = Vector2.zero;
 
+
     public Vector2 GetRandomPoint() {
 
+        float areaM = 0.9f;
+        
         var p = new Vector2(
-            Random.Range(0.0f, _size.x) - _size.x / 2.0f,
-            Random.Range(0.0f, _size.y) - _size.y / 2.0f
+            Random.Range(0.0f, _size.x*areaM) - _size.x * (areaM * 0.5f),
+            Random.Range(0.0f, _size.y * areaM) - _size.y * (areaM * 0.5f)
         );
 
         return transform.localToWorldMatrix.MultiplyPoint(p);
@@ -46,6 +47,7 @@ public class Area2D : MonoBehaviour {
 
         Gizmos.color = new Color(0.0f, 0.65f, 0.65f, 0.5f);
         Gizmos.DrawCube(Vector3.zero, new Vector3(_size.x, _size.y, 1.0f));
+
         
         Gizmos.matrix = mat;
     }

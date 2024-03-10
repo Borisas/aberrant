@@ -17,14 +17,16 @@ MonoBehaviour:
   MinWeightPerWave: 1.05
   MaxWeightPerWave: 1.35
   HighSpawnLimit: 0.8
-  HighSpawnReductor: 0.5
+  HighSpawnReductor: 0.4
   MinDelay: 1.25
   MaxDelay: 1.75
   MaxDelayLossPerWave: 0.01
   FirstSpawnDelay: 0
-  HighSpawnDelayIncrease: 1.5
+  HighSpawnDelayIncrease: 1.75
   WaveDurationMin: 15
   WaveDurationMax: 60
   WaveDurationPerWave: 2
   EliteChance: 0.15
-  ElitesFromWave: 3
+  ElitesFromWave: 5
+  DoubleEliteChanceFromWave: 50
+  EliteWeightMultiplier: 1.9

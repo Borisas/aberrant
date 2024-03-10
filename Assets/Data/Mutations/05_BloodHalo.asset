@@ -23,7 +23,7 @@ MonoBehaviour:
   Attach: 1
   Values:
   - 10
-  - 1.5
+  - 1.3
   ScaleValues:
-  - 2
+  - 3
   - 0.05
