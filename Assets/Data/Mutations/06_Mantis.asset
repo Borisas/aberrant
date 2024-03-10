@@ -15,6 +15,7 @@ MonoBehaviour:
   Obtainable: 1
   Id: 6
   Title: Mantis
+  Description: Swift dodges.
   Limb: 4
   MaxLevel: 8
   Tier: 5

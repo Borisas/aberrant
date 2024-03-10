@@ -15,6 +15,7 @@ MonoBehaviour:
   Obtainable: 1
   Id: 5
   Title: Halo
+  Description: Distant bloody sacrifice.
   Limb: 1
   MaxLevel: 5
   Tier: 5

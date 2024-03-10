@@ -27,6 +27,6 @@ MonoBehaviour:
       type: {class: RangedChaseAttack, ns: , asm: Assembly-CSharp}
       data:
         _speed: 2
-        _attackSpeed: 1.5
-        _range: 2.5
+        _attackSpeed: 1.35
+        _range: 2.6
         _projectile: {fileID: 333137064685856217, guid: c24d798d4bfa3ed428f8ca6fba2098b6, type: 3}

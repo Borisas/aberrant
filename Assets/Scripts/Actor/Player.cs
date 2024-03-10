@@ -164,7 +164,7 @@ public class Player : Actor {
 
     public PlayerStats GetStats() => _stats;
 
-    void Stats_OnMutationsChanged() {
+    void Stats_OnMutationsChanged(MutationInstance i) {
         LoadVisuals();
     }
 

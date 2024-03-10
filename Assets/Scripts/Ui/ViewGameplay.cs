@@ -6,6 +6,7 @@ using UnityEngine;
 public class ViewGameplay : UiView {
 
     [SerializeField] private TMP_Text _labelPlayerHealth = null;
+    [SerializeField] private TMP_Text _labelPlayerMaxHealth = null;
     [SerializeField] private TMP_Text _labelWaveProgress = null;
     [SerializeField] private TMP_Text _labelBlood = null;
     [Header("Intermission")]
@@ -15,7 +16,7 @@ public class ViewGameplay : UiView {
 
         var player = Scene.Player;
         player.OnHealthChanged += Player_OnHealthChanged;
-        _labelPlayerHealth.text = $"{player.GetHealth():0}";
+        Player_OnHealthChanged(Scene.Player);
         CloseIntermission();
 
         Scene.UiDirector.GetView<ViewMutation>().OnClose += ViewMutation_OnClose;
@@ -28,6 +29,7 @@ public class ViewGameplay : UiView {
 
     private void Player_OnHealthChanged(Actor player) {
         _labelPlayerHealth.text = $"{player.GetHealth():0}";
+        _labelPlayerMaxHealth.text = $"/{player.GetMaxHealth():0}";
     }
 
     void CloseIntermission() {

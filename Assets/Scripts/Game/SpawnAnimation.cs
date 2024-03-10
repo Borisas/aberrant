@@ -13,6 +13,8 @@ public class SpawnAnimation : MonoBehaviour {
         _actor = a;
         
         _actor.SetActing(false);
+        _actor.SetPhysicsEnabled(false);
+        
         _previousParent = _actor.transform.parent;
 
         _posPrevious = _actor.transform.position;
@@ -22,6 +24,7 @@ public class SpawnAnimation : MonoBehaviour {
 
     public void OnCompleted() {
         _actor.SetActing(true);
+        _actor.SetPhysicsEnabled(true);
         _actor.transform.SetParent(_previousParent);
         // _actor.transform.position = _posPrevious;
         gameObject.SetActive(false);

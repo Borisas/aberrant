@@ -3,9 +3,11 @@
 [X] Intermission button pricing unclear
 [X] Enemy spawn animation
 [X] Controls screen (first open tell how to control)
-[ ] Show max life
-[ ] Show some small mutation description once received
-[ ] change growth to be flat instead of %-tal
+[X] Show max life
+[X] change growth to be flat instead of %-tal
+[X] Show some small mutation description once received
+[ ] Fix spawn push bug
+
 
 ## LOW
 [ ] Resolution

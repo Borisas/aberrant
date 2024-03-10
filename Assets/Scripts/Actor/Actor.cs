@@ -42,6 +42,23 @@ public class Actor : MonoBehaviour {
     public void SetActing(bool a) => _acting = a;
     protected bool IsActing() => _acting;
 
+    public void SetPhysicsEnabled(bool e) {
+        if (e) {
+            _body.isKinematic = false;
+            var colliders = GetComponentsInChildren<Collider>(true);
+            foreach (var c in colliders) {
+                c.enabled = true;
+            }
+        }
+        else {
+            _body.isKinematic = true;
+            var colliders = GetComponentsInChildren<Collider>(true);
+            foreach (var c in colliders) {
+                c.enabled = false;
+            }
+        }
+    }
+
     public bool IsFullHealth() {
         return Mathf.Abs(_health - _maxHealth) < Mathf.Epsilon;
     }

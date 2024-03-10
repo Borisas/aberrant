@@ -15,6 +15,7 @@ MonoBehaviour:
   Obtainable: 1
   Id: 9
   Title: Eye
+  Description: Scatters red piercing fury.
   Limb: 2
   MaxLevel: 10
   Tier: 5
@@ -23,7 +24,7 @@ MonoBehaviour:
   Attach: 1
   Values:
   - 3
-  - 1
+  - 0.8
   ScaleValues:
   - 3
   - 0.05

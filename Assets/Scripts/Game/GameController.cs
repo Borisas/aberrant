@@ -22,6 +22,11 @@ public class GameController : MonoBehaviour {
         _waveController.OnWaveCompleted += WaveController_OnWaveCompleted;
 
         Scene.Player.OnDie += Player_OnDie;
+        Scene.Player.GetStats().OnMutationChanged += Player_OnMutationsChanged;
+    }
+
+    private void Player_OnMutationsChanged(MutationInstance mi) {
+        ViewMutationInfo.Open(mi);
     }
 
     private void Player_OnDie(Actor obj) {

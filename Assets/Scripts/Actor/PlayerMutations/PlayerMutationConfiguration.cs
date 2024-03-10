@@ -6,6 +6,7 @@ public class PlayerMutationConfiguration : ScriptableObject {
     public bool Obtainable = true;
     public MutationId Id;
     public string Title;
+    public string Description;
     public Player.Limb Limb;
     public int MaxLevel;
     public int Tier;

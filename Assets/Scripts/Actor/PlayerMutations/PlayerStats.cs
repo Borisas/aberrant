@@ -25,7 +25,7 @@ public class PlayerStats {
 
     private Player _owner;
 
-    public System.Action OnMutationChanged;
+    public event System.Action<MutationInstance> OnMutationChanged;
 
     List<MutationInstance> _activeMutations = new List<MutationInstance>();
 
@@ -229,7 +229,7 @@ public class PlayerStats {
                 .Start(fireInterval);
         }
 
-        OnMutationChanged?.Invoke();
+        OnMutationChanged?.Invoke(GetMutationInstance(id));
     }
 
     public IEnumerable<MutationInstance> GetActiveMutations() => _activeMutations;
@@ -309,12 +309,9 @@ public class PlayerStats {
         var lvl = GetMutationLevel(MutationId.Growth);
         var cfg = Database.GetInstance().Main.GetMutationConfig(MutationId.Growth);
 
-        float prc = (cfg.Values[0] + (float)(lvl - 1) * cfg.Values[0]) / 100.0f;
+        float healAmount = Mathf.RoundToInt(cfg.Values[0] + (float)(lvl - 1) * cfg.Values[0]) ;
 
-        float heal = _owner.GetMaxHealth() * prc;
-        int healHp = Mathf.RoundToInt(heal);
-
-        _owner.Heal(healHp);
+        _owner.Heal(healAmount);
     }
 
     #endregion

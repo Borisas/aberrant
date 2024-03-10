@@ -15,6 +15,7 @@ MonoBehaviour:
   Obtainable: 1
   Id: 8
   Title: Growth
+  Description: Parasitic restoration.
   Limb: 3
   MaxLevel: 8
   Tier: 5
@@ -22,6 +23,6 @@ MonoBehaviour:
   Visual: {fileID: 21300000, guid: 0e4eec61d68324866b8d664061c15867, type: 3}
   Attach: 1
   Values:
-  - 0.8
+  - 1
   ScaleValues:
-  - 0.1
+  - 1
