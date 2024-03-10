@@ -25,6 +25,8 @@ public class SpawnAnimation : MonoBehaviour {
         _actor.transform.SetParent(_previousParent);
         // _actor.transform.position = _posPrevious;
         gameObject.SetActive(false);
+        
+        _actor.transform.localScale = Vector3.one;
     }
 
 }

@@ -13,6 +13,7 @@ public class Projectile : DamageEntity, ISetupHitterWithDirection {
     private float _damage;
     private Vector2 _direction;
     bool _firstFrame = false;
+    private bool _hit = false;
 
     private static int counter = 0;
     public int index = 0;
@@ -27,7 +28,8 @@ public class Projectile : DamageEntity, ISetupHitterWithDirection {
 
         // //Safety for if it spawns outside of bounds?
         // transform.position = Vector3.zero;
-        
+
+        _hit = false;
         _owner = owner;
         _damage = damage;
         _direction = direction;
@@ -76,6 +78,8 @@ public class Projectile : DamageEntity, ISetupHitterWithDirection {
 
     private void OnTriggerEnter2D(Collider2D other) {
 
+        if (_hit) return;
+
         var rb = other.attachedRigidbody;
         if (rb == null) return;
         var actor = rb.GetComponent<Actor>();
@@ -92,6 +96,7 @@ public class Projectile : DamageEntity, ISetupHitterWithDirection {
 
         actor.Hit(GenerateHit());
         DestroySelf();
+        _hit = true;
     }
 
     void DestroySelf(bool anim = true) {

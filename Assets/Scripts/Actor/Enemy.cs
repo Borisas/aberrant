@@ -28,6 +28,8 @@ public class Enemy : Actor {
         _initialScale.UpdateValueIfDirty(_visual.transform.localScale);
         _initialColliderRadius.UpdateValueIfDirty(_collider.radius);
 
+        transform.localScale = Vector3.one;
+
         _config = cfg;
 
         SetTarget(Scene.Player);//force target player
@@ -69,6 +71,11 @@ public class Enemy : Actor {
         if (!IsActing()) return;
         base.Update();
         _behaviour.Update();
+
+        var p = transform.position;
+        if (Mathf.Abs(p.x) > 7.0f || Mathf.Abs(p.y) > 7.0f) {
+            Die();//SAFETY
+        }
     }
 
     protected override void FixedUpdate() {

@@ -13,9 +13,9 @@ public class Scene : MonoBehaviour {
     public static Effects Effects;
     public static WaveController WaveController;
     public static Camera GameCamera;
-    public static Animation SceneLoadOverlay;
+    public static Animator SceneLoadOverlay;
 
-    [SerializeField] Animation _sceneLoad = null;
+    [SerializeField] Animator _sceneLoad = null;
 
     private void Awake() {
 
@@ -34,10 +34,11 @@ public class Scene : MonoBehaviour {
             onComplete?.Invoke();
         }
         else {
-            PrimeTween.Tween.Delay(0.55f, onComplete);
+            var ev = SceneLoadOverlay.GetComponent<AnimCompleteEvent>();
+            ev.Complete += onComplete;
+            
             SceneLoadOverlay.gameObject.SetActive(true);
-            SceneLoadOverlay.Stop();
-            SceneLoadOverlay.Play("SceneLoad_Appear");
+            SceneLoadOverlay.Play("Appear",0,0);
         }
     }
 }

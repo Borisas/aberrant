@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Obtainable: 1
   Id: 2
-  Title: Poison Cloud
+  Title: Acid
   Limb: 5
   MaxLevel: 4
   Tier: 5

@@ -155,6 +155,10 @@ public class Actor : MonoBehaviour {
         _hitAnim.Play();
     }
 
+    public void ForceDie() {
+        Die();
+    }
+
     protected virtual void Die() {
         _alive = false;
         _hitAnim.Kill();
