@@ -31,6 +31,10 @@ public class ArchingProjectile : DamageEntity, ISetupWithStartEndPosition {
         _mask = LayerMask.GetMask("Hitbox");
     }
 
+    void OnDestroy() {
+        _destroyTween.Stop();    
+    }
+    
     public void Setup(Actor owner, float dmg, Vector2 sPosition, Vector2 ePosition) {
         _owner = owner;
         _damage = dmg;
